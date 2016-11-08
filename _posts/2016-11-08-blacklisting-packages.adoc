@@ -1,0 +1,8 @@
+---
+layout: page
+title: "Blacklisting packages"
+category: doc
+date: 2016-11-08 17:11:32
+---
+
+How it's done..

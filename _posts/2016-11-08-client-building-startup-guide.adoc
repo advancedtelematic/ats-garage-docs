@@ -1,8 +1,0 @@
----
-layout: page
-title: "Client building start-up guide"
-category: doc
-date: 2016-11-08 16:04:11
----
-
-This is gonna have all the info about building a client.

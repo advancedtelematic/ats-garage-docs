@@ -1,0 +1,97 @@
+---
+layout: page
+title: "1. Install the client"
+category: start
+order: 1
+date: 2016-11-09 12:25:32
+---
+:icons: font
+
+The easiest way to install the client is through one of our supplied packages, but if you're reading this, that probably didn't work for you. For this step, you'll need to complete three tasks:
+
+. Acquire a client binary that runs on your system
+. Add the client to your init system
+. Configure the client to your needs
+
+We'll go into a bit more detail on each step here, using a Raspberry Pi as an example.
+
+== Get a binary
+
+The SOTA client is completely open source; you can build it yourself on more or less any platform that runs Linux and the Rust compiler. At the moment, the only pre-built binaries we're offering are for 64 bit Linux, so if you're on another architecture you'll need to build it yourself.
+
+That's not a difficult process, though: just link:https://github.com/advancedtelematic/rvi_sota_client[clone the repo from github], install Rust if you haven't already, and build. Here's what that process looks like on a Raspberry Pi with a fresh Raspbian install:
+
+.Example: Raspberry Pi 2
+----
+# Install the basic build tools and dev libraries needed
+apt-get install -y autoconf git libdbus-1-dev libtool openssl libssl-dev lshw jq
+
+# Install Rust
+curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain stable -y
+export PATH=/root/.cargo/bin:$PATH
+
+# Download the client source code
+git clone https://github.com/advancedtelematic/rvi_sota_client.git -b stable
+cd rvi_sota_client
+
+# Build
+make rust-openssl <1>
+cargo build --release
+----
+<1> This extra step is necessary for now to ensure the correct version of link:https://github.com/hyperium/hyper[hyper], a Rust HTTP library, is used.
+
+== Add the client to your init system
+
+The SOTA client needs to run as root, and should be run at startup. You can set that up however you like, but the best way is to add it to your platform's init system. In Raspbian, that means systemd.
+
+First, we create a file at `/lib/systemd/system/sota.service`. We populate it as follows:
+
+.Example: Raspbian systemd service file
+----
+[Unit]
+Description=SOTA Client
+Wants=network-online.target
+After=network.target network-online.target
+Requires=network-online.target
+
+[Service]
+RestartSec=5
+Restart=on-failure
+Environment="RUST_LOG=info"
+DefaultTimeoutStopSec=5
+ExecStart=/usr/bin/sota_client --config /etc/sota.toml
+
+[Install]
+WantedBy=multi-user.target
+----
+
+Then, to enable the service:
+
+----
+sudo systemctl daemon-reload
+sudo systemctl enable sota.service
+----
+
+If you use a different init system, like Upstart or systemv, you should consult their documentation for detailed instructions.
+
+== Configure the client to your needs
+
+The SOTA client has a wealth of configuration options, but most of them should not be necessary to change. The config file you download from ATS Garage includes all the correct configuration information, server addresses, and so on. Complete documentation on all of the config options is available link:example.com[here].
+
+There are two important config options that you should be aware of when manually installing the client, however: the trusted certificate list, and the system info script.
+
+==== System info script
+
+The SOTA client reports system information to ATS Garage, and needs a way to get that info. The default is a script called system_info.sh, which depends on `lshw`. This script can be found in the sota client repo, in the `run` directory. You can also implement a custom system info script; as long as it outputs a JSON object, ATS Garage will handle it. However, for our Raspberry Pi example, we will just use the default script, and place it in the place expected by default in the config file ATS Garage downloaded:
+
+----
+cp run/system_info.sh /usr/bin/
+----
+
+==== Trusted certificate authorities
+
+Because the SOTA client connects via HTTPS to ATS Garage (and Amazon S3), it needs a list of certificate authorities to trust. You can either edit the config file to point to your operating system's certificates file, or you can use the one bundled with the SOTA client. Again, for simplicity, we'll use the one provided in our example, and copy it to the default location.
+
+----
+cp run/sota_certificates /etc/
+----

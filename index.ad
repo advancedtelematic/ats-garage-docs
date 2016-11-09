@@ -1,8 +1,15 @@
 ---
 layout: default
-title: "Hi"
+title: "Welcome to ATS Garage"
 ---
 :icons: font
 
-This will be the index/landing page.
+
+== Welcome to ATS Garage
+
+Hi! We've tried to make ATS Garage as easy to use getting started as possible. If your needs fall outside of our normal use cases, though, you may need to dig a little deeper.
+
+You can take a look at our link:../bas/faq.html[FAQ] or link:../bas/troubleshooting.html[troubleshooting] pages for solutions to the most common issues, or dive into the link:../cli/config.html[client configuration reference] if that's what needs tweaking.
+
+Of course, if you don't find what you're looking for here, we're more than happy to help you by email; get in touch at link:mailto:support@atsgarage.com[support@atsgarage.com] and we'll get back to you as soon as possible.
 

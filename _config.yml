@@ -19,10 +19,10 @@ codeurl: 'https://app.atsgarage.com/'
 
 # Default categories (in order) to appear in the navigation
 sections: [
-    ['doc', 'Getting Started'],
-    ['dev', 'Developers'],
-    ['cli', 'Client Documentation'],
-    ['sec', 'Security Approach'],
+    ['start', 'Getting Started'],
+    ['bas', 'Basics'],
+    ['feat', 'Features'],
+    ['new', 'News'],
     ['ref', 'Reference']
     #['post', 'Posts']
 ]

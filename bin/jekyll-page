@@ -33,7 +33,7 @@ filename = ARGV[2]
 # Resolve any relative links
 BASE_DIR = File.expand_path(options[:path])
 POSTS_DIR = "#{BASE_DIR}/_posts"
-PAGES_DIR = "#{BASE_DIR}/_pages"
+PAGES_DIR = "#{BASE_DIR}/_pages/#{category}"
 
 # Ensure the _posts directory exists (we are in the correct directory)
 if not Dir.exists?(POSTS_DIR)
@@ -97,7 +97,7 @@ File.open(filepath, 'w') do |file|
     file.puts content
 end
 
-File.symlink("../_posts/#{today}-#{filename}.adoc", symlink)
+File.symlink(filepath, symlink)
 
 if options[:edit]
     if not ENV['EDITOR']

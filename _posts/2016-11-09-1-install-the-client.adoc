@@ -78,7 +78,19 @@ If you use a different init system, like Upstart or systemv, you should consult 
 
 The SOTA client has a wealth of configuration options, but most of them should not be necessary to change. The config file you download from ATS Garage includes all the correct configuration information, server addresses, and so on. Complete documentation on all of the config options is available link:example.com[here].
 
-There are two important config options that you should be aware of when manually installing the client, however: the trusted certificate list, and the system info script.
+There are three important config options that you should be aware of when manually installing the client, however: the package manager, the trusted certificate list, and the system info script.
+
+==== Package manager selection
+
+The SOTA client typically gets a package in deb or rpm format from ATS Garage, then passes it off to the package manager to be installed. The option of which package manager to use is found in the sota.toml config file.
+
+When you download the config file on its own, the package manager is set to 'off'. With this behaviour, the client will download a package, place it in a temp directory (also configurable in sota.toml), and emit an event notifying an external software loading manager that there has been a package downloaded.
+
+*This is probably not the option you're looking for.* (It's used, for example, for the link:https://github.com/GENIVI/genivi_swm[GENIVI Software Loading Manager].)
+
+To point it towards your preferred package manager instead, set `package_manager` in the `[device]` section to either `deb` or `rpm`.
+
+If you want more information on how to use the SOTA client with an external software loading manager, you'll need the advanced documentation about link:example.com[configuration options] and link:example.com[the command/event API].
 
 ==== System info script
 

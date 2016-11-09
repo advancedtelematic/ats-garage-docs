@@ -29,7 +29,7 @@ sections: [
 
 # Keep as an empty string if served up at the root. If served up at a specific
 # path (e.g. on GitHub pages) leave off the trailing slash, e.g. /my-project
-baseurl: '' 
+baseurl: '/ats-garage-docs' 
 
 # Dates are not included in permalinks
 permalink: none
@@ -41,7 +41,7 @@ highlighter: pygments
 future: true
 
 # Exclude non-site files
-exclude: ['bin', 'README.md','Gemfile*','Makefile','Dockerfile']
+exclude: ['bin', 'README.md','README.adoc','Gemfile*','Makefile','Dockerfile','publish_docs.sh']
 
 gems: 
   - jekyll-asciidoc

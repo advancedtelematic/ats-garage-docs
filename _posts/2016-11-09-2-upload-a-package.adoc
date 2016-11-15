@@ -6,4 +6,4 @@ order: 2
 date: 2016-11-09 12:25:59
 ---
 
-asdf
+One you have the client configured, you'll want to upload the packages you want to update to ATS Garage. You can do that by clicking *Add new package* on the Packages tab, or just by dragging and dropping a file into the package area. If it's a deb or rpm package, it's a good idea to fill in the "name" and "version" fields with the same name and version that the package manager will report. (ATS Garage doesn't yet read that metadata from the packages, but it will soon!)

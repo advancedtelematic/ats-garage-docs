@@ -6,5 +6,4 @@ order: 3
 date: 2016-11-09 12:26:04
 ---
 
-
-asdf
+To send the package you've uploaded to one of your devices, go to the device page, find the package, and click install.

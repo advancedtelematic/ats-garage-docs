@@ -1,0 +1,10 @@
+---
+layout: page
+title: "Creating and managing device groups"
+category: feat
+date: 2016-11-10 15:31:28
+---
+
+In ATS Garage, you can group your devices, automatically or manually. This gives you a quick way to divide your fleet into groups for update campaigns, seeing their status at a glance.
+
+

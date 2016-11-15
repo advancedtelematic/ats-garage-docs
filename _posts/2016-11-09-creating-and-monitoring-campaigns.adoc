@@ -1,0 +1,13 @@
+---
+layout: page
+title: "Creating and monitoring campaigns"
+category: feat
+date: 2016-11-09 19:00:56
+---
+
+If you finished the Getting Started tutorial, you know how to send an individual package to an individual device. But for real OTA operations on a fleet, you'll probably need to build update campaigns that include multiple packages updated simultaneously, operating on large groups of devices.
+
+Campaigns allow you to do that. To create a campaign, you'll first need to have at least one Group. Then, go to the Campaigns tab and
+
+screenshots, instructions
+

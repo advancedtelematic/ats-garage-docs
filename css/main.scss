@@ -2,6 +2,9 @@
 # Sass front matter, has to be here
 ---
 
+$mint: rgb(151,226,217);
+$gray: rgb(190,190,190);
+
 @import url("ats.css");
 
 /* All of the Asciidoctor stylesheet rules are in ats.css. That one is built
@@ -26,4 +29,16 @@
 
 ul.nav.nav-tabs {
     margin-left: 0px;
+}
+
+a {
+	border-bottom: 4px solid $mint;
+	color: rgba(0,0,0,0.675);
+	text-decoration: none;
+}
+
+a:hover, a:focus {
+	color: rgba(0,0,0,0.675);
+    border-bottom: 4px solid $gray;
+    text-decoration: none;
 }

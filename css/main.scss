@@ -1,3 +1,7 @@
+---
+# Sass front matter, has to be here
+---
+
 @import url("ats.css");
 
 /* All of the Asciidoctor stylesheet rules are in ats.css. That one is built
@@ -5,9 +9,16 @@
    should go here.
 */
 
-#header-row {
-    background-image: url("/images/garagedoor.jpg");
+#header-row, #header-navbar, .header-wrapper, .navbar-header, .top-bar {
+    height: 76px;
+    vertical-align: middle;
+
 }
+
+.unfolded-header {
+	max-height: 54px;
+}
+
 
 #navigation {
     padding: 0px;

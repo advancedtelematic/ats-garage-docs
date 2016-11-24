@@ -1,1 +1,1 @@
-/Users/jon/ats/ota-plus/ats-garage-docs/_posts/2016-11-10-creating-and-managing-device-groups.adoc
+../../_posts/2016-11-10-creating-and-managing-device-groups.adoc

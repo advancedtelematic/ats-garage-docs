@@ -27,18 +27,17 @@ $gray: rgb(190,190,190);
     padding: 0px;
 }
 
+
+// don't underline links in the navigation menu
+.nav-link, .nav-link:hover {
+	border-bottom: none;
+}
+
 ul.nav.nav-tabs {
     margin-left: 0px;
 }
 
-a {
-	border-bottom: 4px solid $mint;
-	color: rgba(0,0,0,0.675);
-	text-decoration: none;
+.tab-pane {
+	background-color: red;
 }
 
-a:hover, a:focus {
-	color: rgba(0,0,0,0.675);
-    border-bottom: 4px solid $gray;
-    text-decoration: none;
-}

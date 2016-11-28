@@ -5,6 +5,10 @@
 $mint: rgb(151,226,217);
 $gray: rgb(190,190,190);
 
+// Element colors, where needed
+
+$nav-bg-color: $gray;
+
 @import url("ats.css");
 
 /* All of the Asciidoctor stylesheet rules are in ats.css. That one is built
@@ -37,7 +41,14 @@ ul.nav.nav-tabs {
     margin-left: 0px;
 }
 
-.tab-pane {
-	background-color: red;
+.tab-pane, .nav-tabs > li.active > a {
+	background-color: $nav-bg-color;
 }
 
+body, .container-fluid, #main-body, #navigation, .tab-content, .tab-pane {
+	height: 100%;
+}
+
+html {
+	height: 100%;
+}

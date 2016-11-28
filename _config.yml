@@ -23,7 +23,8 @@ sections: [
     ['bas', 'Basics'],
     ['feat', 'Features'],
     ['new', 'News'],
-    ['ref', 'Reference']
+    ['ref', 'Reference'],
+    ['ostree', 'OSTree']
     #['post', 'Posts']
 ]
 

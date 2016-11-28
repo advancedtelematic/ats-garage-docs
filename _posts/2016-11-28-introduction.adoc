@@ -1,0 +1,38 @@
+---
+layout: page
+title: "Introduction"
+category: ostree
+date: 2016-11-28 15:42:34
+---
+
+
+prerequisites
+
+- Yocto version: krogoth
+- poky
+
+* download the meta-updater layer
+* download the BSP layer
+
+what do i need to know?
+
+- adding to the bitbake process to push to the OSTree repo
+- how OSTree works, in depth (read the OSTree docs)
+
+  - /var is special:
+    - initially empty, things you put there persist through full filesystem updates
+  
+
+  - /usr
+    - 
+
+  - /etc
+    - funky 3-way merge behaviour
+
+BSP support is all about tuning uboot to work with OSTree
+
+- add configuration to your uboot to:
+  - read the config from uEnv.txt
+  - load the specified kernel
+  - checking which deployment (i.e., which OSTree commit) to boot
+

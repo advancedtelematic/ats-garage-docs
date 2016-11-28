@@ -41,7 +41,7 @@ highlighter: pygments
 future: true
 
 # Exclude non-site files
-exclude: ['bin', 'README.md','README.adoc','Gemfile*','Makefile','Dockerfile','publish_docs.sh']
+exclude: ['bin', 'README.md','README.adoc','Gemfile*','Makefile','Dockerfile','publish_docs.sh','design']
 
 gems: 
   - jekyll-asciidoc

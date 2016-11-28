@@ -27,6 +27,12 @@ sections: [
     #['post', 'Posts']
 ]
 
+# Links that should appear as top-bar navigation items
+header-links: [
+    ['Test 1', 'http://example.com'],
+    ['Test 2', 'http://example.com/2']
+]
+
 # Keep as an empty string if served up at the root. If served up at a specific
 # path (e.g. on GitHub pages) leave off the trailing slash, e.g. /my-project
 baseurl: '' 

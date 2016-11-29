@@ -52,6 +52,7 @@ exclude: ['bin', 'README.md','README.adoc','Gemfile*','Makefile','Dockerfile','p
 
 gems: 
   - jekyll-asciidoc
+  - octopress-debugger
 
 asciidoctor:
   attributes:

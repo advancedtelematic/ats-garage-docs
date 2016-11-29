@@ -1,37 +1,36 @@
 <ul class="nav nav-tabs nav-justified" data-tabs="tabs">
-    <li class="active"><a data-toggle="tab" href="#learn">Learn</a></li>
-    <li><a data-toggle="tab" href="#faq">FAQ</a></li>
-    <li><a data-toggle="tab" href="#reference">Reference</a></li>
+    {% for tab in site.navigation_tabs %}
+    {% assign tab_title = tab[0] %}
+    {% assign tab_id = tab[1] %}
+    {% assign topics = tab[2] %}
+    <li {% if forloop.first %} class="active" {% endif %}><a data-toggle="tab" href="#{{ tab_id }}">{{ tab_title }}</a></li>
+    {% endfor %}
 </ul>
 
 <div class="tab-content">
 
-    <div id="learn" class="tab-pane fade in active">
+    {% for tab in site.navigation_tabs %}
+    {% assign tab_title = tab[0] %}
+    {% assign tab_id = tab[1] %}
+    {% assign topics = tab[2] %}
+
+    <div id="{{ tab_id }}" class="tab-pane fade in {% if forloop.first %} active {% endif %}">
+
         <ul class="nav nav-list">
-            <li><a class="nav-link" href="{{ site.baseurl }}/">Home</a></li>
+        {% for topic in topics %}
             {% for section in site.sections %}
-                {% assign attr = section[0] %}
-                {% assign label = section[1] %}
-
-                {% for page in site.categories[attr] %}
-                    {% if forloop.first %}
-                        <li class="nav-header">{{ label }}</li>
-                    {% endif %}
-                    <li data-order="{{ page.order }}"><a class="nav-link" href="{{ site.baseurl }}{{ page.url }}">{{ page.title }}</a></li>
-                {% endfor %}
+                {% if topic == section[0] %}
+                    {% for page in site.categories[topic] %}
+                            {% if forloop.first %}
+                                <li class="nav-header">{{ section[1] }}</li>
+                            {% endif %}
+                        <li data-order="{{ page.order }}"><a class="nav-link" href="{{  site.baseurl }}{{ page.url }}">{{ page.title }}</a></li>
+                    {% endfor %}
+                {% endif %}
             {% endfor %}
-        <!-- List additional links. It is recommended to add a divider
-            e.g. <li class="divider"></li> first to break up the content. -->
+        {% endfor %}
         </ul>
-    </div>
 
-    <div id="faq" class="tab-pane fade in">
-        <ul class="nav nav-list">
-            <li class="nav-header">Coming Soon</li>
     </div>
-
-    <div id="reference" class="tab-pane fade in">
-        <ul class="nav nav-list">
-            <li class="nav-header">Coming Soon</li>
-    </div>
+    {% endfor %}
 </div>

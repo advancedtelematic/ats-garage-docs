@@ -28,8 +28,16 @@ sections: [
     #['post', 'Posts']
 ]
 
+# This creates navigation tabs. First element in the array is the name of the tab,
+# second is the id of the tab's div, third is the list of sections that should
+# appear in the tab
+navigation_tabs: [
+    ['Learn', 'learn', ['start','feat']],
+    ['OSTree', 'ostree', ['ostree']]
+]
+
 # Links that should appear as top-bar navigation items
-header-links: [
+header_links: [
     ['Test 1', 'http://example.com'],
     ['Test 2', 'http://example.com/2']
 ]

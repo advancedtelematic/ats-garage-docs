@@ -42,48 +42,54 @@
                     header,
                     sections = [],
                     lists = {},
-                    headers = {};
+                    headers = {},
+                    tabs = document.querySelectorAll('.tab-pane');
 
-                var navUl = document.querySelectorAll('#navigation ul')[1],
-                    navLis = document.querySelectorAll('#navigation ul li');
+                for (var i = 0; i < tabs.length; i++) {
 
-                if (!navUl) return;
+                    var navUl = document.querySelector("#" + tabs[i].id + "> ul"),
+                    navLis = document.querySelectorAll("#" + tabs[i].id + "> ul > li");
 
-                for (var i = 0; i < navLis.length; i++) {
-                    var order, li = navLis[i];
+                    if (!navUl) return;
 
-                    if (li.classList.contains('nav-header')) {
-                        section = li.textContent || li.innerText;
-                        sections.push(section);
-                        headers[section] = li;
-                        continue;
+                    for (var i = 0; i < navLis.length; i++) {
+                        var order, li = navLis[i];
+
+                        if (li.classList.contains('nav-header')) {
+                            section = li.textContent || li.innerText;
+                            sections.push(section);
+                            headers[section] = li;
+                            continue;
+                        }
+
+                        if (!lists[section]) {
+                            lists[section] = [];
+                        }
+
+                        order = parseFloat(li.getAttribute('data-order'))
+                        lists[section].push([order, li]);
                     }
 
-                    if (!lists[section]) {
-                        lists[section] = [];
-                    }
+                    for (var i = 0; i < sections.length; i++) {
+                        section = sections[i];
+                        list = lists[section].sort(function(a, b) {
+                            return a[0] - b[0];
+                        });
 
-                    order = parseFloat(li.getAttribute('data-order'))
-                    lists[section].push([order, li]);
+                        if (header = headers[section]) {
+                            navUl.appendChild(header);
+                        }
+                        for (var j = 0; j < list.length; j++) {
+                            navUl.appendChild(list[j][1]);
+                        }
+                    }
                 }
 
-                for (var i = 0; i < sections.length; i++) {
-                    section = sections[i];
-                    list = lists[section].sort(function(a, b) {
-                        return a[0] - b[0];
-                    });
-
-                    if (header = headers[section]) {
-                        navUl.appendChild(header);
-                    }
-                    for (var j = 0; j < list.length; j++) {
-                        navUl.appendChild(list[j][1]);
-                    }
-                }
             }
 
             if (document.querySelectorAll) orderNav();
         </script>
+        
         {% if site.google_analytics_id != "" %}
         {% include google_analytics.html %}
         {% endif %}

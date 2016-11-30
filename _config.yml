@@ -31,15 +31,22 @@ sections: [
 # This creates navigation tabs. First element in the array is the name of the tab,
 # second is the id of the tab's div, third is the list of sections that should
 # appear in the tab
+# 
+# Note that any section which aren't assigned to any navigation tab will not show 
+# up in navigation anywhere
 navigation_tabs: [
     ['Learn', 'learn', ['start','feat']],
-    ['OSTree', 'ostree', ['ostree']]
+    ['OSTree', 'ostree', ['ostree']],
+    ['FAQ', 'faq', []]
 ]
 
 # Links that should appear as top-bar navigation items
 header_links: [
-    ['Test 1', 'http://example.com'],
-    ['Test 2', 'http://example.com/2']
+    ['About ATS', 'http://advancedtelematic.com/en/about-us.html'],
+    ['Products', 'http://advancedtelematic.com/en/products.html'],
+    ['Press', 'http://advancedtelematic.com/en/press.html'],
+    ['Careers', 'http://advancedtelematic.com/en/careers.html'],
+    ['Contact', 'http://advancedtelematic.com/en/contact.html']
 ]
 
 # Keep as an empty string if served up at the root. If served up at a specific

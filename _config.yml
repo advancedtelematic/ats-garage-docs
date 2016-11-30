@@ -40,13 +40,15 @@ navigation_tabs: [
     ['FAQ', 'faq', []]
 ]
 
-# Links that should appear as top-bar navigation items
+# Links that should appear as top-bar navigation items. Docs should always be
+# the last one, because of a stupid hack.
 header_links: [
     ['About ATS', 'http://advancedtelematic.com/en/about-us.html'],
     ['Products', 'http://advancedtelematic.com/en/products.html'],
     ['Press', 'http://advancedtelematic.com/en/press.html'],
     ['Careers', 'http://advancedtelematic.com/en/careers.html'],
-    ['Contact', 'http://advancedtelematic.com/en/contact.html']
+    ['Contact', 'http://advancedtelematic.com/en/contact.html'],
+    ['Docs', '/']
 ]
 
 # Keep as an empty string if served up at the root. If served up at a specific

@@ -11,7 +11,7 @@
             <div class="top-bar container center-nav-container">
               <ul class="top-bar nav nav-list navbar-nav">
 	            {% for header_link in site.header_links %}
-	                <li class="top-bar"><a href="{{ header_link[1] }}">{{ header_link[0] }}</a></li>
+	                <li class="top-bar {% if forloop.last %}docs{% endif %}"><a href="{{ header_link[1] }}">{{ header_link[0] }}</a></li>
 	            {% endfor %}
 
                <li class="top-bar visible-xs"><a class="top-bar ats-garage-btn" href="https://www.atsgarage.com/" target="_blank">ATS Garage</a></li>

@@ -7,7 +7,7 @@ $gray: rgb(190,190,190);
 
 // Element colors, where needed
 
-$nav-bg-color: $gray;
+$nav-bg-color: rgb(237,237,237);
 
 @import url("ats.css");
 
@@ -31,27 +31,57 @@ $nav-bg-color: $gray;
     padding: 0px;
 }
 
+#header-navbar {
+	background-color: white;
+}
 
 // don't underline links in the navigation menu
-.nav-link, .nav-link:hover, .top-bar>a, .top-bar>a:hover {
+.nav-link, .nav-link:hover, .top-bar>a {
 	border-bottom: none;
 }
 
+.top-bar>a:hover, .top-bar.docs>a {
+	color: $mint !important;
+	border-bottom: 4px solid black !important;
+	max-height: 76px !important;
+}
+
+.nav-section-title {
+	text-transform: uppercase;
+	color: rgb(145,145,145);
+}
+
 .top-bar>a {
-	padding: 10px 50px;
+	padding: 11px 50px;
 	vertical-align: middle;
 }
 
+// top navigation bar, center list items and space them out a bit
 li.top-bar>a {
-	padding: 28px 60px;
+	padding: 0px 0px;
+	line-height: 76px;
+	vertical-align: center;
+}
+
+li.top-bar {
+	padding: 0px 40px;
 }
 
 ul.nav.nav-tabs {
     margin-left: 0px;
 }
 
-.tab-pane, .nav-tabs > li.active > a {
+.nav-tabs > li > a, .nav-tabs > * > a {
+	border: none !important;
+	outline: none;
+}
+
+.tab-pane, .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus {
 	background-color: $nav-bg-color;
+}
+
+.nav-tabs > li > a:hover {
+	background-color: darken($nav-bg-color, 10%) !important;
 }
 
 body, .container-fluid, #main-body, #navigation, .tab-content, .tab-pane {

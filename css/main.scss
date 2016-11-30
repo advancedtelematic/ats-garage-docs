@@ -33,8 +33,17 @@ $nav-bg-color: $gray;
 
 
 // don't underline links in the navigation menu
-.nav-link, .nav-link:hover {
+.nav-link, .nav-link:hover, .top-bar>a, .top-bar>a:hover {
 	border-bottom: none;
+}
+
+.top-bar>a {
+	padding: 10px 50px;
+	vertical-align: middle;
+}
+
+li.top-bar>a {
+	padding: 28px 60px;
 }
 
 ul.nav.nav-tabs {

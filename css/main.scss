@@ -76,11 +76,11 @@ ul.nav.nav-tabs {
 	outline: none;
 }
 
-.tab-pane, .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus {
+.tab-pane, .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .tab-content {
 	background-color: $nav-bg-color;
 }
 
-.nav-tabs > li > a:hover {
+.nav-tabs > li > a:hover, a.nav-link:hover {
 	background-color: darken($nav-bg-color, 10%) !important;
 }
 

@@ -20,11 +20,12 @@
         {% for topic in topics %}
             {% for section in site.sections %}
                 {% if topic == section[0] %}
-                    {% for page in site.categories[topic] %}
+                    {% assign sorted_pages = site.categories[topic] | sort:"order" %}
+                    {% for page in sorted_pages %}
                             {% if forloop.first %}
                                 <li class="nav-header">{{ section[1] }}</li>
                             {% endif %}
-                        <li data-order="{{ page.order }}"><a class="nav-link" href="{{  site.baseurl }}{{ page.url }}">{{ page.title }}</a></li>
+                        <li><a class="nav-link" href="{{  site.baseurl }}{{ page.url }}">{{ page.title }}</a></li>
                     {% endfor %}
                 {% endif %}
             {% endfor %}
@@ -34,3 +35,4 @@
     </div>
     {% endfor %}
 </div>
+

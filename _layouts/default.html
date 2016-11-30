@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css"> 
         <link rel="stylesheet" href="{{ site.baseurl }}/css/main.css">
     </head>
+    
     <body>
 
         <div class="container-fluid">
@@ -35,61 +36,6 @@
 
         </div>
 
-        <script>
-            function orderNav() {
-                var list,
-                    section,
-                    header,
-                    sections = [],
-                    lists = {},
-                    headers = {},
-                    tabs = document.querySelectorAll('.tab-pane');
-
-                for (var i = 0; i < tabs.length; i++) {
-
-                    var navUl = document.querySelector("#" + tabs[i].id + "> ul"),
-                    navLis = document.querySelectorAll("#" + tabs[i].id + "> ul > li");
-
-                    if (!navUl) return;
-
-                    for (var i = 0; i < navLis.length; i++) {
-                        var order, li = navLis[i];
-
-                        if (li.classList.contains('nav-header')) {
-                            section = li.textContent || li.innerText;
-                            sections.push(section);
-                            headers[section] = li;
-                            continue;
-                        }
-
-                        if (!lists[section]) {
-                            lists[section] = [];
-                        }
-
-                        order = parseFloat(li.getAttribute('data-order'))
-                        lists[section].push([order, li]);
-                    }
-
-                    for (var i = 0; i < sections.length; i++) {
-                        section = sections[i];
-                        list = lists[section].sort(function(a, b) {
-                            return a[0] - b[0];
-                        });
-
-                        if (header = headers[section]) {
-                            navUl.appendChild(header);
-                        }
-                        for (var j = 0; j < list.length; j++) {
-                            navUl.appendChild(list[j][1]);
-                        }
-                    }
-                }
-
-            }
-
-            if (document.querySelectorAll) orderNav();
-        </script>
-        
         {% if site.google_analytics_id != "" %}
         {% include google_analytics.html %}
         {% endif %}

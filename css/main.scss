@@ -35,8 +35,8 @@ $nav-bg-color: rgb(237,237,237);
 	background-color: white;
 }
 
-// don't underline links in the navigation menu
-.nav-link, .nav-link:hover, .top-bar>a {
+// don't underline links in the navigation menu, or links that go to images
+.nav-link, .nav-link:hover, .top-bar>a, a[href^="/images"] {
 	border-bottom: none;
 }
 

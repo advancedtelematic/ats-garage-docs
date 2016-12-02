@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Creating and managing device groups"
-category: feat
+category: hidden
 date: 2016-11-10 15:31:28
 ---
 

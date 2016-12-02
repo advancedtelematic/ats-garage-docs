@@ -24,7 +24,8 @@ sections: [
     ['feat', 'Features'],
     ['new', 'News'],
     ['ref', 'Reference'],
-    ['ostree', 'OSTree']
+    ['ostree', 'OSTree'],
+    ['hidden', '']
     #['post', 'Posts']
 ]
 
@@ -35,7 +36,7 @@ sections: [
 # Note that any section which aren't assigned to any navigation tab will not show 
 # up in navigation anywhere
 navigation_tabs: [
-    ['Learn', 'learn', ['start','feat']],
+    ['Learn', 'learn', ['start']],
     ['OSTree', 'ostree', ['ostree']],
     ['FAQ', 'faq', []]
 ]

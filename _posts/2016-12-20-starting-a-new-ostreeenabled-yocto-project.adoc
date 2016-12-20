@@ -1,0 +1,9 @@
+---
+layout: page
+title: "Starting a new OSTree-enabled Yocto project"
+category: ostree
+order: 3
+date: 2016-12-20 17:20:24
+---
+
+Coming soon

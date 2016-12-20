@@ -29,6 +29,12 @@ $nav-bg-color: rgb(237,237,237);
 
 #navigation {
     padding: 0px;
+    position: fixed;
+}
+
+#content {
+	position: absolute;
+	left: 16.67%;
 }
 
 #header-navbar {

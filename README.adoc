@@ -1,0 +1,10 @@
+ATS Garage Docsite
+------------------
+
+This is the source for docs.atsgarage.com.
+
+== Debugging
+
+If you're having issues with how jekyll is rendering the site, you can add debug breakpoints to any of the layouts or includes with a {% debug %} liquid tag. See the debugger docs at https://github.com/octopress/debugger.
+
+If it's a problem on a single page, you can set the layout of that page to 'debug'.

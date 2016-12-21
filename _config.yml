@@ -25,6 +25,7 @@ sections: [
     ['new', 'News'],
     ['ref', 'Reference'],
     ['ostree', 'OSTree'],
+    ['faq', 'Questions'],
     ['hidden', '']
     #['post', 'Posts']
 ]
@@ -38,7 +39,7 @@ sections: [
 navigation_tabs: [
     ['Learn', 'learn', ['bas', 'start', 'ref']],
     ['OSTree', 'ostree', ['ostree']],
-    ['FAQ', 'faq', []]
+    ['FAQ', 'faq', ['faq']]
 ]
 
 # Links that should appear as top-bar navigation items. Docs should always be

@@ -8,54 +8,16 @@ date: 2016-12-20 16:01:09
 
 The ATS Garage client is a small piece of software that you'll need to install on each device you create.
 
-*IMAGE*
-
 The main thing is does is periodically check whether there are any updates available in the Garage.
 
-*IMAGE*
+If it finds one, it downloads it, tells some other program to install it, and then reports back to the Garage on how the install went.
 
-If it finds one, it downloads it...
-
-*IMAGE*
-
-...tells some other program to install it...
-
-*IMAGE*
-
-...and then reports back to the Garage on how the install went.
-
-*IMAGE*
-
-Of course, it does some other things too. It reports information about the hardware and software installed on the device back to your ATS Garage account.
-
-*IMAGE*
+Of course, it does some other things too. It reports information about the hardware and software installed on the device back to your ATS Garage account, for example.
 
 It also has some tools built in to install updates. If your update is a Debian package, an RPM package, or an OSTree update, the client will install the update on its own.
 
-*IMAGE*
+The client is quite flexible. All of the options are detailed in the link:../ref/client-configuration-options.html[client configuration reference] documentation. For example, you might want to configure it not to check for updates at all.
 
-The client is quite flexible. You can even configure it not to check for updates at all.
+Why would you want to do that? Because you can also let other programs on your device control the client through its easy-to-understand API. So you could set it to never check for updates, and then manually trigger update checks from another component, like a dialog box in the user interface, or triggered by an SMS shoulder-tap.
 
-*IMAGE*
-
-Why would you want to do that? Because there's an easy-to-understand API interface that lets you command the client. So you could set it to never check for updates...
-
-*IMAGE*
-
-...and then manually trigger update checks from another component.
-
-*IMAGE*
-
-Like a dialog box on your HMI.
-
-*IMAGE*
-
-Or an SMS-reception service.
-
-*IMAGE*
-
-This functionality is particularly useful if your updates are rare, or your devices have very limited data plans.
-
-*IMAGE*
-
-To get started, try installing the client via Debian or RPM Package, then look at the link:example.com[configuration reference] or the link:example.com[API reference] to see what else you can do with the ATS Garage client.
+The easiest way to get started is to install the client via Debian or RPM Package, but once you're comfortable with how the client works, make sure to check out link:../ostree/introduction.html[OSTree and TreeHub] to see how they can make your entire development cycle easier.

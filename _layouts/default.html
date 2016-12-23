@@ -14,30 +14,32 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css"> 
         <link rel="stylesheet" href="{{ site.baseurl }}/css/main.css">
     </head>
-    
     <body>
-
         <div class="container-fluid">
             <div class="row top-bar" id="header-row">
-                    {% include header.html %}
+                {% include header.html %}
             </div>
 
             <div class="row" id="main-body">
-            
-                    <div id="navigation" class="col-xs-2">
-                        {% include navigation.html %}
-                    </div>
 
-                    <div id="content" class="col-xs-9">
-                            {{ content }}
-                    </div>
+                <div id="navigation" class="col-xs-2">
+                    {% include navigation.html %}
+                </div>
+
+                <div id="content" class="col-xs-9">
+                    {{ content }}
+                </div>
             </div>
 
+            <div class="row top-bar" id="footer-row">
+                {% include footer.html %}
+            </div>
         </div>
 
         {% if site.google_analytics_id != "" %}
         {% include google_analytics.html %}
         {% endif %}
-        
+
+        <script src="/js/main.js"></script>
     </body>
 </html>

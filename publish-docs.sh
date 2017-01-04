@@ -10,9 +10,7 @@ rm -rf _site
 git clone -b gh-pages git@github.com:advancedtelematic/ats-garage-docs.git _site
 
 # build latest docs
-# For a docker-contained build, do this:
-# docker run -v $(pwd):/site advancedtelematic/jekyll-asciidoc
-jekyll b
+docker run -v $(pwd):/site advancedtelematic/jekyll-asciidoc
 
 # commit and push
 

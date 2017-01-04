@@ -1,10 +1,26 @@
 ATS Garage Docsite
 ------------------
 
-This is the source for docs.atsgarage.com.
+This is the source for docs.atsgarage.com. It's built with Jekyll, a static site generator.
+
+The text is written in Asciidoc, and rendered by link:http://asciidoctor.org[Asciidoctor]. Asciidoctor exercises a large number of styles, and has a tool to build stylesheets called asciidoctor-stylesheet-factory. ats.css is built with that tool; if you need to edit anything in there, do it via a pull request link:https://github.com/advancedtelematic/asciidoctor-stylesheet-factory[on our fork of asciidoctor-stylesheet-factory]. Any CSS changes that are specific to the ATS Garage docsite should be done in main.scss, though.
+
+== Building
+
+To build the site, you can `bundle install`, then do `jekyll build`. `jekyll serve` will start a server to preview it locally on http://localhost:4000.
+
+Alternatively, you can use link:docker.com[Docker] to build and preview the site. That's probably a better idea anyway, as everything will be standardized and you won't have to worry about conflicts, etc..
+
+    docker run -it -v $(pwd):/site -p 4000:4000 advancedtelematic/jekyll-asciidoc jekyll s -H 0.0.0.0 (to preview)
+    docker run -it -v $(pwd):/site -p 4000:4000 advancedtelematic/jekyll-asciidoc jekyll b (to build)
 
 == Debugging
 
 If you're having issues with how jekyll is rendering the site, you can add debug breakpoints to any of the layouts or includes with a {% debug %} liquid tag. See the debugger docs at https://github.com/octopress/debugger.
 
-If it's a problem on a single page, you can set the layout of that page to 'debug'.
+If it's a problem that only affects a single page, you can set the layout of that page to 'debug'.
+
+== Navigation
+
+The sidebar navigation can be customized in `_config.yml`. The `sections` key lists the sections that will appear in the navigation, and the `navigation_tabs` key lists the tabs, and which sections each one contains. (Details in the `_config.yml` comments.)
+

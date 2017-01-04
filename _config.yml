@@ -34,7 +34,7 @@ sections: [
 # second is the id of the tab's div, third is the list of sections that should
 # appear in the tab
 # 
-# Note that any section which aren't assigned to any navigation tab will not show 
+# Note that any sections which aren't assigned to any navigation tab will not show 
 # up in navigation anywhere
 navigation_tabs: [
     ['Learn', 'learn', ['bas', 'start', 'ref']],
@@ -67,7 +67,7 @@ highlighter: pygments
 future: true
 
 # Exclude non-site files
-exclude: ['bin', 'README.md','README.adoc','Gemfile*','Makefile','Dockerfile','publish_docs.sh','design']
+exclude: ['bin', 'README.md','README.adoc','Gemfile*','Makefile','Dockerfile','publish-docs.sh','design']
 
 gems: 
   - jekyll-asciidoc

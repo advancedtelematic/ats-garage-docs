@@ -1,9 +1,159 @@
 ---
 layout: page
-title: "Starting a new OSTree-enabled Yocto project"
+title: "Getting started: Your first OSTree-enabled Yocto project"
 category: ostree
-order: 3
+order: 2
 date: 2016-12-20 17:20:24
 ---
+:icons: font
 
-Coming soon
+To help new users get running with Yocto, we've created a quick-start project for the Raspberry Pi. In this tutorial, we'll show you:
+
+* How to build your first Yocto image and get it running on a Raspberry Pi,
+* How to automatically push that image to your ATS Garage account, and
+* How to install the image on your Pi and get it talking to ATS Garage
+
+== Prerequisites
+
+* A linux machine with at least 50 GB of hard drive space
+* A link:https://www.raspberrypi.org/products/raspberry-pi-3-model-b/[Raspberry Pi 3]
+* A micro SD card, 1 GB or larger
+* An ATS Garage account with TreeHub enabled
+* Your TreeHub credentials file (downloadable from the TreeHub tab in ATS Garage)
+
+== Building your first Yocto image
+
+Yocto is a set of tools for building your own linux distribution, from source. It's already the most common standard for commercial and industrial embedded systems, but it's also a great choice for dedicated hacking projects, because you can build in only what you need. The image you'll be building for this project, in fact, weighs in at just over 100 MB and boots in just a few seconds.
+
+=== 1. Clone the ATS Garage Quickstart repo and set up your build environment
+
+The link:https://github.com/advancedtelematic/garage-quickstart-rpi[garage-quickstart-rpi] project contains everything you need to get started. It uses git submodules, so make sure to use the `--recursive` option when you clone it:
+
+----
+git clone --recursive https://github.com/advancedtelematic/garage-quickstart-rpi.git
+----
+
+Then, enter the garage-quickstart-rpi directory and run the build setup script:
+
+----
+cd garage-quickstart-rpi
+source env-init.sh
+----
+
+=== 2. Add your Treehub credentials to the build
+
+The `meta-updater` layer will automatically push your images to TreeHub and add them to your ATS Garage account as part of the build process. To do that, it needs the credentials file you downloaded. (If you haven't downloaded it yet, grab it now from the link:https://app.atsgarage.com/#/treehub[TreeHub tab].)
+
+Add the following line to `garage-quickstart-rpi/build/conf/local.conf`:
+
+----
+OSTREE_PUSH_CREDENTIALS = "path/to/credentials_file"
+----
+
+=== 3. Build your image
+
+This part's easy. From the build directory, run
+
+----
+bitbake core-image-minimal
+----
+
+...and then go do something fun for a while.
+
+link:http://xkcd.com/303/[image:http://imgs.xkcd.com/comics/compiling.png[]]
+
+Yocto downloads source code, and builds absolutely everything from source. Naturally, this takes quite a while--anywhere from 45 minutes on a fast i7 to 2-3 hours or more on a slower system. Fortunately, Yocto does cache everything, so on subsequent builds you only need to recompile the pieces you've actually changed, which means everything goes much, much faster.
+
+=== 4. Flash the image onto your micro SD card
+
+Using `dd`:
+
+----
+sudo dd if=./tmp/deploy/images/raspberrypi3/core-image-minimal-raspberrypi3.rpi-sdimg-ota of=/dev/sdX bs=32M && sync
+----
+
+=== 5. Resize the partitions so that they use the entire card
+
+The previous step will create two partitions on your card: partition 1 will be a boot partition, and partition 2 will contain the root filesystem. However, the root filesystem partition will be minimally sized--Yocto has no way of knowing how big the device you're planning to flash will be. You'll need to resize that partition to fill up the whole card.
+
+You can do this on the command line, or with link:http://gparted.org/[GParted] (or with another similar partition management tool).
+
+==== Command line
+
+(Replace sdX below with the identifier of your SD card.)
+
+[source, shell]
+----
+$ sudo umount /dev/sdX1 /dev/sdX2 <1>
+$ sudo fdisk /dev/sdX <1>
+
+Command (m for help): p <2>
+
+Disk /dev/sdX: 7,5 GiB, 8054112256 bytes, 15730688 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x6e928708
+
+Device     Boot Start    End Sectors Size Id Type
+/dev/sdb1  *     8192  90111   81920  40M  c W95 FAT32 (LBA)
+/dev/sdb2       90112 229377  139266  68M 83 Linux <3>
+
+Command (m for help): d <4>
+Partition number (1,2, default 2): 2 <4>
+
+Partition 2 has been deleted.
+
+Command (m for help): n <5>
+Partition type
+   p   primary (1 primary, 0 extended, 3 free)
+   e   extended (container for logical partitions)
+Select (default p): p
+Partition number (2-4, default 2): 2 <5>
+First sector (2048-15730687, default 2048): 90112 <5>
+Last sector, +sectors or +size{K,M,G,T,P} (90112-15730687, default 15730687): 15730687
+
+Created a new partition 2 of type 'Linux' and of size 7,5 GiB.
+
+Command (m for help): w <6>
+The partition table has been altered.
+Calling ioctl() to re-read partition table.
+Syncing disks.
+
+$ sudo resize2fs /dev/sdX2 <7>
+resize2fs 1.42.13 (17-May-2015)
+Resizing the filesystem on /dev/sdb2 to 7820288 (1k) blocks.
+The filesystem on /dev/sdb2 is now 7820288 (1k) blocks long.
+
+----
+<1> Unmount the partitions, and start fdisk.
+<2> Show the partition table.
+<3> Take note of the *Start* sector of partition 2--in this case, it is *90112*.
+<4> Delete partition 2.
+<5> Create a new partition 2, *starting at the same sector as the old one*. In this case, it was *90112*.
+<6> Write the partition table.
+<7> Resize the filesystem to fit the entire partition.
+
+==== GParted
+
+First, select the second partition of your SD card (note that you may have to select the card from the drop-down menu in the top right), and click the forward arrow for *Resize/move*:
+
+image:/images/screenshots/gparted-1.png[]
+
+Then, resize the partition so it takes up all the remaining free space, and click *Resize/Move*.
+
+image:/images/screenshots/gparted-2.png[]
+
+Finally, back at the main screen, click the check mark to apply your changes. Once the operations complete, you can close GParted.
+
+image:/images/screenshots/gparted-3.png[]
+
+=== 7. Add your device credentials to the SD card
+
+. Create a new device in ATS Garage.
+. Download its credentials, selecting OSTree as the package manager.
+. Copy this file onto your SD card, placing it in `/boot/sota.toml`. (It needs to be in exactly this location.)
+
+== link:/ostree/making-your-first-ostree-update.html[Next: Pushing your first update >>]
+

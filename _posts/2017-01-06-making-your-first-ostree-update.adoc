@@ -1,0 +1,13 @@
+---
+layout: page
+title: "Getting started: Pushing an update"
+category: ostree
+order: 3
+date: 2017-01-06 17:16:30
+---
+
+==== link:/ostree/starting-a-new-ostreeenabled-yocto-project.html[<< Prev: Your first OSTree-enabled Yocto project]
+
+Now that you have a Raspberry Pi connected to your ATS Garage account, it's time to make some changes, rebuild your image, and update it over the air.
+
+

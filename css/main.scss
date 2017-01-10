@@ -1,13 +1,6 @@
 ---
-# Sass front matter, has to be here
+# Sass front matter -- do not remove
 ---
-
-$mint: rgb(151,226,217);
-$gray: rgb(190,190,190);
-
-// Element colors, where needed
-
-$nav-bg-color: rgb(237,237,237);
 
 @import url("ats.css");
 
@@ -16,84 +9,289 @@ $nav-bg-color: rgb(237,237,237);
    should go here.
 */
 
+
+$mint: rgb(151,226,217);
+$mint-active: rgb(125, 233, 218);
+$gray: rgb(190,190,190);
+$nav-bg-color: rgb(237,237,237);
+
+@mixin transition($type: all, $duration: 0.2s) {
+    transition: $type $duration ease-in;
+}
+
+@mixin active-link {
+    color: $mint;
+    max-height: 76px;
+    border-bottom: 7px solid $mint;
+}
+
+@font-face{
+    font-family: icons;
+    src: url(/fonts/icomoon.ttf)
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    position: relative;
+    min-height: 100%;
+}
+
 #header-row, #header-navbar, .header-wrapper, .navbar-header, .top-bar {
     height: 76px;
     vertical-align: middle;
-
 }
 
-.unfolded-header {
-	max-height: 54px;
+a {    
+    outline: none !important;
 }
-
 
 #navigation {
+    height: 100%;
     padding: 0px;
     position: fixed;
+
+    .tab-content {
+        height: 100%;
+
+        .nav-list {
+            height: 100%;
+            padding-top: 15px;
+
+            .nav-link {
+                @include transition;
+            }
+
+            .nav-section-title {
+                margin: 5px 0;
+            }
+        }
+    }
 }
 
 #content {
-	position: absolute;
-	left: 16.67%;
+    padding: 0 0 80px 0;
+    margin-left: 20%;
 }
 
 #header-navbar {
-	background-color: white;
+    background-color: white;
+}
+
+#main-body {
+    background: #F7F7F7;
 }
 
 // don't underline links in the navigation menu, or links that go to images
 .nav-link, .nav-link:hover, .top-bar>a, a[href^="/images"] {
-	border-bottom: none;
-}
-
-.top-bar>a:hover, .top-bar.docs>a {
-	color: $mint !important;
-	border-bottom: 4px solid black !important;
-	max-height: 76px !important;
+    border-bottom: none;
 }
 
 .nav-section-title {
-	text-transform: uppercase;
-	color: rgb(145,145,145);
+    color: rgb(145,145,145);
+    text-transform: uppercase;
 }
 
-.top-bar>a {
-	padding: 11px 50px;
-	vertical-align: middle;
+.navbar-default {
+    .navbar-brand {
+        position: relative;
+
+        img {
+            max-height: 50px;
+        }
+
+        &:after {
+            content: '';
+            background: url(/images/docs-flag.png) no-repeat;
+            background-size: cover;
+            width: 50px;
+            height: 20px;
+            display: block;
+            position: absolute;
+            top: 10px;
+            right: -35px;
+        }
+    }
+
+    .navbar-nav {
+        & > li {
+            padding: 0 30px;
+
+            & > a {
+                color: #202020;
+                font-weight: 500;
+                font-size: 15px;
+                line-height: 76px;
+                padding: 0;
+                vertical-align: middle;
+                border-color: $mint;
+                @include transition;
+
+                &:hover {
+                    @include active-link;
+                }
+
+                &.ats-garage-btn {
+                    font-size: 13px;
+                    background: $mint;
+                    padding: 0 30px !important;
+                    border: 0;
+
+                    &:hover, &:focus, &:active {
+                        color: inherit;
+                        background: $mint-active;
+                    }
+
+                    &:after {
+                        font-family: icons;
+                        font-size: 11px;
+                        content: 'u';
+                        margin: -3px 0 0 10px;
+                        display: inline-block;
+                    }
+
+                    span {
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            &.docs {
+                & > a {
+                    @include active-link;
+                }
+            }
+        }
+    }
 }
 
-// top navigation bar, center list items and space them out a bit
-li.top-bar>a {
-	padding: 0px 0px;
-	line-height: 76px;
-	vertical-align: center;
+.nav-tabs {
+    * {
+        & > a {
+            border: none !important;
+            outline: none;
+        }
+    }
 }
 
-li.top-bar {
-	padding: 0px 40px;
-}
+ul {
+    &.nav {
+        &.nav-tabs {
+            margin-left: 0;
 
-ul.nav.nav-tabs {
-    margin-left: 0px;
-}
+            &.nav-justified {
+                & > li {
+                    & > a {
+                        background: #fff;
+                        border-radius: 0 !important;
+                        @include transition;
 
-.nav-tabs > li > a, .nav-tabs > * > a {
-	border: none !important;
-	outline: none;
+                        &:hover, &:focus, &:active {
+                            background: #EDEDED !important;
+                        }
+                    }
+
+                    &.active {
+                        a {
+                            background: #EDEDED;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 .tab-pane, .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .tab-content {
-	background-color: $nav-bg-color;
+    background-color: $nav-bg-color;
 }
 
 .nav-tabs > li > a:hover, a.nav-link:hover {
-	background-color: darken($nav-bg-color, 10%) !important;
+    background-color: darken($nav-bg-color, 10%) !important;
 }
 
-body, .container-fluid, #main-body, #navigation, .tab-content, .tab-pane {
-	height: 100%;
-}
+#footer-row {
+    background: #fff;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
 
-html {
-	height: 100%;
+    .navbar-default {
+        margin: 0;
+        display: inline-block;
+        border: 0;
+    }
+
+    #footer-texts {
+        color: $gray;
+        font-size: 14px;
+        display: inline-block;
+        vertical-align: middle;
+
+        a {
+            border: 0;
+        }
+
+        .follow-us {
+            text-transform: uppercase;
+            display: inline-block;
+
+            .github-link, .twitter-link {
+                border: 0;
+
+                img {
+                    margin: 0 10px;
+                    vertical-align: middle;
+                }
+            }
+
+            .github-link {
+                img {
+                    height: 15px;
+                }
+            }
+
+            .twitter-link {
+                img {
+                    height: 25px;
+                }
+            }
+        }
+
+        .copyright {
+            text-transform: uppercase;
+            margin: 0 0 0 20px;
+            display: inline-block;
+        }
+    }
+
+    #footer-right {
+        margin: 20px 20px 0 0;
+        float: right;
+
+        a {
+            border: 0;
+        }
+
+        .min-logo {
+            width: 40px;
+        }
+
+        #to-top {
+            font-size: 18px;
+            cursor: pointer;
+            margin: 0 10px;
+            display: inline-block;
+            -webkit-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            transform: rotate(180deg);
+
+            &:after {
+                content: 'a';
+                font-family: icons;
+            }
+        }
+    }
 }

@@ -52,31 +52,37 @@ OSTREE_PUSH_CREDENTIALS = "path/to/credentials_file"
 
 === 3. Build your image
 
-This part's easy. From the build directory, run
+This part's easy. From the build directory, run `bitbake core-image-minimal`. The one catch is, your first build will take a long time.
 
-----
-bitbake core-image-minimal
-----
-
-...and then go do something fun for a while.
-
-link:http://xkcd.com/303/[image:http://imgs.xkcd.com/comics/compiling.png[]]
+image::http://imgs.xkcd.com/comics/compiling.png[float="left",align="center"]
 
 Yocto downloads source code, and builds absolutely everything from source. Naturally, this takes quite a while--anywhere from 45 minutes on a fast i7 to 2-3 hours or more on a slower system. Fortunately, Yocto does cache everything, so on subsequent builds you only need to recompile the pieces you've actually changed, which means everything goes much, much faster.
 
 === 4. Flash the image onto your micro SD card
 
+For this step, the first thing you'll need is a configuration file for your specific device; you can download it from the device page in ATS Garage. It should be named something like `sota_client_5206671b-cc2a-42e8-9227-736588bf6cf0.toml`, with a UUID unique to your device.
+
+Now you can flash the image. We've included a script that does it for you, because there are a couple of extra steps:
+
+
 ----
-sudo dd if=./tmp/deploy/images/raspberrypi3/core-image-minimal-raspberrypi3.rpi-sdimg-ota of=/dev/sdX bs=32M && sync
-sudo parted -s /dev/sdX resizepart 2 '100%'
-sudo resize2fs /dev/sdX2
+sudo ../flash-configured-image.sh ./tmp/deploy/images/raspberrypi3/core-image-minimal-raspberrypi3.rpi-sdimg-ota /path/to/your/sota.toml /dev/sdX
 ----
 
-=== 5. Add your device credentials to the SD card
+.Alternative: manual steps
+****
+If you prefer to do the steps manually, you can do the following:
 
-. Create a new device in ATS Garage.
-. Download its credentials, selecting OSTree as the package manager.
-. Copy this file onto your SD card, placing it in `/boot/sota.toml` on partition 2. (It needs to be in exactly this location.)
+----
+sudo dd if=./tmp/deploy/images/raspberrypi3/core-image-minimal-raspberrypi3.rpi-sdimg-ota \
+  of=/dev/sdX bs=32M && sync
+sudo parted -s /dev/sdX resizepart 2 '100%' <1>
+sudo resize2fs /dev/sdX2 <1>
+----
+<1> The image file Yocto generates is shrunk down to the smallest it can be. After writing it to your SD card, you'll want to expand the partition and root filesystem so they use the whole disk.
+
+Next, mount your SD card's second partition, and copy your `sota_client_UUID.toml` to `/boot/sota.toml`. It needs to be in exactly this location.
+****
 
 == link:/ostree/making-your-first-ostree-update.html[Next: Pushing your first update >>]
 

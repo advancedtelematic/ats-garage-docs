@@ -5,6 +5,7 @@ category: ostree
 order: 3
 date: 2017-01-06 17:16:30
 ---
+:icons: font
 
 Building the base image is all well and good, but it doesn't do that much that's very useful.
 

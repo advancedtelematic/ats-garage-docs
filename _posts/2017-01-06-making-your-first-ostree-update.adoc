@@ -50,18 +50,19 @@ BBLAYERS_NON_REMOVABLE ?= " \
 ----
 <1> This is the line to add. Note that the path should be fully qualified.
 
-=== 3. Add pianobar to your local.conf
+=== 2. Add pianobar to your local.conf
 
-In `build/conf/local.conf`, you can specify a list of additional recipes to install, using the `IMAGE_INSTALL_append` key.
-
-Add the following line:
+Add the following lines to `build/conf/local.conf`:
 
 ----
-IMAGE_INSTALL_append = "pianobar"
+IMAGE_INSTALL_append = " pianobar " <1>
+LICENSE_FLAGS_WHITELIST = "commercial" <2>
 ----
+<1> You can use this value to add extra recipes to your image build. If you want a list off all the recipes that are possible to install, you can run `bitbake-layers show-recipes`. This does a simple string concatenation on the list of packages to install, so make sure you have spaces at the beginning and end of the string, or you might get unexpected results.
+<2> Since Yocto is often used for building the system images in commercial products, it has robust support for licensing restrictions, and by default it won't install anything that has a commercial license. Pianobar depends on ffmpeg, which builds in some non-free codecs.
 
-=== 4. Rebuild your image
+=== 3. Rebuild your image
 
 Run `bitbake rpi-basic-image` again. This time, it's going to go a lot faster, since it only needs to compile pianobar and its dependencies.
 
-Your image will be push automatically to ATS Garage once it's done building. Install it from there, reboot your Pi, and you'll have pianobar installed.
+Your image will be pushed automatically to ATS Garage once it's done building. Install it from there, reboot your Pi, and you'll have pianobar installed.

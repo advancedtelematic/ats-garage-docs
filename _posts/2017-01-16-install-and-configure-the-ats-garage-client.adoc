@@ -79,7 +79,7 @@ If you use a different init system, like Upstart or systemv, you should consult 
 
 == Configure the client to your needs
 
-The ATS Garage client has a wealth of configuration options, but most of them should not be necessary to change. The config file you download from ATS Garage includes all the correct configuration information, server addresses, and so on. Complete documentation on all of the config options is available link:example.com[here].
+The ATS Garage client has a wealth of configuration options, but most of them should not be necessary to change. The config file you download from ATS Garage includes all the correct configuration information, server addresses, and so on. Complete documentation on all of the config options is available link:../cli-dev/client-configuration-guide.html[here].
 
 There are three important config options that you should be aware of when manually installing the client, however: the package manager, the trusted certificate list, and the system info script.
 

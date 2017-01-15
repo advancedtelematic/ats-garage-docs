@@ -24,8 +24,16 @@ function setNavbarHeight() {
 	}
 }
 
+function setMinContainerHeight() {
+	var windowHeight = $(window).height();
+	var navHeight = $('.navbar.navbar-default').outerHeight();
+	var footerHeight = $("body > footer").outerHeight();
+	$('#content').css('min-height', windowHeight - navHeight - footerHeight);
+}
+
 $(document).ready(function() {
 	setNavigationHeight();
+	setMinContainerHeight();
 
 	$('.to-top-small-logo-container').click(function (e) {
 	    e.preventDefault();
@@ -45,6 +53,7 @@ $(document).ready(function() {
 $(window).resize(function() {
 	setNavigationHeight();
 	setNavbarHeight();
+	setMinContainerHeight();
 });
 
 $(window).scroll(function() {

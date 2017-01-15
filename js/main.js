@@ -13,7 +13,8 @@ function setNavigationHeight() {
 	var windowHeight = $(window).height();
 	var navHeight = $('.navbar.navbar-default').height();
 	var visibleFooterHeight = Math.max(0, $("body > footer").visibleHeight());
-	$('#navigation').height(windowHeight - navHeight - visibleFooterHeight);
+	var navigationHeight = windowHeight - navHeight - visibleFooterHeight;
+	$('#navigation .tab-content').height(navigationHeight - $('#navigation .nav-tabs').height());
 }
 
 function setNavbarHeight() {

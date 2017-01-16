@@ -33,7 +33,7 @@ Systemd is not a requirement, of course; you can use whatever startup system you
 
 == SOTA Client config file guide
 
-The config file for the SOTA client is in TOML format, and can be invoked at startup with `sota_client  --config /path/to/config_file.toml`. You can download the config file for your particular device from the device page, or if you installed from a deb or rpm package, the config file for your device was included in that package.
+The config file for the SOTA client is in TOML format, and can be invoked at startup with `sota_client  --config /path/to/config_file.toml`. You can download the config file for your particular device from the device page. If you installed from a deb or rpm package, the config file for your device was included in that package.
 
 === [auth]
 

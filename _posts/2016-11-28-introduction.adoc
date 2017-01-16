@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Introduction"
-category: ostree
+category: hidden
 order: 1
 date: 2016-11-28 15:42:34
 ---
@@ -27,8 +27,9 @@ ATS provides layers for integrating OSTree into your Yocto/OpenEmbedded project.
 
 We also provide board support layers, because OSTree requires integration into the bootloader. Right now we have board support for the following devices/architectures:
 
-* Raspberry Pi 3 rev. 2
-* R-Car M2 Porter board
+* link:https://github.com/advancedtelematic/meta-updater-raspberrypi[Raspberry Pi 3 rev. 2]
+* link:https://github.com/advancedtelematic/meta-updater-minnowboard[Minnowboard Max/Turbot]
+* link:https://github.com/advancedtelematic/meta-updater-qemux86-64[Native QEMU emulation]
 
 We're working on expanding board support, but if you're familiar with your board's internals you can probably get it running yourself. We've posted a walkthrough of how we got the R-Pi running, and you can find detailed technical documentation on developing board support layers link:example.com[here].
 

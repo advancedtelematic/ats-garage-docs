@@ -2,6 +2,7 @@
 layout: page
 title: "Yocto, OSTree, and TreeHub"
 category: bas
+order: 2
 date: 2017-01-13 11:26:41
 ---
 
@@ -21,7 +22,7 @@ link:http://ostree.readthedocs.io/en/latest/[OSTree] is an open-source tool that
 
 For more on why OSTree is the best tool for the job of doing embedded device updates, take a look at link:http://docs.atsgarage.com/ostree/ostree-vs-dual-bank-systems.html[OSTree vs. dual-bank systems].
 
-(If you're contemplating trying to do embedded updates using a generic package manager or by rebooting into an "update mode", take a deep breath and think about your life choices.)
+(If you're contemplating trying to do embedded software updates using a generic package manager or by rebooting into an "update mode", take a deep breath and think about your life choices.)
 
 == TreeHub
 

@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Blacklisting packages and impact analysis"
-category: hidden
+category: start-garage
 date: 2016-11-09 18:59:45
 ---
 

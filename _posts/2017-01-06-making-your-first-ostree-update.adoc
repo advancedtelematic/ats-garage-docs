@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Getting started: Pushing an update"
-category: ostree
+category: start-yocto
 order: 3
 date: 2017-01-06 17:16:30
 ---

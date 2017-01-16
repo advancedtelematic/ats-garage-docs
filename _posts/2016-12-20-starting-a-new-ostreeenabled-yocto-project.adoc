@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Getting started: Your first OSTree-enabled Yocto project"
-category: ostree
+category: start-yocto
 order: 2
 date: 2016-12-20 17:20:24
 ---
@@ -15,7 +15,7 @@ To help new users get running with Yocto, we've created a quick-start project fo
 
 == Prerequisites
 
-* A linux machine with at least 50 GB of hard drive space
+* A linux machine with at least 50 GB of hard drive space and the link:http://www.yoctoproject.org/docs/current/yocto-project-qs/yocto-project-qs.html#packages[required software packages] from the Yocto project's Quickstart guide
 * A link:https://www.raspberrypi.org/products/raspberry-pi-3-model-b/[Raspberry Pi 3]
 * A micro SD card, 1 GB or larger
 * An ATS Garage account with TreeHub enabled
@@ -44,7 +44,7 @@ source env-init.sh
 
 The `meta-updater` layer will automatically push your images to TreeHub and add them to your ATS Garage account as part of the build process. To do that, it needs the credentials file you downloaded. (If you haven't downloaded it yet, grab it now from the link:https://app.atsgarage.com/#/treehub[TreeHub tab].)
 
-Add the following line to `garage-quickstart-rpi/build/conf/local.conf`:
+Add this line to `garage-quickstart-rpi/build/conf/local.conf`, with your credentials file substituted in:
 
 ----
 OSTREE_PUSH_CREDENTIALS = "path/to/credentials_file"
@@ -52,21 +52,28 @@ OSTREE_PUSH_CREDENTIALS = "path/to/credentials_file"
 
 === 3. Build your image
 
-This part's easy. From the build directory, run `bitbake rpi-basic-image`. The one catch is, your first build will take a long time.
+This part's easy. From the build directory, run
+
+----
+bitbake rpi-basic-image
+----
 
 image::http://imgs.xkcd.com/comics/compiling.png[float="left",align="center"]
+
+Your first build will take a long time.
 
 Yocto downloads source code, and builds absolutely everything from source. Naturally, this takes quite a while--anywhere from 45 minutes on a fast i7 to 2-3 hours or more on a slower system. Fortunately, Yocto does cache everything, so on subsequent builds you only need to recompile the pieces you've actually changed, which means everything goes much, much faster.
 
 === 4. Flash the image onto your micro SD card
 
-For this step, the first thing you'll need is a configuration file for your specific device; you can download it from the device page in ATS Garage. It should be named something like `sota_client_5206671b-cc2a-42e8-9227-736588bf6cf0.toml`, with a UUID unique to your device.
+For this step, you'll need to create a device in ATS Garage. Once you've done so, you can download a configuration file for your device from the device page. It should be named something like `sota_client_5206671b-cc2a-42e8-9227-736588bf6cf0.toml`, with a UUID unique to your device.
 
 Now you can flash the image. We've included a script that does it for you, because there are a couple of extra steps:
 
 ----
-sudo ../flash-configured-image.sh ./tmp/deploy/images/raspberrypi3/core-image-minimal-raspberrypi3.rpi-sdimg-ota /path/to/your/sota.toml /dev/sdX
+sudo ../flash-configured-image.sh ./tmp/deploy/images/raspberrypi3/core-image-minimal-raspberrypi3.rpi-sdimg-ota /path/to/your/sota_client.toml /dev/sdX
 ----
+<1> Make sure the path to your sota_client.toml file and the correct block device for your micro SD card substituted in.
 
 .Alternative: manual steps
 ****

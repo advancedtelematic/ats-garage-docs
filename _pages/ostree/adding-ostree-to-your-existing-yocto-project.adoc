@@ -1,1 +1,0 @@
-../../_posts/2016-12-20-adding-ostree-to-your-existing-yocto-project.adoc

@@ -1,0 +1,15 @@
+---
+layout: page
+title: "Introduction"
+category: using-ats-garage
+date: 2017-01-16 22:03:55
+---
+
+The ATS Garage web app is where you can create, manage, and update your fleet of devices, and upload and manage software packages and update campaigns. Whether you're using OSTree updates, package-based updates, or managing software installation manually, the management tool is the same.
+
+The first thing you'll need to do is link:../feat/devices-and-groups.html[create a device]. You can then get the ATS Garage client running on your device, either via a link:../start-yocto/your-first-ostreeenabled-yocto-project.html[Yocto build process] or by link:../start-package/installing-the-ats-garage-client-from-a-package.html[installing a deb or rpm package].
+
+After that, you might want to link:../feat/devices-and-groups.html[create device groups] and upload some link:../feat/packages-and-ostree-images.html[packages or system images] so that you can start link:../feat/update-campaigns.html[creating update campaigns].
+
+Once you have a few devices in the field, you might find out that some of the software installed on your devices has vulnerabilities that need to be addressed. That would be a great time to try out ATS Garage's ability to link:../feat/blacklisting-packages.html[blacklist software packages] and link:../feat/impact-analysis-of-blacklisted-packages.html[analyze the blacklisted packages impact] on your fleet of devices.
+

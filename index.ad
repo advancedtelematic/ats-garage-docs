@@ -1,17 +1,13 @@
 ---
 layout: default
 title: "Welcome to ATS Garage"
+category: feat
 ---
 :icons: font
 
 
 == Welcome to ATS Garage
 
-Hi! We've tried to make ATS Garage as easy to use getting started as possible. If your needs fall outside of our normal use cases, though, you may need to dig a little deeper.
+ATS Garage is the best way to get software updates to embedded devices, especially for automotive applications. It consists of two parts: the ATS Garage site, which manages all your devices and updates, and the ATS Garage client, a small daemon you can install on your devices to OTA-emable them.
 
-The most common stumbling block to getting started is needing to build a or configure a client manually. If that's what you came here for, check out the link:start/1-install-the-client.html[advanced getting started guide].
-
-You could also take a look at our link:bas/faq.html[FAQ] or link:bas/troubleshooting.html[troubleshooting] pages for solutions to the most common issues, or dive into the link:cli/config.html[client configuration reference] if that's what needs tweaking.
-
-Of course, if you don't find what you're looking for here, we're more than happy to help you by email; get in touch at link:mailto:support@atsgarage.com[support@atsgarage.com] and we'll get back to you as soon as possible.
-
+== link:/using-ats-garage/introduction.html[ATS Garage docs] | link:/bas/understanding-the-ats-garage-client.html[ATS Garage Client docs]

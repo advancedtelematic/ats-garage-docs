@@ -1,0 +1,13 @@
+---
+layout: page
+title: "Installing the ATS Garage client from a package"
+category: start-package
+order: 1
+date: 2017-01-16 18:46:51
+---
+
+It's not a recommended use for production environments, but if you wish you can use ATS Garage as a management tool for installing deb or rpm packages on your devices. It's the quickest way to get the ATS Garage client running, so it can be a good way to get started if what you want is a test drive.
+
+
+For this mode of operation, just create a new device, download a deb or rpm package from the device page, and install it on your device. The packages from the device page have individual device credentials embedded; for each new device you want to install the ATS Garage client on, you will need to download its individual deb or rpm package.
+

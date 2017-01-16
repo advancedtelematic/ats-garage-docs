@@ -1,0 +1,1 @@
+../../_posts/2017-01-16-installing-the-ats-garage-client-from-a-package.adoc

@@ -1,0 +1,99 @@
+---
+layout: page
+title: "Client configuration guide"
+category: cli-dev
+date: 2017-01-16 21:09:19
+---
+:icons: font
+
+The config file for the SOTA client is in TOML format, and can be invoked at startup with `sota_client  --config /path/to/config_file.toml`. You can download a pre-populated config file for a device, containing its ATS Garage credentials, from the device page.
+
+=== [auth]
+
+This section is required for connection to ATS Garage. It should never need to be changed.
+
+----
+[auth]
+server = "https://auth-plus.gw.prod01.advancedtelematic.com"
+client_id = "bf66425f-d4e6-422b-b510-7c7f178af9fe"
+client_secret = "hr8nEWxQc9"
+----
+
+=== [core]
+
+This section contains configuration for communicating with the vehicle endpoints in ATS Garage.
+
+----
+[core]
+server = "https://sota-core.gw.prod01.advancedtelematic.com"
+polling = true <1>
+polling_sec = 60 <2>
+----
+<1> Boolean indicating whether ATS Garage should be polled for new updates. In general, you would want to leave this on, but if you have another service that's triggering update checks using the link:../cli-dev/client-commands-and-events-reference.html#commands[GetUpdateRequests command], you might want to disable update polling.
+<2> The polling frequency in seconds.
+
+==== [dbus]
+
+This section contains values for dbus configuration. If you enable the `dbus` gateway, you'll need to populate this section. Note that having this section defined does _not_ imply that dbus will necessarily be used; if the dbus gateway is turned off in the `[gateway]` section, any values configured here are ignored.
+
+----
+[dbus]
+name = "org.ats.SotaClient"
+path = "/org/ats/SotaClient"
+interface = "org.ats.SotaClient"
+software_manager = "org.genivi.SoftwareLoadingManager"
+software_manager_path = "/org/genivi/SoftwareLoadingManager"
+timeout = 60
+----
+
+=== [device]
+
+This section contains device-specific configuration.
+
+----
+[device]
+uuid = "123e4567-e89b-12d3-a456-426655440000" <1>
+system_info = "system_info.sh" <2>
+packages_dir = "/tmp/" <3>
+package_manager = "off" <4>
+certificates_path = "/usr/local/etc/sota_certificates" <5>
+----
+<1> The UUID of the device. This is provided in the config file you can download from the device page, and shouldn't be changed.
+<2> The script to use to gather system information. By default, this uses link:https://github.com/advancedtelematic/rvi_sota_client/blob/master/run/system_info.sh[system_info.sh].
+<3> The location SOTA Client should use for temporary package storage until they are processed by the software loading manager.
+<4> The software loading manager backend to use. Possible values are `deb`, `rpm`, `ostree`, and `off`. If an external software loading manager is in use, this should be set to `off`.
+<5> The certificate authorities the ATS Garage Client trusts.
+
+=== [gateway]
+
+The SOTA Client communicates with the device's software loading manager (or other interested parties) through various gateways. For more details on how this works, please see the link:../cli/client-commands-and-events-reference.html[Client commands and events API reference].
+
+----
+[gateway]
+console = false <1>
+dbus = false
+http = false <2>
+socket = true <3>
+websocket = true
+----
+<1> REPL mode, generally only enabled for debugging.
+<2> Simple http server, for sending commands to the client remotely. Note that this does _not_ affect how the client communicates with the server.
+<3> Unix domain sockets for local communication.
+
+
+=== [network]
+
+This section contains network configuration information. Some values may be ignored if the corresponding communication methods aren't enabled.
+
+----
+[network]
+http_server = "127.0.0.1:8888" <1>
+socket_commands_path = "/tmp/sota-commands.socket" <2>
+socket_events_path = "/tmp/sota-events.socket" <3>
+websocket_server = "127.0.0.1:9081" <4>
+----
+<1> The host and port the client should listen on for commands if the http gateway is enabled in the [gateway] section.
+<2> The name of the unix domain socket to be used for receiving commands, if the socket gateway is enabled in the [gateway] section.
+<3> The name of the unix domain socket to be used for sending events, if the socket gateway is enabled in the [gateway] section.
+<4> The host and port to listen for local websocket connections on. Could be used, for example, for integration with an HTML5 HMI.
+

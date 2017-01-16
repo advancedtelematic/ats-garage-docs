@@ -1,0 +1,70 @@
+---
+layout: page
+title: "Pushing your first update"
+category: start-yocto
+order: 2
+date: 2017-01-16 18:02:57
+---
+:icons: font
+
+Building the base image is all well and good, but it doesn't do that much that's very useful.
+
+Now that you have a Raspberry Pi connected to your ATS Garage account, it's time to make some changes, rebuild your image, and update it over the air. We're going to add a layer to the build that installs pianobar, a command-line Pandora client.
+
+TIP: Remember, Yocto is a build system that takes metadata about sources, and then downloads and builds them. A *layer* in yocto is a collection of metadata about a thing--a set of customizations, or supporting pieces of a software package. *Layers* contain one or more *recipes*; a single recipe is a set of metadata files telling bitbake how to build one particular piece of software.
+
+=== 1. Download a new layer and add it to your build
+
+Pianobar is contained in the link:https://github.com/advancedtelematic/meta-aura[meta-aura] layer. Clone it into the `garage-quickstart-rpi` directory:
+
+----
+git clone https://github.com/advancedtelematic/meta-aura.git
+----
+
+Next, edit your `build/conf/bblayers.conf` file to include the new `meta-aura` layer. `bblayers.conf` is where you tell bitbake which layers you want to be available to your build. Here's an example; your paths will of course be different:
+
+----
+# LAYER_CONF_VERSION is increased each time build/conf/bblayers.conf
+# changes incompatibly
+LCONF_VERSION = "6"
+
+BBPATH = "${TOPDIR}"
+BBFILES ?= ""
+
+BBLAYERS ?= " \
+  /home/ats/garage-quickstart-rpi/poky/meta \
+  /home/ats/garage-quickstart-rpi/poky/meta-yocto \
+  /home/ats/garage-quickstart-rpi/poky/meta-yocto-bsp \
+  /home/ats/garage-quickstart-rpi/poky/../meta-raspberrypi \
+  /home/ats/garage-quickstart-rpi/poky/../meta-updater \
+  /home/ats/garage-quickstart-rpi/poky/../meta-updater-raspberrypi \
+  /home/ats/garage-quickstart-rpi/poky/../meta-openembedded/meta-oe \
+  /home/ats/garage-quickstart-rpi/poky/../meta-openembedded/meta-filesystems \
+  /home/ats/garage-quickstart-rpi/poky/../meta-rust \
+  /home/ats/garage-quickstart-rpi/meta-aura \ <1>
+  "
+BBLAYERS_NON_REMOVABLE ?= " \
+  /home/ats/garage-quickstart-rpi/poky/meta \
+  /home/ats/garage-quickstart-rpi/poky/meta-yocto \
+  "
+----
+<1> This is the line to add. Note that the path should be fully qualified.
+
+=== 2. Add pianobar to your local.conf
+
+Add the following lines to `build/conf/local.conf`:
+
+----
+IMAGE_INSTALL_append = " pianobar " <1>
+LICENSE_FLAGS_WHITELIST = "commercial" <2>
+----
+<1> You can use this value to add extra recipes to your image build. It does a simple string concatenation on the list of packages to install, so make sure you have spaces at the beginning and end of the string, or you might get unexpected results. If you want a list off all the recipes that are possible to install, you can run `bitbake-layers show-recipes`.
+<2> Since Yocto is often used for building the system images in commercial products, it has robust support for licensing restrictions, and by default it won't install anything that has a commercial license. Pianobar depends on ffmpeg, which builds in some non-free codecs.
+
+=== 3. Rebuild your image
+
+Run `bitbake rpi-basic-image` again. This time, it's going to go a lot faster, since it only needs to compile pianobar and its dependencies.
+
+Your image will be pushed automatically to ATS Garage once it's done building. Install it from there, reboot your Pi, and you'll have pianobar installed.
+
+

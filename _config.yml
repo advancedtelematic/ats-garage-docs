@@ -20,15 +20,14 @@ codeurl: 'https://app.atsgarage.com/'
 # Categories that can appear in the navigation
 sections: [
     ['start-yocto', 'Getting started with Yocto'],
-    ['start-garage', 'Getting started with the garage'],
+    ['start-package', 'Getting started with packages'],
+    ['start-manual', 'Getting started with manual configurations'],
+    ['cli-dev', 'Developer Docs'],
+    ['using-ats-garage', 'Using ATS Garage'],
     ['bas', 'Basics'],
-    ['feat', 'Features'],
-    ['new', 'News'],
-    ['ref', 'Reference'],
-    ['ostree', 'OSTree'],
+    ['feat', 'ATS Garage Features'],
     ['faq', 'Questions'],
-    ['hidden', '']
-    #['post', 'Posts']
+#    ['hidden', '']
 ]
 
 # This creates navigation tabs. First element in the array is the name of the tab,
@@ -38,8 +37,8 @@ sections: [
 # Note that any sections which aren't assigned to any navigation tab will not show 
 # up in navigation anywhere
 navigation_tabs: [
-    ['Learn', 'learn', ['bas', 'start-yocto', 'start-garage', 'ref']],
-    ['OSTree', 'ostree', ['ostree']],
+    ['ATS Garage', 'garage', ['using-ats-garage', 'feat']],
+    ['Clients', 'clients', ['bas', 'start-yocto', 'start-package', 'start-manual', 'cli-dev']],
     ['FAQ', 'faq', ['faq']]
 ]
 

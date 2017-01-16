@@ -1,1 +1,1 @@
-../../_posts/2017-01-13-yocto-ostree-and-treehub.adoc
+../../_posts/2017-01-16-yocto-ostree-and-treehub.adoc

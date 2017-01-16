@@ -1,8 +1,0 @@
----
-layout: page
-title: "How do I delete a device or package?"
-category: faq
-date: 2016-12-21 19:10:03
----
-
-For now, you can't. Coming soon!

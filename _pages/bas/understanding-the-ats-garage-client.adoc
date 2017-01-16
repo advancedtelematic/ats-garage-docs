@@ -1,1 +1,1 @@
-../../_posts/2016-12-20-understanding-the-ats-garage-client.adoc
+../../_posts/2017-01-16-understanding-the-ats-garage-client.adoc

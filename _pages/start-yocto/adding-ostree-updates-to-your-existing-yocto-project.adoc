@@ -1,0 +1,1 @@
+../../_posts/2017-01-16-adding-ostree-updates-to-your-existing-yocto-project.adoc

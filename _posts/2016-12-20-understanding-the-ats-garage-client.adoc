@@ -1,23 +1,17 @@
 ---
 layout: page
-title: "Understanding the ATS Garage Client"
+title: "ATS Garage client: Core concepts"
 category: bas
+order: 1
 date: 2016-12-20 16:01:09
 ---
 
+The ATS Garage client is a small daemon that you install on your device. Its main function is to check for and download updates, and then either install the updates itself, or pass them off to some external program to be installed. It also can report useful information about the device back to ATS Garage.
 
-The ATS Garage client is a small piece of software that you'll need to install on each device you create.
+The most important function of the client, downloading and installing updates, can be done in three different (and mutually exclusive) ways: with OSTree and TreeHub for Yocto/OpenEmbedded-based systems, with a package manager (dpkg or RPM), or with an external software installer that you provide. The Yocto/OSTree/TreeHub option is the best option for any embedded system (link:../bas/yocto-ostree-and-treehub.html[learn more]).
 
-The main thing is does is periodically check whether there are any updates available in the Garage.
+To learn more, try out our link:../ostree/starting-a-new-ostreeenabled-yocto-project.html[Getting started with Yocto] project. Or, if you already have a Yocto-based project and you'd like to add over-the-air update support to it, read link:http://docs.atsgarage.com/ostree/adding-ostree-to-your-existing-yocto-project.html[Adding OSTree to your existing Yocto project].
 
-If it finds one, it downloads it, tells some other program to install it, and then reports back to the Garage on how the install went.
+If you just want to try out the client and you don't want to wait for your Yocto distro to build, you can also download it as a deb or rpm package. You'll then be able to upload deb/rpm packages to ATS Garage, and manage their installation from there. This isn't a great model for actual production use, but we support it as an easy way to get started.
 
-Of course, it does some other things too. It reports information about the hardware and software installed on the device back to your ATS Garage account, for example.
-
-It also has some tools built in to install updates. If your update is a Debian package, an RPM package, or an OSTree update, the client will install the update on its own.
-
-The client is quite flexible. All of the options are detailed in the link:../ref/client-configuration-options.html[client configuration reference] documentation. For example, you might want to configure it not to check for updates at all.
-
-Why would you want to do that? Because you can also let other programs on your device control the client through its easy-to-understand API. So you could set it to never check for updates, and then manually trigger update checks from another component, like a dialog box in the user interface, or triggered by an SMS shoulder-tap.
-
-The easiest way to get started is to install the client via Debian or RPM Package, but once you're comfortable with how the client works, make sure to check out link:../ostree/introduction.html[OSTree and TreeHub] to see how they can make your entire development cycle easier.
+In automotive applications, it's common to have a telematics control unit (TCU) that handles updating firmware for other ECUs in the vehicle over various buses. You can use ATS Garage to manage those updates and update campaigns. The ATS Garage client can report system information from the TCU to ATS Garage, allowing you to easily target update campaigns to just the devices that need them, and use the client's link:example.com[command/event API] to initialize and report on the installs.

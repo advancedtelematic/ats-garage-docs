@@ -7,7 +7,7 @@ date: 2017-01-16 18:09:07
 :icons: font
 :toc: macro
 
-If you are planning to use a custom software installer with ATS Garage, you'll need to complete some manual steps that are taken care of automatically in the OSTree or package-based getting started guides. You'll need to:
+If you are planning to use a custom software installer with ATS Garage, or if you want to install from packages but you don't use systemd, you'll need to complete some manual steps that are taken care of automatically in the OSTree or package-based getting started guides. You'll need to:
 
 . Acquire a client binary that runs on your system
 . Add the client to your init system

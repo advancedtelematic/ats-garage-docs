@@ -6,4 +6,6 @@ order: 3
 date: 2017-01-16 22:32:36
 ---
 
-Lorem ipsum
+Update campaigns are the heart of ATS Garage. An update campaign installs a package (or system image) on one or more groups of devices.
+
+When a campaign is active, any time a device in the campaign connects, it will be sent the update in question. You can see data on running campaigns, with a high-level view or drilling down to specific devices for troubleshooting.

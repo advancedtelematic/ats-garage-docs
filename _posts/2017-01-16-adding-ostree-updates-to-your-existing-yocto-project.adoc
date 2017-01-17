@@ -5,5 +5,59 @@ category: start-yocto
 order: 3
 date: 2017-01-16 18:03:38
 ---
+:icons: font
 
-Coming soon
+To OTA-enable an existing project, you need to:
+
+* add the link:https://github.com/advancedtelematic/meta-updater[meta-updater] and link:https://github.com/meta-rust/meta-rust[meta-rust] layers to your project,
+* add a BSP layer for your target architecture,
+* set up your distro target for OTA updates, and
+* add your personal TreeHub credentials to your local configuration
+
+=== Clone layers and add them to bblayers.conf
+
+From your build's base directory:
+
+----
+git clone https://github.com/advancedtelematic/meta-updater.git
+git clone https://github.com/meta-rust/meta-rust.git
+git clone https://github.com/advancedtelematic/meta-updater-YOURBOARD.git <1>
+----
+<1> We currently have BSP layers for link:https://github.com/advancedtelematic/meta-updater-raspberrypi[Raspberry Pi 3], link:https://github.com/advancedtelematic/meta-updater-minnowboard[Minnowboard], and link:https://github.com/advancedtelematic/meta-updater-qemux86-64[QEMU native emulation]. More BSP layers are in the works, and contributed BSPs are always welcome.
+
+Add to bblayers.conf:
+
+----
+[...]
+
+  BBLAYERS ?= " \
+  /build/yocto/poky/meta \
+  /build/yocto/poky/meta-poky \
+  /build/yocto/poky/meta-yocto-bsp \
++  /build/yocto/meta-updater \
++  /build/yocto/meta-updater-YOURBOARD \
++  /build/yocto/meta-rust \
++  "
+
+[...]
+----
+
+=== Set distro target
+
+Assuming you're using poky, you can just set your distro to 'poky-sota-systemd' by changing your local.conf:
+
+----
+DISTRO ?= "poky-sota-systemd"
+----
+
+If you're using your own or a 3rd-party distro configuration, you can examine `meta-updater/conf/distro/sota.conf.inc` and include it in your distro config and/or modify it to your needs.
+
+=== Add your TreeHub credentials
+
+Download your TreeHub credentials from the TreeHub tab, save them somewhere, and add a line to your local.conf telling bitbake where to find them:
+
+----
+OSTREE_PUSH_CREDENTIALS = "path/to/credentials_file"
+----
+
+That's it! If you are having trouble, please send an email to link:mailto:support@atsgarage.com[support@atsgarage.com], and we may be able to point you in the right direction. Bug reports and pull requests at the link:https://github.com/advancedtelematic/meta-updater[meta-updater GitHub] repository are also welcome.

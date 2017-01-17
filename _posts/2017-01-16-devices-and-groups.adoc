@@ -6,5 +6,7 @@ order: 1
 date: 2017-01-16 22:21:38
 ---
 
+The Devices tab is where you can see all of your managed devices, and drag and drop to organize them into groups.
 
-Lorem ipsum
+You can group devices for your own convenience in organizing your devices, but groups are also how you target link:../feat/update-campaigns.html[update campaigns], so it's a good idea to make groups of devices that will be receiving the same updates--for example, grouping by model number or QA group.
+

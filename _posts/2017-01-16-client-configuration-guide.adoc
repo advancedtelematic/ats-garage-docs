@@ -29,7 +29,7 @@ server = "https://sota-core.gw.prod01.advancedtelematic.com"
 polling = true <1>
 polling_sec = 60 <2>
 ----
-<1> Boolean indicating whether ATS Garage should be polled for new updates. In general, you would want to leave this on, but if you have another service that's triggering update checks using the link:../cli-dev/client-commands-and-events-reference.html#commands[GetUpdateRequests command], you might want to disable update polling.
+<1> Boolean indicating whether ATS Garage should be polled for new updates. In general, you would want to leave this on, but if you have another service that's triggering update checks using the link:../cli-dev/client-commandevent-api.html#commands[GetUpdateRequests command], you might want to disable update polling.
 <2> The polling frequency in seconds.
 
 ==== [dbus]
@@ -66,7 +66,7 @@ certificates_path = "/usr/local/etc/sota_certificates" <5>
 
 === [gateway]
 
-The SOTA Client communicates with the device's software loading manager (or other interested parties) through various gateways. For more details on how this works, please see the link:../cli/client-commands-and-events-reference.html[Client commands and events API reference].
+The SOTA Client communicates with the device's software loading manager (or other interested parties) through various gateways. For more details on how this works, please see the link:../cli-dev/client-commandevent-api.html[Client commands and events API reference].
 
 ----
 [gateway]

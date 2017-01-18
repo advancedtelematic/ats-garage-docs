@@ -60,4 +60,4 @@ Download your TreeHub credentials from the TreeHub tab, save them somewhere, and
 OSTREE_PUSH_CREDENTIALS = "path/to/credentials_file"
 ----
 
-That's it! If you are having trouble, please send an email to link:mailto:support@atsgarage.com[support@atsgarage.com], and we may be able to point you in the right direction. Bug reports and pull requests at the link:https://github.com/advancedtelematic/meta-updater[meta-updater GitHub] repository are also welcome.
+That's it! If you are having trouble, please send an email to link:mailto:support@atsgarage.com[support@atsgarage.com], and we may be able to point you in the right direction. Bug reports and pull requests at the link:https://github.com/advancedtelematic/meta-updater[meta-updater GitHub repository] are also welcome.

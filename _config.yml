@@ -45,11 +45,11 @@ navigation_tabs: [
 # Links that should appear as top-bar navigation items. Docs should always be
 # the last one, because of a stupid hack.
 header_links: [
-    ['How it works', 'http://www.atsgarage.com/en/how-it-works.html'],
-    ['Pricing', 'http://www.atsgarage.com/en/pricing.html'],
-    ['News', 'http://www.atsgarage.com/en/news.html'],
-#    ['FAQ', 'http://www.atsgarage.com/en/FAQ.html'],
-    ['Contact', 'http://www.atsgarage.com/en/contact.html'],
+    ['How it works', 'http://atsgarage.com/en/how-it-works.html'],
+    ['Pricing', 'http://atsgarage.com/en/pricing.html'],
+    ['News', 'http://atsgarage.com/en/news.html'],
+#    ['FAQ', 'http://atsgarage.com/en/FAQ.html'],
+    ['Contact', 'http://atsgarage.com/en/contact.html'],
     ['Docs', '/']
 ]
 

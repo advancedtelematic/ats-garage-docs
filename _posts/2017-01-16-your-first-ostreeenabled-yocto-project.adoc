@@ -80,7 +80,7 @@ sudo ../flash-configured-image.sh ./tmp/deploy/images/raspberrypi3/rpi-basic-ima
 If you prefer to do the steps manually, you can do the following:
 
 ----
-sudo dd if=./tmp/deploy/images/raspberrypi3/core-image-minimal-raspberrypi3.rpi-sdimg-ota \
+sudo dd if=./tmp/deploy/images/raspberrypi3/rpi-basic-image-raspberrypi3.rpi-sdimg-ota \
   of=/dev/sdX bs=32M && sync
 sudo parted -s /dev/sdX resizepart 2 '100%' <1>
 sudo resize2fs /dev/sdX2 <1>

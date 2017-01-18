@@ -94,7 +94,7 @@ Next, mount your SD card's second partition, and copy your `sota_client_UUID.tom
 
 Plug in an ethernet cable, insert the SD card you just flashed, and boot up your Pi. You should see it come online in ATS Garage momentarily.
 
-== link:/ostree/making-your-first-ostree-update.html[Next: Pushing your first update >>]
+== link:../start-yocto/pushing-your-first-update.html[Next: Pushing your first update >>]
 
 
 

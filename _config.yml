@@ -48,7 +48,7 @@ header_links: [
     ['How it works', 'http://ats-garage.ventureoak.com/en/how-it-works.html'],
     ['Pricing', 'http://ats-garage.ventureoak.com/en/pricing.html'],
     ['News', 'http://ats-garage.ventureoak.com/en/news.html'],
-    ['FAQ', 'http://ats-garage.ventureoak.com/en/FAQ.html'],
+#    ['FAQ', 'http://ats-garage.ventureoak.com/en/FAQ.html'],
     ['Contact', 'http://ats-garage.ventureoak.com/en/contact.html'],
     ['Docs', '/']
 ]

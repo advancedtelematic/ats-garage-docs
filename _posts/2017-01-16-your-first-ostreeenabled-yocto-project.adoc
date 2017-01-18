@@ -71,7 +71,7 @@ For this step, you'll need to create a device in ATS Garage. Once you've done so
 Now you can flash the image. We've included a script that does it for you, because there are a couple of extra steps:
 
 ----
-sudo ../flash-configured-image.sh ./tmp/deploy/images/raspberrypi3/core-image-minimal-raspberrypi3.rpi-sdimg-ota /path/to/your/sota_client.toml /dev/sdX <1>
+sudo ../flash-configured-image.sh ./tmp/deploy/images/raspberrypi3/rpi-basic-image-raspberrypi3.rpi-sdimg-ota /path/to/your/sota_client.toml /dev/sdX <1>
 ----
 <1> Make sure the path to your sota_client.toml file and the correct block device for your micro SD card are substituted in.
 

@@ -229,6 +229,8 @@ h1, h2, h3, h4 {
                 padding: 28px 15px 28px 5px;
                 margin: 0;
                 display: block !important;
+                position: absolute;
+                right: 15px;
 
                 &.collapsed {
                     .icon-bar {

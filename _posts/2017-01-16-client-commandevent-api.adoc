@@ -4,13 +4,12 @@ title: "Client command/event API"
 category: cli-dev
 date: 2017-01-16 21:09:08
 ---
-
 :icons: font
 
 
 The ATS Garage client communicates with other processes on the host system over a command and event API. This API can function over a number of different gateways, configurable in the [gateway] section of the client config file.
 
-The client receives *commands*, and broadcasts *events*. Any interested parties on the system can subscribe to events, and send commands to the client. A quick overview of the commands and events is given here; for the most up-to-date information on the exact structure of the command and event bodies, check out the RustDocs for link:http://advancedtelematic.github.io/rvi_sota_server/gen_docs/client/sota/datatype/command/enum.Command.html[commands] and link:http://advancedtelematic.github.io/rvi_sota_server/gen_docs/client/sota/datatype/event/enum.Event.html[events], respectively.
+The client receives *commands*, and broadcasts *events*. Any interested parties on the system can subscribe to events, and send commands to the client. A quick overview of the commands and events is given here; if you want more detailed information on the exact structure of the command and event bodies, check out the RustDocs for link:../gen_docs/client/sota/datatype/command/enum.Command.html[commands] and link:../gen_docs/client/sota/datatype/event/enum.Event.html[events], respectively.
 
 == Events
 
@@ -87,11 +86,15 @@ TIP: SendInstalledPackages is intended to send a complete list of all packages o
 
 == Gateways
 
-The commands and events, in general, are the same regardless of the gateway used. The exact invocation method may differ, however, and certain gateways may not support all commands/events. This section is a work in progress; if you are interested in implementing an external software installer, please link:mailto:support@atsgarage.com[contact ATS Garage Support].
+Different subsets of commands and events are used in each gateway depending on its purpose.
 
-=== D-Bus
+The Websocket gateway supports subscribing to every event in the client. This gateway would be useful for integrating update notifications and control into an HTML5 UI, for example, or for any other use case where very detailed tracking of client behaviour is needed.
 
-=== Unix domain socket
+The HTTP and Console gateways support sending any command to the client, and will receive the final event after interpreting it. These gateways are primarily used for testing.
+
+The D-Bus and Socket gateways are intended for listening for `DownloadComplete` events to inform an external installer of available updates. This installer can then reply to the client with the installation outcome (with a `SendUpdateReport` command) and the currently installed packages (with a `SendInstalledPackages` command).
+
+If you are interested in implementing an external software installer using the command and event gateways, we would love to hear from you. link:mailto:support@atsgarage.com[Contact ATS Garage Support] and we'll do our best to support your efforts.
 
 ==== SendUpdateReport
 
@@ -125,25 +128,15 @@ The Unix domain socket gateway supports a limited version of the SendUpdateRepor
 |19 | GENERAL_ERROR | Other error
 |===
 
-==== SendInstalledPackages
+==== SendInstalledPackages command
 
-The syntax for SendInstalledPackages is:
-
+The command syntax is:
 ----
-SendInstalledPackages package1_name package1_version package2_name package2_version [...] packageN_name packageN_version
+SendInstalledPackages pkg1_name pkg1_version pkg2_name pkg2_version [...] pkgN_name pkgN_version
 ----
 
-Package names and versions can't contain spaces, but there are no other character restrictions. For example, all of the package/versions listed here are valid:
+Note that the package version must be included for each package name, and neither the name nor version may contain spaces. Here is a valid example:
 
 ----
 SendInstalledPackages gcc 7.63 Movie&MusicPlayer rc2-beta3 ECU9274927BF82-firmware gitID-2fab572
 ----
-
-Note, however, that all packages must have a version.
-
-
-=== Websocket
-
-=== Console
-
-=== HTTP

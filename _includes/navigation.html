@@ -21,11 +21,11 @@
             {% for section in site.sections %}
                 {% if topic == section[0] %}
                     {% assign sorted_pages = site.categories[topic] | sort:"order" %}
-                    {% for page in sorted_pages %}
+                    {% for p in sorted_pages %}
                             {% if forloop.first %}
                                 <li class="nav-header nav-section-title">{{ section[1] }}</li>
                             {% endif %}
-                        <li><a class="nav-link" href="{{  site.baseurl }}{{ page.url }}">{{ page.title }}</a></li>
+                        <li><a class="nav-link {% if p.path == page.path %} active {% endif %}" href="{{  site.baseurl }}{{ p.url }}">{{ p.title }}</a></li>
                     {% endfor %}
                 {% endif %}
             {% endfor %}

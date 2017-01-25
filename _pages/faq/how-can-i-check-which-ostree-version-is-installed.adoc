@@ -1,0 +1,1 @@
+../../_posts/2017-01-25-how-can-i-check-which-ostree-version-is-installed.adoc

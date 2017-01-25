@@ -53,7 +53,7 @@ certificates_path = "/usr/local/etc/sota_certificates" <6>
 <3> The location SOTA Client should use for temporary package storage until they are processed by the software loading manager.
 <4> The software loading manager backend to use. Possible values are `deb`, `rpm`, `ostree`, and `off`. If an external software loading manager is in use, this should be set to `off`.
 <5> Boolean indicating whether the client should download new updates when ATS Garage indicates updates are available. If this is set to false, *no updates will be downloaded* unless an external mechanism triggers the download (by sending a link:../cli-dev/client-commandevent-api.html[command]).
-<5> The certificate authorities the ATS Garage Client trusts.
+<6> The certificate authorities the ATS Garage Client trusts.
 
 === [gateway]
 

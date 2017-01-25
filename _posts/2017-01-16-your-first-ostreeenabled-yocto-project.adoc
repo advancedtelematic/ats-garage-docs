@@ -64,6 +64,8 @@ Your first build will take a long time.
 
 Yocto downloads source code, and builds absolutely everything from source. Naturally, this takes quite a while--anywhere from 45 minutes on a fast i7 to 2-3 hours or more on a slower system. Fortunately, Yocto does cache everything, so on subsequent builds you only need to recompile the pieces you've actually changed, which means everything goes much, much faster.
 
+The last step of the bitbake process will push your brand new image up to TreeHub--check the *Packages* tab once the build is done, and you'll see a new package called treehub-ota-raspberrypi3, with your new build right underneath. You can now push this image to any of your OSTree-enabled devices. To get it running on your first device, though, you'll have to...
+
 === 4. Flash the image onto your micro SD card
 
 For this step, you'll need to create a device in ATS Garage. Once you've done so, you can download a configuration file for your device from the device page. It should be named something like `sota_client_5206671b-cc2a-42e8-9227-736588bf6cf0.toml`, with a UUID unique to your device.

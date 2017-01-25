@@ -37,8 +37,8 @@ sections: [
 # Note that any sections which aren't assigned to any navigation tab will not show 
 # up in navigation anywhere
 navigation_tabs: [
-    ['ATS Garage', 'garage', ['using-ats-garage', 'feat']],
-    ['Clients', 'clients', ['bas', 'start-yocto', 'start-package', 'start-manual', 'cli-dev']],
+    ['Web App', 'garage', ['using-ats-garage', 'feat']],
+    ['Client Apps', 'clients', ['bas', 'start-yocto', 'start-package', 'start-manual', 'cli-dev']],
     ['FAQ', 'faq', ['faq']]
 ]
 

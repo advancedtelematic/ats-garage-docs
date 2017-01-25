@@ -14,7 +14,8 @@ function setNavigationHeight() {
 	var navHeight = $('.navbar.navbar-default').height();
 	var visibleFooterHeight = Math.max(0, $("body > footer").visibleHeight());
 	var navigationHeight = windowHeight - navHeight - visibleFooterHeight;
-	$('#navigation .tab-content').height(navigationHeight - $('#navigation .nav-tabs').height());
+	var visibleToggleNavigationHeight = $(window).width() <= 1024 ? $('#toggle-navigation').outerHeight() : 0;
+	$('#navigation .tab-content').height(navigationHeight - $('#navigation .nav-tabs').height() - visibleToggleNavigationHeight);
 }
 
 function setNavbarHeight() {
@@ -48,6 +49,10 @@ $(document).ready(function() {
 
 	$('#navbar-menu').on('hidden.bs.collapse', function (e) {
 		$(this).css('cssText', 'height: 0 !important');
+	});
+
+	$('#toggle-navigation').click(function() {
+		$('#navigation, #toggle-navigation').toggleClass('collapsed');
 	});
 });
 

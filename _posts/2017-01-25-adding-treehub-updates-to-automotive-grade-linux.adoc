@@ -1,0 +1,90 @@
+---
+layout: page
+title: "Adding TreeHub updates to Automotive Grade Linux"
+category: start-yocto
+order: 4
+date: 2017-01-25 13:22:15
+---
+:icons: font
+
+ATS Garage works great with link:https://www.automotivelinux.org/[Automotive Grade Linux]. It's very easy to add OSTree updates to your AGL build, and then connect your devices to ATS Garage to get updates. These instructions are for building the AGL Demo Platform on a Raspberry Pi 3, but if you already have an AGL-based project, you can adapt as needed.
+
+== Prerequisites
+
+1. Download/install `repo`. You can install it from your distro's package manager (e.g. `apt-get install repo`), or follow the manual install instructions link:http://source.android.com/source/downloading.html#installing-repo[here].
+2. Enable TreeHub on your ATS Garage account, and download your credentials file.
+3. Create a device in ATS Garage, and download the unique credentials file.
+4. Download The AGL source code and Yocto layers. (We're going to use the current stable release, link:https://wiki.automotivelinux.org/agl-distro/release-notes#charming_chinook[Charming Chinook 3.0.0].) From an empty directory, run the following:
+
+----
+repo init -b chinook -m chinook_3.0.0.xml -u https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo/
+repo sync
+----
+
+== Set up build environment
+
+OSTree is already integrated into AGL; all you need to do is add *agl-sota* to the feature list when setting up your build environment:
+
+----
+source meta-agl/scripts/aglsetup.sh -m raspberrypi3 agl-demo agl-netboot agl-appfw-smack agl-sota
+----
+
+There is a recipe for the ATS Garage Client in AGL, but it isn't installed by default. You can add it as an extra package to install by adding this line to your local.conf:
+
+----
+IMAGE_INSTALL_append = " rvi-sota-client "
+----
+
+== Set up automatic push to TreeHub
+
+To push your images to TreeHub as soon as they are built, you need to tell Bitbake where to find your TreeHub credentials. Download the credentials file from the TreeHub tab in ATS Garage, copy it into your conf directory, and add a line to your local.conf pointing to the credentials file. Assuming it's named `treehub.json`, add this line:
+
+----
+OSTREE_PUSH_CREDENTIALS = "${TOPDIR}/conf/treehub.json"
+----
+
+You can put the credentials file anywhere you want, as long as you supply a fully qualified path to it in local.conf; we suggest the conf directory as a logical place for it, but you might prefer it to be somewhere else.
+
+== Build
+
+.Temporary work-around
+****
+In Charming Chinook 3.0.0, the recipes for rvi-sota-client and sota-tools are slightly too old to work with ATS Garage. Those recipes are located at:
+
+----
+meta-agl-extra/meta-sota/recipes-sota/rvi-sota-client/rvi-sota-client_git.bb
+meta-agl-extra/meta-sota/recipes-sota/sota-tools/sota-tools_git.bb
+----
+
+Replace those two recipes with these updated ones:
+
+link:../downloads/rvi-sota-client_git.bb[rvi-sota-client_git.bb] | link:../downloads/sota-tools_git.bb[sota-tools_git.bb]
+
+****
+
+Build your image with bitbake as normal:
+
+----
+bitbake agl-demo-platform
+----
+
+The image will be automatically pushed to TreeHub at the end of the build, and will show up automatically as a package in your ATS Garage account.
+
+== Flash built image to device
+
+Bitbake writes the image it builds to `build/tmp/deploy/images/raspberrypi3/agl-demo-platform-raspberrypi3.rpi-sdimg-ota`. This is a generic image that can be installed on any Raspberry Pi 3. For your specific device to connect to ATS Garage, you'll need to add the device's unique credentials to the image.
+
+First, flash the image onto your SD card and resize the rootfs partition:
+
+----
+sudo dd if=./tmp/deploy/images/raspberrypi3/agl-demo-platform-raspberrypi3.rpi-sdimg-ota of=/dev/sdX bs=32M && sync
+sudo parted -s /dev/sdX resizepart 2 '100%' <1>
+sudo resize2fs /dev/sdX2 <1>
+----
+<1> The image file Yocto generates is shrunk down to the smallest it can be. After writing it to your SD card, you'll want to expand the partition and root filesystem so they use the whole disk.
+
+Next, mount your SD card's second partition, and copy your `sota_client_UUID.toml` to `/boot/sota.toml`. It needs to be in exactly this location.
+
+TIP: You can also use the link:https://github.com/advancedtelematic/garage-quickstart-rpi/blob/master/flash-configured-image.sh[`flash_configured_image.sh`] script from the link:../start-yocto/your-first-ostreeenabled-yocto-project.html#4-flash-the-image-onto-your-micro-sd-card[Yocto Quickstart] project to flash the image.
+
+Now you should be able to boot up your Pi and see it load the AGL Demo Platform UI. You'll also see it connect in ATS Garage, and you'll be able to push updates to it over the air.

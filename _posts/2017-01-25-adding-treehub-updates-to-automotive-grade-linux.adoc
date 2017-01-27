@@ -7,14 +7,15 @@ date: 2017-01-25 13:22:15
 ---
 :icons: font
 
-ATS Garage works great with link:https://www.automotivelinux.org/[Automotive Grade Linux]. It's very easy to add OSTree updates to your AGL build, and then connect your devices to ATS Garage to get updates. These instructions are for building the AGL Demo Platform on a Raspberry Pi 3, but if you already have an AGL-based project, you can adapt as needed.
+ATS Garage works great with link:https://www.automotivelinux.org/[Automotive Grade Linux]. As long as your build environment is x86_64, it's very easy to add OSTree updates to your AGL build, and then connect your devices to ATS Garage to get updates. These instructions are for building the AGL Demo Platform on a Raspberry Pi 3, but if you already have an AGL-based project, you can adapt as needed.
 
 == Prerequisites
 
-1. Download/install `repo`. You can install it from your distro's package manager (e.g. `apt-get install repo`), or follow the manual install instructions link:http://source.android.com/source/downloading.html#installing-repo[here].
-2. Enable TreeHub on your ATS Garage account, and download your credentials file.
-3. Create a device in ATS Garage, and download the unique credentials file.
-4. Download The AGL source code and Yocto layers. (We're going to use the current stable release, link:https://wiki.automotivelinux.org/agl-distro/release-notes#charming_chinook[Charming Chinook 3.0.0].) From an empty directory, run the following:
+1. Make sure your build environment is x86_64. Although most Yocto layers support any architecture for the build machine, link:https://github.com/meta-rust/meta-rust[meta-rust] does not. Therefore, your build environment will need to be x86_64.
+2. Download/install `repo`. You can install it from your distro's package manager (e.g. `apt-get install repo`), or follow the manual install instructions link:http://source.android.com/source/downloading.html#installing-repo[here].
+3. Enable TreeHub on your ATS Garage account, and download your credentials file.
+4. Create a device in ATS Garage, and download the unique credentials file.
+5. Download The AGL source code and Yocto layers. (We're going to use the current stable release, link:https://wiki.automotivelinux.org/agl-distro/release-notes#charming_chinook[Charming Chinook 3.0.0].) From an empty directory, run the following:
 
 ----
 repo init -b chinook -m chinook_3.0.0.xml -u https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo/

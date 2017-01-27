@@ -9,10 +9,13 @@ date: 2017-01-16 18:03:38
 
 To OTA-enable an existing project, you need to:
 
+* be using an x86_64 build environment,
 * add the link:https://github.com/advancedtelematic/meta-updater[meta-updater] and link:https://github.com/meta-rust/meta-rust[meta-rust] layers to your project,
 * add a BSP layer for your target architecture,
 * set up your distro target for OTA updates, and
 * add your personal TreeHub credentials to your local configuration
+
+WARNING: Although most Yocto layers support any architecture for the build machine, link:https://github.com/meta-rust/meta-rust[meta-rust] does not. Therefore, your build environment will need to be x86_64.
 
 === Clone layers and add them to bblayers.conf
 

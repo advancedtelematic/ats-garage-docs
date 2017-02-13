@@ -9,7 +9,7 @@ date: 2017-01-16 21:09:08
 
 The ATS Garage client communicates with other processes on the host system over a command and event API. This API can function over a number of different gateways, configurable in the [gateway] section of the client config file.
 
-The client receives *commands*, and broadcasts *events*. Any interested parties on the system can subscribe to events, and send commands to the client. A quick overview of the commands and events is given here; if you want more detailed information on the exact structure of the command and event bodies, check out the RustDocs for link:../gen_docs/client/sota/datatype/command/enum.Command.html[commands] and link:../gen_docs/client/sota/datatype/event/enum.Event.html[events], respectively.
+The client receives *commands*, and broadcasts *events*. Any interested parties on the system can subscribe to events, and send commands to the client. A quick overview of the commands and events is given here; if you want more detailed information on the exact structure of the command and event bodies, check out the RustDocs for link:http://advancedtelematic.github.io/rvi_sota_server/gen_docs/client/sota/datatype/command/enum.Command.html[commands] and link:http://advancedtelematic.github.io/rvi_sota_server/gen_docs/client/sota/datatype/event/enum.Event.html[events], respectively.
 
 == Events
 

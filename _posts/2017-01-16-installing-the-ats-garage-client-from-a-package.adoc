@@ -1,10 +1,8 @@
----
-layout: page
-title: "Installing the ATS Garage client from a package"
-category: start-package
-order: 1
-date: 2017-01-16 18:46:51
----
+:page-layout: page
+:page-title: "Installing the ATS Garage client from a package"
+:page-category: start-package
+:page-order: 1
+:page-date: 2017-01-16 18:46:51
 
 It's not a recommended use for production environments, but if you wish you can use ATS Garage as a management tool for installing deb or rpm packages on your devices. It's the quickest way to get the ATS Garage client running, so it can be a good way to get started if what you want is a test drive.
 

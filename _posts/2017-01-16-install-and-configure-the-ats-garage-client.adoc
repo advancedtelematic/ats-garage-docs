@@ -1,10 +1,8 @@
----
-layout: page
-title: "Install and configure the ATS Garage client"
-category: start-manual
-order: 1
-date: 2017-01-16 18:09:07
----
+:page-layout: page
+:page-title: "Install and configure the ATS Garage client"
+:page-category: start-manual
+:page-order: 1
+:page-date: 2017-01-16 18:09:07
 :icons: font
 :toc: macro
 

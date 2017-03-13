@@ -1,9 +1,7 @@
----
-layout: page
-title: "Client command/event API"
-category: cli-dev
-date: 2017-01-16 21:09:08
----
+:page-layout: page
+:page-title: "Client command/event API"
+:page-category: cli-dev
+:page-date: 2017-01-16 21:09:08
 :icons: font
 
 

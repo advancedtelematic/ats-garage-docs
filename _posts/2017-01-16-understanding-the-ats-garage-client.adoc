@@ -1,9 +1,7 @@
----
-layout: page
-title: "Understanding the ATS Garage client"
-category: bas
-date: 2017-01-16 18:12:09
----
+:page-layout: page
+:page-title: "Understanding the ATS Garage client"
+:page-category: bas
+:page-date: 2017-01-16 18:12:09
 
 The ATS Garage client is a small daemon that you install on your device. Its main function is to check for and download updates, and then either install the updates itself, or pass them off to some external program to be installed. It also can report useful information about the device back to ATS Garage.
 

@@ -1,6 +1,6 @@
+= Update campaigns
 :page-layout: page
-:page-title: "Update campaigns"
-:page-category: feat
+:page-categories: [feat]
 :page-order: 3
 :page-date: 2017-01-16 22:32:36
 

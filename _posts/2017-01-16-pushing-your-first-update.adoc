@@ -1,6 +1,6 @@
+= Pushing your first update
 :page-layout: page
-:page-title: "Pushing your first update"
-:page-category: start-yocto
+:page-categories: [start-yocto]
 :page-order: 2
 :page-date: 2017-01-16 18:02:57
 :icons: font

@@ -1,6 +1,6 @@
+= Install and configure the ATS Garage client
 :page-layout: page
-:page-title: "Install and configure the ATS Garage client"
-:page-category: start-manual
+:page-categories: [start-manual]
 :page-order: 1
 :page-date: 2017-01-16 18:09:07
 :icons: font

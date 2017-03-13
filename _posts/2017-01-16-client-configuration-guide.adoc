@@ -1,6 +1,6 @@
+= Client configuration guide
 :page-layout: page
-:page-title: "Client configuration guide"
-:page-category: cli-dev
+:page-categories: [cli-dev]
 :page-date: 2017-01-16 21:09:19
 :icons: font
 

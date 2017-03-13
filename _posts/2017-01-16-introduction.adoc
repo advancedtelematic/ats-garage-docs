@@ -1,6 +1,6 @@
+= Introduction
 :page-layout: page
-:page-title: "Introduction"
-:page-category: using-ats-garage
+:page-categories: [using-ats-garage]
 :page-date: 2017-01-16 22:03:55
 
 The ATS Garage web app is where you can create, manage, and update your fleet of devices, and upload and manage software packages and update campaigns. Whether you're using OSTree updates, package-based updates, or managing software installation manually, the management tool is the same.

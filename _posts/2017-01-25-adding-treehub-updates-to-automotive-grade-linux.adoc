@@ -1,10 +1,8 @@
----
-layout: page
-title: "Adding TreeHub updates to Automotive Grade Linux"
-category: start-yocto
-order: 4
-date: 2017-01-25 13:22:15
----
+= Adding TreeHub updates to Automotive Grade Linux
+:page-layout: page
+:page-categories: [start-yocto]
+:page-order: 4
+:page-date: 2017-01-25 13:22:15
 :icons: font
 
 ATS Garage works great with link:https://www.automotivelinux.org/[Automotive Grade Linux]. As long as your build environment is x86_64, it's very easy to add OSTree updates to your AGL build, and then connect your devices to ATS Garage to get updates. These instructions are for building the AGL Demo Platform on a Raspberry Pi 3, but if you already have an AGL-based project, you can adapt as needed.

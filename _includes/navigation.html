@@ -3,7 +3,7 @@
     {% assign tab_title = tab[0] %}
     {% assign tab_id = tab[1] %}
     {% assign topics = tab[2] %}
-    <li {% if topics contains page.category %} class="active" {% endif %}{% if page.layout == "default" %}{% if forloop.first %} class="active"{% endif %}{% endif %}><a data-toggle="tab" href="#{{ tab_id }}">{{ tab_title }}</a></li>
+    <li {% if topics contains page.categories[0] %} class="active" {% endif %}{% if page.layout == "default" %}{% if forloop.first %} class="active"{% endif %}{% endif %}><a data-toggle="tab" href="#{{ tab_id }}">{{ tab_title }}</a></li>
     {% endfor %}
 </ul>
 
@@ -14,7 +14,7 @@
     {% assign tab_id = tab[1] %}
     {% assign topics = tab[2] %}
 
-    <div id="{{ tab_id }}" class="tab-pane fade in {% if topics contains page.category %} active {% endif %}{% if page.layout == "default" %}{% if forloop.first %} active {% endif %}{% endif %}">
+    <div id="{{ tab_id }}" class="tab-pane fade in {% if topics contains page.categories[0] %} active {% endif %}{% if page.layout == "default" %}{% if forloop.first %} active {% endif %}{% endif %}">
 
         <ul class="nav nav-list">
         {% for topic in topics %}

@@ -1,9 +1,7 @@
----
-layout: page
-title: "Comparing full-filesystem update strategies"
-category: cli-dev
-date: 2017-01-16 21:56:51
----
+= Comparing full-filesystem update strategies
+:page-layout: page
+:page-categories: [cli-dev]
+:page-date: 2017-01-16 21:56:51
 
 OSTree provides a number of very significant technological advantages over other full-filesystem updating schemes. For embedded systems that need a solution for safe, atomic, full-filesystem updates, the usual approach is to have some kind of *dual-bank* scheme. Here, we're going to take a look at the difference between OSTree and dual-bank systems, and the advantages OSTree can provide.
 

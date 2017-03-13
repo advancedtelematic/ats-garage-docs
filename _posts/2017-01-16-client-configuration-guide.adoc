@@ -1,9 +1,7 @@
----
-layout: page
-title: "Client configuration guide"
-category: cli-dev
-date: 2017-01-16 21:09:19
----
+= Client configuration guide
+:page-layout: page
+:page-categories: [cli-dev]
+:page-date: 2017-01-16 21:09:19
 :icons: font
 
 The config file for the SOTA client is in TOML format, and can be invoked at startup with `sota_client  --config /path/to/config_file.toml`. You can download a pre-populated config file for a device, containing its ATS Garage credentials, from the device page.

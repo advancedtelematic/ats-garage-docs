@@ -1,9 +1,7 @@
----
-layout: page
-title: "Configure a custom software installer"
-category: start-manual
-order: 2
-date: 2017-01-16 18:10:09
----
+= Configure a custom software installer
+:page-layout: page
+:page-categories: [start-manual]
+:page-order: 2
+:page-date: 2017-01-16 18:10:09
 
 To configure a custom installer, you will need to interact with the client's command/event API. See the developer docs for more details.

@@ -1,10 +1,8 @@
----
-layout: page
-title: "Devices and Groups"
-category: feat
-order: 1
-date: 2017-01-16 22:21:38
----
+= Devices and Groups
+:page-layout: page
+:page-categories: [feat]
+:page-order: 1
+:page-date: 2017-01-16 22:21:38
 
 The Devices tab is where you can see all of your managed devices, and drag and drop to organize them into groups.
 

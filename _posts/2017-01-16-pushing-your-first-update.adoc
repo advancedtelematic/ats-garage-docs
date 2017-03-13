@@ -1,10 +1,8 @@
----
-layout: page
-title: "Pushing your first update"
-category: start-yocto
-order: 2
-date: 2017-01-16 18:02:57
----
+= Pushing your first update
+:page-layout: page
+:page-categories: [start-yocto]
+:page-order: 2
+:page-date: 2017-01-16 18:02:57
 :icons: font
 
 Building the base image is all well and good, but it doesn't do that much that's very useful.

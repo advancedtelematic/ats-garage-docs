@@ -1,10 +1,8 @@
----
-layout: page
-title: "Update campaigns"
-category: feat
-order: 3
-date: 2017-01-16 22:32:36
----
+= Update campaigns
+:page-layout: page
+:page-categories: [feat]
+:page-order: 3
+:page-date: 2017-01-16 22:32:36
 
 Update campaigns are the heart of ATS Garage. An update campaign installs a package (or system image) on one or more groups of devices.
 

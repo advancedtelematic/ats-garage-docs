@@ -1,10 +1,8 @@
----
-layout: page
-title: "Your first OSTree-enabled Yocto project"
-category: start-yocto
-order: 1
-date: 2017-01-16 18:02:25
----
+= Your first OSTree-enabled Yocto project
+:page-layout: page
+:page-categories: [start-yocto]
+:page-order: 1
+:page-date: 2017-01-16 18:02:25
 :icons: font
 
 To help new users get running with Yocto, we've created a quick-start project for the Raspberry Pi. In this tutorial, we'll show you:

@@ -1,6 +1,6 @@
+= Packages and OSTree images
 :page-layout: page
-:page-title: "Packages and OSTree images"
-:page-category: feat
+:page-categories: [feat]
 :page-order: 2
 :page-date: 2017-01-16 22:22:15
 

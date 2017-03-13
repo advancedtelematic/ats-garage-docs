@@ -1,6 +1,6 @@
+= Impact analysis of blacklisted packages
 :page-layout: page
-:page-title: "Impact analysis of blacklisted packages"
-:page-category: feat
+:page-categories: [feat]
 :page-order: 5
 :page-date: 2017-01-16 22:23:32
 

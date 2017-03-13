@@ -1,6 +1,6 @@
+= Installing the ATS Garage client from a package
 :page-layout: page
-:page-title: "Installing the ATS Garage client from a package"
-:page-category: start-package
+:page-categories: [start-package]
 :page-order: 1
 :page-date: 2017-01-16 18:46:51
 

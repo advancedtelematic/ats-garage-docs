@@ -1,6 +1,6 @@
+= Devices and Groups
 :page-layout: page
-:page-title: "Devices and Groups"
-:page-category: feat
+:page-categories: [feat]
 :page-order: 1
 :page-date: 2017-01-16 22:21:38
 

@@ -1,6 +1,6 @@
+= Your first OSTree-enabled Yocto project
 :page-layout: page
-:page-title: "Your first OSTree-enabled Yocto project"
-:page-category: start-yocto
+:page-categories: [start-yocto]
 :page-order: 1
 :page-date: 2017-01-16 18:02:25
 :icons: font

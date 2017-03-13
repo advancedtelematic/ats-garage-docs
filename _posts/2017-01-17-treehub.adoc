@@ -1,6 +1,6 @@
+= TreeHub
 :page-layout: page
-:page-title: "TreeHub"
-:page-category: feat
+:page-categories: [feat]
 :page-date: 2017-01-17 14:00:01
 
 ATS Garage lets you update full filesystem images efficiently and atomically, straight from your Yocto build system.

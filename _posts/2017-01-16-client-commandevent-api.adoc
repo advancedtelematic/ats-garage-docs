@@ -1,6 +1,6 @@
+= Client command/event API
 :page-layout: page
-:page-title: "Client command/event API"
-:page-category: cli-dev
+:page-categories: [cli-dev]
 :page-date: 2017-01-16 21:09:08
 :icons: font
 

@@ -1,6 +1,6 @@
+= Yocto, OSTree, and TreeHub
 :page-layout: page
-:page-title: "Yocto, OSTree, and TreeHub"
-:page-category: bas
+:page-categories: [bas]
 :page-date: 2017-01-16 18:07:47
 
 

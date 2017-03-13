@@ -1,6 +1,6 @@
+= Adding TreeHub updates to Automotive Grade Linux
 :page-layout: page
-:page-title: "Adding TreeHub updates to Automotive Grade Linux"
-:page-category: start-yocto
+:page-categories: [start-yocto]
 :page-order: 4
 :page-date: 2017-01-25 13:22:15
 :icons: font

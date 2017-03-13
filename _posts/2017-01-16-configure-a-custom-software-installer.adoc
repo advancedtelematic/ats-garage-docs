@@ -1,6 +1,6 @@
+= Configure a custom software installer
 :page-layout: page
-:page-title: "Configure a custom software installer"
-:page-category: start-manual
+:page-categories: [start-manual]
 :page-order: 2
 :page-date: 2017-01-16 18:10:09
 

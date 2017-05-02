@@ -14,6 +14,26 @@ Alternatively, you can use link:docker.com[Docker] to build and preview the site
     docker run -it -v $(pwd):/site -p 4000:4000 advancedtelematic/jekyll-asciidoc jekyll s -H 0.0.0.0 (to preview)
     docker run -it -v $(pwd):/site -p 4000:4000 advancedtelematic/jekyll-asciidoc jekyll b (to build)
 
+== Publishing
+
+    s3_website push
+
+or
+
+   docker run --rm -it -v $(pwd):/site -u $(id -u):$(id -g) --env-file=.env advancedtelematic/jekyll-asciidoc s3_website push
+
+Both options require a file called `.env` in the current directory
+containing the AWS S3 upload credentials in the following format:
+
+..................................................
+S3_ID=...
+S3_SECRET=...
+..................................................
+
+A script called `publish-docs.sh` is provided which builds and
+published the site in one step. It expects the AWS S3 upload
+credentials file to be named `s3_credentials.env`.
+
 == Debugging
 
 If you're having issues with how jekyll is rendering the site, you can add debug breakpoints to any of the layouts or includes with a {% debug %} liquid tag. See the debugger docs at https://github.com/octopress/debugger.

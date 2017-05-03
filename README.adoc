@@ -16,23 +16,24 @@ Alternatively, you can use link:docker.com[Docker] to build and preview the site
 
 == Publishing
 
-    s3_website push
+    aws s3 sync --delete _site/ s3://docs.advancedtelematic.com
 
 or
 
-   docker run --rm -it -v $(pwd):/site -u $(id -u):$(id -g) --env-file=.env advancedtelematic/jekyll-asciidoc s3_website push
+   docker run --rm -it -v $(pwd):/project -u $(id -u):$(id -g) --env-file=s3_credentials.env mesosphere/aws-cli s3 sync --delete _site/ s3://docs.advancedtelematic.com
 
-Both options require a file called `.env` in the current directory
-containing the AWS S3 upload credentials in the following format:
+
+The first option requires that you have the aws command line tools set up and configured with credentials that are valid for the given s3 bucket. The second option requires you to create an `s3_credentials.env` file that looks like this:
 
 ..................................................
-S3_ID=...
-S3_SECRET=...
+AWS_ACCESS_KEY_ID=...
+AWS_SECRET_ACCESS_KEY=...
+AWS_DEFAULT_REGION=eu-central-1
 ..................................................
 
-A script called `publish-docs.sh` is provided which builds and
-published the site in one step. It expects the AWS S3 upload
-credentials file to be named `s3_credentials.env`.
+A script called `publish-docs.sh` is provided which builds the site, serves it locally so you can check that everything looks okay, and then pushes it to S3. It expects the AWS S3 upload credentials file to be named `s3_credentials.env`.
+
+There's an IAM user called `docs` which has access to only this bucket; ask Alaa or Alex for the credentials for that user if you need to push the site.
 
 == Debugging
 

@@ -59,7 +59,7 @@ This part's easy. From the build directory, run
 bitbake rpi-basic-image
 ----
 
-image::http://imgs.xkcd.com/comics/compiling.png[float="left",align="center"]
+image::https://imgs.xkcd.com/comics/compiling.png[float="left",align="center"]
 
 Your first build will take a long time.
 

@@ -54,5 +54,5 @@ fi
 
 
 # push to s3 using CLI
-docker run --rm -it -v $(pwd):/project -u $(id -u):$(id -g) --env-file=$env_file mesosphere/aws-cli s3 sync --delete _site/ s3://docs.advancedtelematic.com
+docker run --rm -it -v $(pwd):/project -u $(id -u):$(id -g) --env-file=$env_file mesosphere/aws-cli s3 sync --delete _site/ s3://docs.atsgarage.com
 rm -rf _site

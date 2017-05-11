@@ -4,5 +4,5 @@
 :page-order: 5
 :page-date: 2017-01-16 22:23:32
 
-With ATS Garage, you can link:../feat/blacklisting-packages.html[blacklist packages] that you know to be bad, buggy, or have security bulnerabilities. Once you've done that, the Impact Analysis tab will let you see which of your devices are affected by the bad version, and create update campaigns to rectify the situation.
+With ATS Garage, you can link:../feat/blacklisting-packages.html[blacklist packages] that you know to be bad, buggy, or have security vulnerabilities. Once you've done that, the Impact Analysis tab will let you see which of your devices are affected by the bad version, and create update campaigns to rectify the situation.
 

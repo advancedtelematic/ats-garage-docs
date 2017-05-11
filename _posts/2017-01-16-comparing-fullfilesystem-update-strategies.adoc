@@ -7,7 +7,7 @@ OSTree provides a number of very significant technological advantages over other
 
 == Dual-bank
 
-In a dual-bank system, the read-only root filesystem is kept on a different partition from the writable user space, so that when an update is needed the whole partition can be overwritten. For atomiciy and safety, this read-only partition is duplicated: there are two complete copies of the filesystem, kept on different partitions, and the active partition can be selected at boot time.
+In a dual-bank system, the read-only root filesystem is kept on a different partition from the writable user space, so that when an update is needed the whole partition can be overwritten. For atomicity and safety, this read-only partition is duplicated: there are two complete copies of the filesystem, kept on different partitions, and the active partition can be selected at boot time.
 
 When the system needs to be updated, the new filesystem image is written to the inactive partition, and the next time the system reboots, that partition becomes the active one.
 
@@ -15,7 +15,7 @@ When the system needs to be updated, the new filesystem image is written to the 
 .Fig. 1: Dual-bank update process (click to enlarge)
 link:/images/dual-bank-system-update-flow.svg[image:/images/dual-bank-system-update-flow.svg[]]
 
-The main advantage of this update model is its safety. Updates are always strictly atomic, and there is always a known-good image that can be rolled back to. However, there are significant trade-offs in flexibility and materials costs that must be made: the size of the root partition must be chosen when the system is flashed for the very first time, and the duplication of the root partition doubles the space required. When choosing how big to make the root partition, a device manufacturer has to consider not just how big their filesystem image currently is, but also must estimate and plan for the size of all future updates. If the size chosen is too small, it may restrict the ability to add new features. Making it larger, of course, adds to the bill of goods for the product--and since it's duplicated, every extra megabyte of future capacity actually costs two megabytes to accomodate.
+The main advantage of this update model is its safety. Updates are always strictly atomic, and there is always a known-good image that can be rolled back to. However, there are significant trade-offs in flexibility and materials costs that must be made: the size of the root partition must be chosen when the system is flashed for the very first time, and the duplication of the root partition doubles the space required. When choosing how big to make the root partition, a device manufacturer has to consider not just how big their filesystem image currently is, but also must estimate and plan for the size of all future updates. If the size chosen is too small, it may restrict the ability to add new features. Making it larger, of course, adds to the bill of goods for the product--and since it's duplicated, every extra megabyte of future capacity actually costs two megabytes to accommodate.
 
 == OSTree
 

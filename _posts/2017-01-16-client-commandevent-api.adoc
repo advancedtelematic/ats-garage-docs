@@ -99,7 +99,7 @@ If you are interested in implementing an external software installer using the c
 The Unix domain socket gateway supports a limited version of the SendUpdateReport command. The form of the command over unix domain sockets is `SendUpdateReport update_id result_code`.
 
 * The update ID is the one received from the `DownloadComplete` message.
-* The result of the update attempt, either in numberical or verbal form. The possible update codes are enumerated here:
+* The result of the update attempt, either in numerical or verbal form. The possible update codes are enumerated here:
 
 [cols="1,2,5",options="header"]
 |===

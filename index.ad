@@ -8,6 +8,6 @@ category: feat
 
 == Welcome to ATS Garage
 
-ATS Garage is the best way to get software updates to embedded devices, especially for automotive applications. It consists of two parts: the ATS Garage site, which manages all your devices and updates, and the ATS Garage client, a small daemon you can install on your devices to OTA-emable them.
+ATS Garage is the best way to get software updates to embedded devices, especially for automotive applications. It consists of two parts: the ATS Garage site, which manages all your devices and updates, and the ATS Garage client, a small daemon you can install on your devices to OTA-enable them.
 
 == link:/using-ats-garage/introduction.html[ATS Garage docs] | link:/bas/understanding-the-ats-garage-client.html[ATS Garage Client docs]

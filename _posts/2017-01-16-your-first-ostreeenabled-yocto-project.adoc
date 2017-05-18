@@ -13,7 +13,7 @@ To help new users get running with Yocto, we've created a quick-start project fo
 
 == Prerequisites
 
-* An x86_64 linux machine with at least 20 GB of hard drive space and the link:http://www.yoctoproject.org/docs/current/yocto-project-qs/yocto-project-qs.html#packages[required software packages] from the Yocto project's Quickstart guide
+* An x86_64 linux machine with at least 100 GB of hard drive space and the link:http://www.yoctoproject.org/docs/current/yocto-project-qs/yocto-project-qs.html#packages[required software packages] from the Yocto project's Quickstart guide
 
 WARNING: Although most Yocto layers support any architecture for the build machine, link:https://github.com/meta-rust/meta-rust[meta-rust] does not. Therefore, your build environment will need to be x86_64.
 

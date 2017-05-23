@@ -1,0 +1,8 @@
+= Pushing updates
+:page-layout: page
+:page-categories: [quickstarts]
+:page-date: 2017-05-23 16:31:35
+:page-order: 5
+:icons: font
+
+Every time you bitbake a new image, it is automatically pushed to ATS Garage. You can then send the updated image out to any of your devices.

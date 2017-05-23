@@ -1,0 +1,102 @@
+= Raspberry Pi
+:page-layout: page
+:page-categories: [quickstarts]
+:page-date: 2017-05-16 15:48:37
+:page-order: 1
+:icons: font
+
+ATS Garage lets you easily manage OTA updates to embedded devices running custom-built Yocto images. This is a guide for building a simple Yocto image for the Raspberry Pi. You can use it as a base image for another project, or as a template for how to get started.
+
+== Prerequisites
+
+You'll need a Raspberry Pi Model 3, and a build machine with the following:
+
+* A x86-64 Linux distro link:http://www.yoctoproject.org/docs/2.2/ref-manual/ref-manual.html#detailed-supported-distros[supported by the Yocto project] with the link:http://www.yoctoproject.org/docs/current/ref-manual/ref-manual.html#required-packages-for-the-host-development-system[required packages] installed. (On a Debian-based system, you should be able to install all the required packages with `sudo apt-get install gawk wget git-core diffstat unzip texinfo gcc-multilib build-essential chrpath socat libsdl1.2-dev xterm repo`.)
+** Many/most distros that aren't on the officially supported list will still work just fine, but YMMV.
+** Although the Yocto project as a whole does support architectures other than x86-64 for the build machine, one of the layers we'll be using only supports x86-64.
+** You *can* run this all inside a VM, but a Yocto build is a pretty resource-intensive process, so generally we don't recommend it. If you do, make sure there's plenty of ram and disk space available to the VM.
+* 100GB of free disk space
+* link:https://android.googlesource.com/tools/repo/[repo]
+** link:https://source.android.com/source/downloading#installing-repo[Download the latest version] directly from Google, or
+** install it from your distro's packages if available (`apt-get install repo`)
+
+=== Provisioning credentials
+
+**Device Provisioning** is the process of attaching individual credentials and certificates to a device. ATS Garage automates this process for you, allowing you to use the same unmodified disk image on many different devices and registering each one with ATS Garage the first time it boots.
+
+Go to the **Provisioning Keys** tab of your profile to create a key, then download it and save it somewhere. You'll need it when you set up your Yocto build.
+
+(TODO: insert screenshots)
+
+== 1. Create your Yocto build environment
+
+First, clone a manifest file for the quickstart project:
+
+----
+mkdir myproject
+cd myproject
+repo init -u https://github.com/advancedtelematic/updater-repo.git
+repo sync
+----
+
+This will download the basic Yocto layers you need.
+
+.What is this actually doing?
+****
+Yocto is a set of tools, templates and methods for building Linux systems from scratch. Most Yocto-built systems use a common set of base layers. The Yocto project maintains a *reference distribution* called Poky; we include that as a base layer, then add layers containing hardware support for specific boards (in this case the Raspberry Pi). Finally, we include a layer called meta-rust allowing us to compile the ATS Garage client (written in https://www.rust-lang.org/[Rust]), and the *meta-updater* layer containing the ATS Garage client and supporting tooling.
+
+All of these layers are assembled into a built Linux system by Bitbake, the build tool of the Yocto Project, based on the instructions in the recipes inside the layers.
+****
+
+Now you can run the following script to get the environment set up:
+
+----
+source meta-updater/scripts/envsetup.sh raspberrypi3
+----
+
+== 2. Customize your build
+
+The environment setup script will have created a build directory and placed you in it. It also generates a configuration file, located at `conf/local.conf`. This file is where we'll make our modifications to the base config.
+
+The main thing you need to add is the provisioning credentials bundle you downloaded earlier. Add the following line to your local.conf:
+
+----
+SOTA_PACKED_CREDENTIALS = "/path/to/your/credentials.zip"
+----
+
+You can also, if you wish, use the ATS Garage bitbake mirror to speed up your build:
+
+----
+SSTATE_MIRRORS ?= "file://.* https://bitbake-cache.atsgarage.com/PATH;downloadfilename=PATH"
+----
+
+This will save you some compilation time, as bitbake downloads some intermediate build artefacts instead of building them itself.
+
+== 3. Bitbake
+
+Now you're ready to build an image.
+
+----
+bitbake rpi-basic-image
+----
+
+image::https://imgs.xkcd.com/comics/compiling.png[float="left",align="center"]
+
+This step will take a while. If you used the build mirror, it might be as little as 10-15 minutes. Building everything from scratch, it will likely take a few hours.
+
+== 4. Put the built image on an SD card
+
+The build process creates disk images as an artefact. The one you need to write to the disk is located under your build directory at `tmp/deploy/images/raspberrypi3/rpi-basic-image-raspberrypi3.rpi-sdimg-ota`. We recommend using https://etcher.io/[Etcher] or https://etcher.io/cli/[Etcher CLI].
+
+TIP: You can also write the image using `dd`, but since the wrong kind of typo in a dd command is so dangerous, we don't recommend it.
+
+Once the image is on the card, resize the partition and filesystem to fill the whole space:
+
+----
+sudo parted -s /dev/sdX resizepart 2 '100%' <1>
+sudo resize2fs /dev/sdX2 <1>
+----
+<1> Where /dev/sdX is the device you wrote the image to.
+
+Now, put the card into your Pi, plug it into a *wired* internet connection, and power it on. You should see it come online shortly.
+

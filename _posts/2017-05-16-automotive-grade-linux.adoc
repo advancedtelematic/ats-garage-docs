@@ -1,0 +1,96 @@
+= Automotive Grade Linux
+:page-layout: page
+:page-categories: [quickstarts]
+:page-date: 2017-05-16 15:54:29
+:page-order: 2
+
+ATS Garage lets you easily manage OTA updates to embedded devices running custom-built Yocto images. It works great with Automotive Grade Linux, so building an AGL image is one easy way to get started. If your planned project is automotive, AGL is a great choice to start out with.
+
+== Prerequisites
+
+You'll need some AGL-supported hardware, and a build machine with the following:
+
+* A x86-64 Linux distro link:http://www.yoctoproject.org/docs/2.2/ref-manual/ref-manual.html#detailed-supported-distros[supported by the Yocto project] with the link:http://www.yoctoproject.org/docs/current/ref-manual/ref-manual.html#required-packages-for-the-host-development-system[required packages] installed. (On a Debian-based system, you should be able to install all the required packages with `sudo apt-get install gawk wget git-core diffstat unzip texinfo gcc-multilib build-essential chrpath socat libsdl1.2-dev xterm repo`.)
+** Many/most distros that aren't on the officially supported list will still work just fine, but YMMV.
+** Although the Yocto project as a whole does support architectures other than x86-64 for the build machine, one of the layers we'll be using only supports x86-64.
+** You *can* run this all inside a VM, but a Yocto build is a pretty resource-intensive process, so generally we don't recommend it. If you do, make sure there's plenty of ram and disk space available to the VM.
+* 100GB of free disk space
+* link:https://android.googlesource.com/tools/repo/[repo]
+** link:https://source.android.com/source/downloading#installing-repo[Download the latest version] directly from Google, or
+** install it from your distro's packages if available (`apt-get install repo`)
+
+=== Provisioning credentials
+
+**Device Provisioning** is the process of attaching individual credentials and certificates to a device. ATS Garage automates this process for you, allowing you to use the same unmodified disk image on many different devices and registering each one with ATS Garage the first time it boots.
+
+Go to the **Provisioning Keys** tab of your profile to create a key, then download it and save it somewhere. You'll need it when you set up your Yocto build.
+
+(TODO: insert screenshots)
+
+== 1. Create your AGL Yocto build environment
+
+First, clone a manifest file for AGL master:
+
+----
+mkdir myproject
+cd myproject
+repo init -u https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo
+repo sync
+----
+
+This will download the basic Yocto layers you need.
+
+.What is this actually doing?
+****
+Yocto is a set of tools, templates and methods for building Linux systems from scratch. Automotive Grade Linux is a complete Linux distribution designed for in-car systems. It includes base system layers from Poky and OpenEmbedded, board support layers for popular automotive platforms, and quite a lot more.
+
+All of these layers are assembled into a built Linux system by Bitbake, the build tool of the Yocto Project, based on the instructions in the recipes inside the layers.
+****
+
+Now you can run the following script to get the environment set up:
+
+----
+source meta-agl/scripts/aglsetup.sh -m <target-architecture> agl-demo agl-netboot agl-appfw-smack agl-sota <1>
+----
+<1> Where `target-architecture` one of: `raspberrypi2`, `raspberrypi3`, or `qemux86-64`.
+
+== 2. Customize your build
+
+The environment setup script will have created a build directory and placed you in it. It also generates a configuration file, located at `conf/local.conf`. This file is where we'll make our modifications to the base config.
+
+The main thing you need to add is the provisioning credentials bundle you downloaded earlier. Add the following line to your local.conf:
+
+----
+SOTA_PACKED_CREDENTIALS = "/path/to/your/credentials.zip"
+----
+
+WARNING: AGL's environment setup script, _unlike_ most other Yocto distributions, overwrites local.conf each time it is run. Anything you need to add, you'll have to add again after each time you run the environment setup.
+
+== 3. Bitbake
+
+Now you're ready to build an image.
+
+----
+bitbake agl-demo-platform <1>
+----
+<1> Or whatever other target you wish.
+
+image::https://imgs.xkcd.com/comics/compiling.png[float="left",align="center"]
+
+This step will take a while. The first time you build, it will likely be on the scale of several hours.
+
+== 4. Put the built image on your device's boot media
+
+The build process creates disk images as an artefact. The exact image you'll need will vary depending on the architecture you're building for, but it will be located in the `/tmp/deploy/images` directory under your build directory. We recommend using https://etcher.io/[Etcher] or https://etcher.io/cli/[Etcher CLI] to write the image.
+
+TIP: You can also write the image using `dd`, but since the wrong kind of typo in a dd command is so dangerous, we don't recommend it.
+
+You'll probably also want to resize the main partition to fill all of the space on the boot media:
+
+----
+sudo parted -s /dev/sdX resizepart 2 '100%' <1>
+sudo resize2fs /dev/sdX2 <1>
+----
+<1> Where /dev/sdX is the device you wrote the image to.
+
+You should now be able to boot your device and have it show up in your ATS Garage account.

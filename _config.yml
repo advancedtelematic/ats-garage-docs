@@ -19,6 +19,7 @@ codeurl: 'https://app.atsgarage.com/'
 
 # Categories that can appear in the navigation
 sections: [
+    ['quickstarts', 'Quickstart Guides'],
     ['start-yocto', 'Getting started with Yocto'],
     ['start-package', 'Getting started with packages'],
     ['start-manual', 'Getting started with manual configurations'],
@@ -37,9 +38,8 @@ sections: [
 # Note that any sections which aren't assigned to any navigation tab will not show 
 # up in navigation anywhere
 navigation_tabs: [
-    ['Web App', 'garage', ['using-ats-garage', 'feat']],
-    ['Client Apps', 'clients', ['bas', 'start-yocto', 'start-package', 'start-manual', 'cli-dev']],
-    ['FAQ', 'faq', ['faq']]
+    ['Guides', 'guides', ['quickstarts', 'start-yocto', 'start-package', 'start-manual', 'using-ats-garage', 'feat']],
+    ['Reference', 'reference', ['bas', 'cli-dev', 'faq']]
 ]
 
 # Links that should appear as top-bar navigation items. Docs should always be

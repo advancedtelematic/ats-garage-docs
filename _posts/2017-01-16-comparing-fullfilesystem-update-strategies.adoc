@@ -19,7 +19,7 @@ The main advantage of this update model is its safety. Updates are always strict
 
 == OSTree
 
-OSTree checksums individual files and stores them as content-addressed objects, much like git. The read-only filesystem is built by "checking out" a particular revision, and hardlinking the content-addressed objects into the actual linux directory structure. Multiple filesystem versions can be stored, and any content that is duplicated across versions is only stored once. A complete history of all version is stored in TreeHub, but it is not required to store that complete revision history on the device. Only one partition is needed--writable user space can be on the same partition as the OSTree content store.
+OSTree checksums individual files and stores them as content-addressed objects, much like git. The read-only filesystem is built by "checking out" a particular revision, and hardlinking the content-addressed objects into the actual Linux directory structure. Multiple filesystem versions can be stored, and any content that is duplicated across versions is only stored once. A complete history of all versions is stored in TreeHub, but it is not required to store that complete revision history on the device. Only one partition is needed--writable user space can be on the same partition as the OSTree content store.
 
 When the system needs to be updated, ATS Garage sends a small metadata file with a particular commit identifier. The client pulls that commit from TreeHub, only downloading the new files, and only downloading binary diffs of changed files. Once the pull is complete and verified verified, the system is instructed to boot into the new version the next time it starts up.
 

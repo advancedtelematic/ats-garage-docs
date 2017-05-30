@@ -3,6 +3,7 @@
 :page-categories: [quickstarts]
 :page-date: 2017-05-16 15:54:29
 :page-order: 2
+:icons: font
 
 ATS Garage lets you easily manage OTA updates to embedded devices running custom-built Yocto images. It works great with Automotive Grade Linux, so building an AGL image is one easy way to get started. If your planned project is automotive, AGL is a great choice to start out with.
 
@@ -81,7 +82,7 @@ This step will take a while. The first time you build, it will likely be on the 
 
 == 4. Put the built image on your device's boot media
 
-The build process creates disk images as an artefact. The exact image you'll need will vary depending on the architecture you're building for, but it will be located in the `/tmp/deploy/images` directory under your build directory. We recommend using https://etcher.io/[Etcher] or https://etcher.io/cli/[Etcher CLI] to write the image.
+The build process creates disk images as an artefact. The exact image you'll need will vary depending on the architecture you're building for, but it will be located in the `/tmp/deploy/images` directory under your build directory. We recommend using https://etcher.io/[Etcher, window="_blank"] or https://etcher.io/cli/[Etcher CLI, window="_blank"] to write the image.
 
 TIP: You can also write the image using `dd`, but since the wrong kind of typo in a dd command is so dangerous, we don't recommend it.
 

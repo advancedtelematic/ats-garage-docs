@@ -1,0 +1,10 @@
+= Introduction
+:page-layout: default
+:page-categories: [manual]
+:page-date: 2017-05-24 10:46:43
+:page-order: 1
+:icons: font
+
+== Manual Configuration Guides
+
+ATS Garage is designed to be easy to use for Yocto-based workflows, but there's actually a lot of flexibility under the hood. These guides take you through some of the other options you have for using ATS Garage.

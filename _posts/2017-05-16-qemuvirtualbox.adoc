@@ -11,7 +11,7 @@ ATS Garage lets you easily manage OTA updates to embedded devices running custom
 
 toc::[]
 
-== Prerequisites
+== 0. Prerequisites
 
 A build machine with the following:
 
@@ -24,7 +24,7 @@ A build machine with the following:
 ** link:https://source.android.com/source/downloading#installing-repo[Download the latest version] directly from Google, or
 ** install it from your distro's packages if available (`apt-get install repo`)
 
-== 0. Generate provisioning credentials
+== 1. Generate provisioning credentials
 
 **Device Provisioning** is the process of attaching individual credentials and certificates to a device. ATS Garage automates this process for you, allowing you to use the same unmodified disk image on many different devices and registering each one with ATS Garage the first time it boots.
 
@@ -32,7 +32,7 @@ Go to the **Provisioning Keys** tab of your profile to create a key, then downlo
 
 (TODO: insert screenshots)
 
-== 1. Create your Yocto build environment
+== 2. Create your Yocto build environment
 
 First, clone a manifest file for the quickstart project:
 
@@ -58,7 +58,7 @@ Now you can run the following script to get the environment set up:
 source meta-updater/scripts/envsetup.sh qemux86-64
 ----
 
-== 2. Customize your build
+== 3. Customize your build
 
 The environment setup script will have created a build directory and placed you in it. It also generates a configuration file, located at `conf/local.conf`. This file is where we'll make our modifications to the base config.
 
@@ -111,7 +111,7 @@ IMAGE_INSTALL_append = " vim " <1>
 
 You can get a list of all the available packages in the layers you have configured with `bitbake-layers show-recipes`
 
-== 3. Bitbake
+== 4. Bitbake
 
 Now you're ready to build an image.
 
@@ -123,7 +123,7 @@ image::https://imgs.xkcd.com/comics/compiling.png[float="left",align="center"]
 
 This step will take a while. If you used the build mirror, it might be as little as 10-15 minutes. Building everything from scratch, it will likely take a few hours.
 
-== 4. Run the built image with QEMU
+== 5. Run the built image with QEMU
 
 The build process creates disk images as an artefact. You can then directly run them with QEMU. The meta-updater layer contains a helper script to launch the images:
 
@@ -133,9 +133,6 @@ The build process creates disk images as an artefact. You can then directly run 
 
 Both arguments are optional; image name defaults to `core-image-minimal`, and if a mac address isn't specified, a random one is generated.
 
-TIP: When a virtual device connects to ATS Garage to be provisioned, it uses its current MAC address as its identifier. The provided script will launch QEMU with a random MAC address if you don't specify one.
+You should see your new device appear in ATS Garage shortly after it boots. It will generate a random name for itself during autoprovisioning; you can change the name later.
 
-You should see your new device appear in ATS Garage shortly after it boots.
-
-
-
+== link:../quickstarts/pushing-updates.html[Next: Pushing your first update >>]

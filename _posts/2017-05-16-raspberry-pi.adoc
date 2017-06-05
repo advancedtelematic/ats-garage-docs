@@ -10,7 +10,7 @@ ATS Garage lets you easily manage OTA updates to embedded devices running custom
 
 toc::[]
 
-== Prerequisites
+== 0. Prerequisites
 
 You'll need a Raspberry Pi Model 3, and a build machine with the following:
 
@@ -23,7 +23,7 @@ You'll need a Raspberry Pi Model 3, and a build machine with the following:
 ** link:https://source.android.com/source/downloading#installing-repo[Download the latest version] directly from Google, or
 ** install it from your distro's packages if available (`apt-get install repo`)
 
-== 0. Generate provisioning credentials
+== 1. Generate provisioning credentials
 
 **Device Provisioning** is the process of attaching individual credentials and certificates to a device. ATS Garage automates this process for you, allowing you to use the same unmodified disk image on many different devices and registering each one with ATS Garage the first time it boots.
 
@@ -31,7 +31,7 @@ Go to the **Provisioning Keys** tab of your profile to create a key, then downlo
 
 (TODO: insert screenshots)
 
-== 1. Create your Yocto build environment
+== 2. Create your Yocto build environment
 
 First, clone a manifest file for the quickstart project:
 
@@ -57,7 +57,7 @@ Now you can run the following script to get the environment set up:
 source meta-updater/scripts/envsetup.sh raspberrypi3
 ----
 
-== 2. Customize your build
+== 3. Customize your build
 
 The environment setup script will have created a build directory and placed you in it. It also generates a configuration file, located at `conf/local.conf`. This file is where we'll make our modifications to the base config.
 
@@ -110,7 +110,7 @@ IMAGE_INSTALL_append = " vim " <1>
 
 You can get a list of all the available packages in the layers you have configured with `bitbake-layers show-recipes`
 
-== 3. Bitbake
+== 4. Bitbake
 
 Now you're ready to build an image.
 
@@ -122,7 +122,7 @@ image::https://imgs.xkcd.com/comics/compiling.png[float="left",align="center"]
 
 This step will take a while. If you used the build mirror, it might be as little as 10-15 minutes. Building everything from scratch, it will likely take a few hours.
 
-== 4. Put the built image on an SD card
+== 5. Put the built image on an SD card
 
 The build process creates disk images as an artefact. The one you need to write to the disk is located under your build directory at `tmp/deploy/images/raspberrypi3/rpi-basic-image-raspberrypi3.rpi-sdimg-ota`. We provide a script to write the image and resize it to fit your SD card:
 
@@ -133,4 +133,6 @@ sudo ../meta-updater-raspberrypi/scripts/flash-image.sh <device> <1>
 
 TIP: You can also write the image using `dd`, but since the wrong kind of typo in a dd command is so dangerous, we don't recommend it. If you really want to do it that way, though, inspect the shell script to find the required commands.
 
-Now, put the card into your Pi, plug it into a *wired* internet connection, and power it on. You should see it come online in a minute or two.
+Now, put the card into your Pi, plug it into a *wired* internet connection, and power it on. You should see it come online in a minute or two. It will generate a random name for itself during autoprovisioning; you can change the name later.
+
+== link:../quickstarts/pushing-updates.html[Next: Pushing your first update >>]

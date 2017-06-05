@@ -1,15 +1,69 @@
-= Understanding the ATS Garage client
+= Understanding ATS Garage
 :page-layout: page
 :page-categories: [bas]
 :page-date: 2017-01-16 18:12:09
 
-The ATS Garage client is a small daemon that you install on your device. Its main function is to check for and download updates, and then either install the updates itself, or pass them off to some external program to be installed. It also can report useful information about the device back to ATS Garage.
+Although it's easy to get started with our quickstart guides and Yocto layers, there are quite a lot of moving pieces under the hood that make ATS Garage work. Here, we're going to walk through what's actually happening when you:
 
-The most important function of the client, downloading and installing updates, can be done in three different (and mutually exclusive) ways: with OSTree and TreeHub for Yocto/OpenEmbedded-based systems, with a package manager (dpkg or RPM), or with an external software installer that you provide. The Yocto/OSTree/TreeHub option is the best option for any embedded system (link:../bas/yocto-ostree-and-treehub.html[learn more]).
+* Provision a new device
+* Build a Yocto image that can do atomic full-filesystem updates with rollback
+* Build a new version of the image and push the update to ATS Garage
+* Send it to a client device for installation
 
-To learn more, try out our link:../start-yocto/your-first-ostreeenabled-yocto-project.html[Getting started with Yocto] project. Or, if you already have a Yocto-based project and you'd like to add over-the-air update support to it, read link:../start-yocto/adding-ostree-updates-to-your-existing-yocto-project.html[Adding OSTree to your existing Yocto project].
+== Provisioning a new device
 
-If you just want to try out the client and you don't want to wait for your Yocto distro to build, you can also download it as a deb or rpm package. You'll then be able to upload deb/rpm packages to ATS Garage, and manage their installation from there. This isn't a great model for actual production use, but we support it as an easy way to get started.
+ATS Garage uses mutual TLS authentication with X.509 certificates to secure communication with devices. This, of course, requires the devices to be provisioned with their unique certificates, and registered with the server. We make this process easy and automatic with *provisioning keys*.
 
-In automotive applications, it's common to have a telematics control unit (TCU) that handles updating firmware for other ECUs in the vehicle over various buses. You can use ATS Garage to manage those updates and update campaigns. The ATS Garage client can report system information from the TCU to ATS Garage, allowing you to easily target update campaigns to just the devices that need them, and use the client's link:../cli-dev/client-commandevent-api.html[command/event API] to initialize and report on the installs.
+When you build a filesystem image, you include a provisioning key. When a device boots, it checks whether it has credentials already. If not, it attempts to auto-provision. It presents its provisioning key and a unique identifierfootnote:[This could be something like a VIN, serial number, or device MAC address. It needs to be something that is unique to a particular device, doesn't change, and is programmatically available. We use the MAC address by default.] to the ATS Garage provisioning servicefootnote:[Each user has a uniquely generated provisioning URL; it's included in the provisioning key bundle.]. If the provisioning key is valid and the identifier is unique, new credentials are issued to the device. It then appears in the user's ATS Garage account, with its unique identifier as the name.
 
+== Building the image
+
+The way ATS Garage does full-filesystem updates is unique, and offers link:../cli-dev/comparing-fullfilesystem-update-strategies.html[significant benefits over other systems]. ATS Garage makes use of link:http://ostree.readthedocs.io/en/latest/[libOSTree] to store the whole filesystem in a git-like repository (content-addressed object store); file objects in the repository are then hardlinked into their place in the filesystem at boot time by a specially configured boot loader. We've done integration work to use OSTree with link:http://www.denx.de/wiki/U-Boot/WebHome[u-boot] and link:https://www.gnu.org/software/grub/[GRUB], but in principle other boot loaders can also be integrated.
+
+When you do a Yocto build integrating our open-source link:https://github.com/advancedtelematic/meta-updater[meta-updater] layer, you get two different artefacts:
+
+* a *disk image* that includes the bootloader partition integrated with OSTree and the rootfs partition, and
+* a local *OSTree repository* storing all of the filesystem revisions you've built.
+
+(There are actually some other intermediate images generated as well, but these two are the ones we care about.)
+
+The disk image is what you need to flash onto your device initially; the OSTree repository is what we use to update the images.
+
+== Pushing images to ATS Garage
+
+As mentioned above, OSTree repositories work quite a bit like git repositories; that includes the ability to have remote repositories. ATS Garage includes a server for OSTree repositories called TreeHub, and every time you build a new image, that image gets committed to your local OSTree repo, and then pushed to the TreeHub remote.
+
+This is all done with the meta-updater Yocto layer. Building the rootfs image and turning it into an OSTree commit is a publishing step, and there is a tool included in the layer called garage-push that authenticates with TreeHub and pushes the commit up to TreeHub.
+
+== Installing updates on devices
+
+The ATS Garage client is written to be modular and minimal. It ATS Garage, we generally assume that updates will be OSTree images, but in fact ATS Garage can be used to send all kinds of other updates, and can be configured for use in a wide variety of scenarios.
+
+First, let's describe an update sent with the default setup:
+
+.OSTree default update flow
+****
+. The client polls ATS Garage servers periodically to check if there are any new updates.
+. If there are, the client requests to download the update. (For OSTree updates, the initial download is simply a metadata file pointing to a particular OSTree commit.)
+. The update is cryptographically checked for validity following the https://uptane.org[Uptane specification].
+. The client checks if the reference is available locally; if it's not, the commit is downloaded from TreeHub, only actually downloading objects not already present in the repo.
+. Each object's SHA is checked for correctness.
+. Once all objects are downloaded and verified, a flag is set telling OSTree to boot into the new filesystem the next time it boots.
+****
+
+If this workflow doesn't fit the needs of a particular situation, though, virtually everything about it can be changed and/or integrated into an external system; every time the client does something, it emits an *event*, and each of the things is does can be triggered by a *command*. (See the link:../cli-dev/client-commandevent-api.html[API docs] for more details.) Let's go through the process again, but this time describing how it would look if there were an external software loading manager (SWLM) controlling the client through the API, and some other update package format was in use--for example, perhaps the update is to a maps package, and needs to call a special installer to manage the updating.
+
+.API-controlled update flow with an external software loading manager (SWLM)
+****
+. The client has update polling disabled. Instead of checking periodically, it listens for a `GetUpdateRequests` command. When it receives one from the SWLM, it checks with ATS Garage for updates.
+. The server responds that an update is available, so the client emits an `UpdatesReceived` event.
+. The SWLM then decides what to do; if it wants to download the update, it sends a `StartDownload` command.
+. The client emits a `DownloadingUpdate` event to notify the SWLM and any other listeners that the download has started.
+. When the download completes, it first checks the update for validity following the https://uptane.org[Uptane specification], then emits a `DownloadComplete` event when it successfully finishes.
+. Again, the SWLM decides what to do, and because the update is for the maps package, it passes the update off to some other installer to complete.
+. Once the install finishes (success or failure), the SWLM sends a `SendUpdateReport` command to the client.
+. The client passes the update report on to ATS Garage.
+. The client then emits an `UpdateReportSent` event.
+****
+
+These design choices for the client allow it to be useful in a wide variety of situations, while remaining easy to use and full featured for our ATS Garage quickstart setups. If you're interested in a custom client setup and need more information, please contact us at mailto:support@atsgarage.com. We'd be happy to help.

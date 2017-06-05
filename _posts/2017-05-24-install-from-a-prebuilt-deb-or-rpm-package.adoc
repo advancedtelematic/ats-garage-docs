@@ -1,0 +1,10 @@
+= Install from a pre-built .deb or .rpm package
+:page-layout: default
+:page-categories: [manual]
+:page-date: 2017-05-24 11:15:57
+:page-order: 99
+:icons: font
+
+== Installation from pre-built packages
+
+It's possible to use ATS Garage as a front-end/web interface for package management, without any of the Yocto support. With this option,

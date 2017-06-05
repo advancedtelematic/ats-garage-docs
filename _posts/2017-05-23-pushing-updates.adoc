@@ -4,5 +4,55 @@
 :page-date: 2017-05-23 16:31:35
 :page-order: 5
 :icons: font
+:toc: macro
 
-Every time you bitbake a new image, it is automatically pushed to ATS Garage. You can then send the updated image out to any of your devices.
+Every time you bitbake a new image, it is automatically pushed to ATS Garage. You can then send the updated image out to any of your devices. In this guide, you learn a few ways to add new things to your images.
+
+toc::[]
+
+== Add a new package from an existing recipes
+
+The simplest update you can do is just adding an extra package to your image, choosing from packages that there are already recipes for. For demonstration purposes, and because you probably noticed it was missing the first time you went to edit a config file on your device, let's add vim. Add this line to your local.conf:
+
+----
+IMAGE_INSTALL_append = " vim " <1>
+----
+<1> Note the spaces before and after the package name. This option dumbly appends a string to an install list, so we wrap it in spaces to make sure we don't alter the list in unexpected ways.
+
+You can get a list of all the available packages in the layers you have configured with `bitbake-layers show-recipes`
+
+== Add a new layer someone else created
+
+Since Yocto layers are just recipes for how to build software from source, it's often quite easy to find a layer for the thing you're looking for. As an example, we're going to integrate a layer that provides https://6xq.net/pianobar/[pianobar], a command-line client for http://www.pandora.com/[Pandora].
+
+NOTE: Pandora doesn't work with IP addresses outside of the United States, so if you're not in the USA, sorry: you're out of luck.footnote:[On a completely unrelated note, pianobar does provide a `control_proxy` configuration option that routes API calls through an HTTP proxy; check the manpage for details.]
+
+Adding a Yocto layer is pretty straightforward. You just need to download it, then tell bitbake where it is. The layer we're going to use is https://github.com/advancedtelematic/meta-aura[`meta-aura`]. First, clone the layer from github. From the top directory of your Yocto project, do:
+
+----
+git clone https://github.com/advancedtelematic/meta-aura
+----
+
+Then, you'll need to add it to your `bblayers.conf`. Add this line to `build/conf/bblayers.conf`:
+
+----
+BBLAYERS += "${METADIR}/meta-aura"
+----
+
+Next, add pianobar to the list of packages to install by adding this line to your `local.conf`:
+
+----
+IMAGE_INSTALL_append = " pianobar "
+----
+
+Since pianobar uses ffmpeg for mp3 decoding, its license is flagged as commercial. By default, Yocto won't allow that. You need to explicitly permit it:
+
+----
+LICENSE_FLAGS_WHITELIST += " commercial "
+----
+
+Finally, rebuild your image.
+
+== Make your own recipe or layer
+
+A complete guide to writing Yocto recipes is out of scope here, but http://www.yoctoproject.org/docs/current/dev-manual/dev-manual.html#new-recipe-writing-a-new-recipe[the Yocto Reference Manual] is a great resource.

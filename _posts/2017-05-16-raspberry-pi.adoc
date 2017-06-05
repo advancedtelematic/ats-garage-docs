@@ -4,8 +4,11 @@
 :page-date: 2017-05-16 15:48:37
 :page-order: 1
 :icons: font
+:toc: macro
 
 ATS Garage lets you easily manage OTA updates to embedded devices running custom-built Yocto images. This is a guide for building a simple Yocto image for the Raspberry Pi. You can use it as a base image for another project, or as a template for how to get started.
+
+toc::[]
 
 == Prerequisites
 
@@ -20,11 +23,11 @@ You'll need a Raspberry Pi Model 3, and a build machine with the following:
 ** link:https://source.android.com/source/downloading#installing-repo[Download the latest version] directly from Google, or
 ** install it from your distro's packages if available (`apt-get install repo`)
 
-=== Provisioning credentials
+== 0. Generate provisioning credentials
 
 **Device Provisioning** is the process of attaching individual credentials and certificates to a device. ATS Garage automates this process for you, allowing you to use the same unmodified disk image on many different devices and registering each one with ATS Garage the first time it boots.
 
-Go to the **Provisioning Keys** tab of your profile to create a key, then download it and save it somewhere. You'll need it when you set up your Yocto build.
+Go to the **Provisioning Keys** tab of your profile to create a key, then download it. It comes as a zip file containing a provisioning key and credentials for your build system to publish images. You don't need to unzip it; just save it somewhere. You'll need it when you set up your Yocto build.
 
 (TODO: insert screenshots)
 
@@ -58,19 +61,54 @@ source meta-updater/scripts/envsetup.sh raspberrypi3
 
 The environment setup script will have created a build directory and placed you in it. It also generates a configuration file, located at `conf/local.conf`. This file is where we'll make our modifications to the base config.
 
-The main thing you need to add is the provisioning credentials bundle you downloaded earlier. Add the following line to your local.conf:
+=== Mandatory configuration keys
+
+There are two things that are mandatory to change: you need to select a client to installfootnote:[ATS develops two open source clients compatible with ATS Garage, one written in Rust called rvi-sota-client, and one written in C++ called aktualizr. We'll use the Rust client for now; it gets the newest features first, and currently is the only one of the two that fully supports Uptane updates.], and add the provisioning credentials bundle you downloaded earlier. Add the following two lines to your local.conf:
 
 ----
 SOTA_PACKED_CREDENTIALS = "/path/to/your/credentials.zip"
+SOTA_CLIENT = "rvi-sota-client"
 ----
 
-You can also, if you wish, use the ATS Garage bitbake mirror to speed up your build:
+=== Optional configuration keys
+
+* *Set image name*
+
+When you build a filesystem image, it gets automatically uploaded to ATS Garage. By default, the image will be named `{MACHINE}-ota`, and you'll see the various versions of the image under that name. You can also choose to set your own name as follows:
+
+----
+OSTREE_BRANCHNAME = "my-super-great-project"
+----
+
+* *Persistent Yocto shared state cache and download directory*
+
+Yocto caches its build artefacts to speed up future builds. By default, these are stored under the build directory of the current project. However, if you're planning to build several different projects that have some shared base files, you might want them to share their cache directories, both to save space and speed up your builds. You can do that as follows:
+
+----
+SSTATE_DIR = "/path/to/your/shared-sstate"
+DL_DIR = "/path/to/your/shared-download"
+----
+
+* *Remote Yocto shared state cache*
+
+Yocto also supports the use of remote caches. ATS provides one; you can configure your build to use it as follows:
 
 ----
 SSTATE_MIRRORS ?= "file://.* https://bitbake-cache.atsgarage.com/PATH;downloadfilename=PATH"
 ----
 
 This will save you some compilation time, as bitbake downloads some intermediate build artefacts instead of building them itself.
+
+* *Add extra packages*
+
+There are quite a lot of packages available to install that aren't installed by default. You can add extra packages to your image with *IMAGE_INSTALL_append*; for example, this will install vim:
+
+----
+IMAGE_INSTALL_append = " vim " <1>
+----
+<1> Note the spaces before and after the package name. This option dumbly appends a string to an install list, so we wrap it in spaces to make sure we don't alter the list in unexpected ways.
+
+You can get a list of all the available packages in the layers you have configured with `bitbake-layers show-recipes`
 
 == 3. Bitbake
 
@@ -86,19 +124,13 @@ This step will take a while. If you used the build mirror, it might be as little
 
 == 4. Put the built image on an SD card
 
-test
-
-The build process creates disk images as an artefact. The one you need to write to the disk is located under your build directory at `tmp/deploy/images/raspberrypi3/rpi-basic-image-raspberrypi3.rpi-sdimg-ota`. We recommend using https://etcher.io/[Etcher, window="_blank"] or https://etcher.io/cli/[Etcher CLI, window="_blank"].
-
-TIP: You can also write the image using `dd`, but since the wrong kind of typo in a dd command is so dangerous, we don't recommend it.
-
-Once the image is on the card, resize the partition and filesystem to fill the whole space:
+The build process creates disk images as an artefact. The one you need to write to the disk is located under your build directory at `tmp/deploy/images/raspberrypi3/rpi-basic-image-raspberrypi3.rpi-sdimg-ota`. We provide a script to write the image and resize it to fit your SD card:
 
 ----
-sudo parted -s /dev/sdX resizepart 2 '100%' <1>
-sudo resize2fs /dev/sdX2 <1>
+sudo ../meta-updater-raspberrypi/scripts/flash-image.sh <device> <1>
 ----
-<1> Where /dev/sdX is the device you wrote the image to.
+<1> <device> is the name of the the device you want to write to. For example, `sdb`.
 
-Now, put the card into your Pi, plug it into a *wired* internet connection, and power it on. You should see it come online shortly.
+TIP: You can also write the image using `dd`, but since the wrong kind of typo in a dd command is so dangerous, we don't recommend it. If you really want to do it that way, though, inspect the shell script to find the required commands.
 
+Now, put the card into your Pi, plug it into a *wired* internet connection, and power it on. You should see it come online in a minute or two.

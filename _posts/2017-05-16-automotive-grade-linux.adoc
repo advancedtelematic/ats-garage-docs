@@ -7,7 +7,7 @@
 
 ATS Garage lets you easily manage OTA updates to embedded devices running custom-built Yocto images. It works great with Automotive Grade Linux, so building an AGL image is one easy way to get started. If your planned project is automotive, AGL is a great choice to start out with.
 
-== Prerequisites
+== 0. Prerequisites
 
 You'll need some AGL-supported hardware, and a build machine with the following:
 
@@ -20,7 +20,7 @@ You'll need some AGL-supported hardware, and a build machine with the following:
 ** link:https://source.android.com/source/downloading#installing-repo[Download the latest version] directly from Google, or
 ** install it from your distro's packages if available (`apt-get install repo`)
 
-=== Provisioning credentials
+== 1. Provisioning credentials
 
 **Device Provisioning** is the process of attaching individual credentials and certificates to a device. ATS Garage automates this process for you, allowing you to use the same unmodified disk image on many different devices and registering each one with ATS Garage the first time it boots.
 
@@ -28,7 +28,7 @@ Go to the **Provisioning Keys** tab of your profile to create a key, then downlo
 
 (TODO: insert screenshots)
 
-== 1. Create your AGL Yocto build environment
+== 2. Create your AGL Yocto build environment
 
 First, clone a manifest file for AGL master:
 
@@ -55,7 +55,7 @@ source meta-agl/scripts/aglsetup.sh -m <target-architecture> agl-demo agl-appfw-
 ----
 <1> Where `target-architecture` one of: `raspberrypi2`, `raspberrypi3`, or `qemux86-64`.
 
-== 2. Customize your build
+== 3. Customize your build
 
 There are two things that are mandatory to change: you need to select a client to installfootnote:[ATS develops two open source clients compatible with ATS Garage, one written in Rust called rvi-sota-client, and one written in C++ called aktualizr. We'll use the Rust client for now; it gets the newest features first, and currently is the only one of the two that fully supports Uptane updates.], and add the provisioning credentials bundle you downloaded earlier. Add the following two lines to your local.conf:
 
@@ -106,7 +106,7 @@ IMAGE_INSTALL_append = " vim " <1>
 
 You can get a list of all the available packages in the layers you have configured with `bitbake-layers show-recipes`
 
-== 3. Bitbake
+== 4. Bitbake
 
 Now you're ready to build an image.
 
@@ -134,3 +134,5 @@ sudo resize2fs /dev/sdX2 <1>
 <1> Where /dev/sdX is the device you wrote the image to.
 
 You should now be able to boot your device and have it show up in your ATS Garage account.
+
+== link:../quickstarts/pushing-updates.html[Next: Pushing your first update >>]

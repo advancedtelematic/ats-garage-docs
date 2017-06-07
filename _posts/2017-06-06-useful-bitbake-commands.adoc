@@ -2,7 +2,7 @@
 :page-layout: page
 :page-categories: [tips]
 :page-date: 2017-06-06 15:23:05
-:page-order: 1
+:page-order: 2
 :icons: font
 :toc: macro
 

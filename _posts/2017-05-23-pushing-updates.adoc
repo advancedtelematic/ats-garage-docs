@@ -6,7 +6,7 @@
 :icons: font
 :toc: macro
 
-Every time you bitbake a new image, it is automatically pushed to ATS Garage. You can then send the updated image out to any of your devices. In this guide, you learn a few ways to add new things to your images.
+Every time you bitbake a new image, it is automatically pushed to ATS Garage. You can then send the updated image out to any of your devices. In this guide, you learn a few ways to push updated system images from your build machine or workstation to ATS Garage.
 
 toc::[]
 

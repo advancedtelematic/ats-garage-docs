@@ -6,7 +6,7 @@
 :icons: font
 
 .Individual device page
-image::/path/to/file[alt text, width, height]
+image::../images/device-page.png[]
 
 On this page, you can:
 
@@ -16,3 +16,4 @@ On this page, you can:
 ** Currently installed OSTree image
 ** Installation history and status
 * Manually select packages/images to install
+* Set a particular branch to automatically update as soon as it's built/pushed by bitbake

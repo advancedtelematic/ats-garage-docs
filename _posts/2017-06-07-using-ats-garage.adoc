@@ -1,8 +1,0 @@
-= Using ATS Garage
-:page-layout: page
-:page-categories: [tips]
-:page-date: 2017-06-07 13:47:09
-:page-order: 99
-:icons: font
-
-

@@ -1,8 +1,8 @@
-= Campaigns
+= Managing campaigns
 :page-layout: page
 :page-categories: [usage]
 :page-date: 2017-06-07 13:51:54
-:page-order: 99
+:page-order: 2
 :icons: font
 
 ATS Garage is built for managing update campaigns to fleets of devices in the field. The Campaigns screen is where you create, monitor, and manage them.
@@ -13,14 +13,28 @@ To make a campaign, you need to:
 
 * Give the campaign a name:
 
-image::../images/campagin-creation-1.png[]
+image::../images/campaign-creation-1.png[]
 
 * Select an image to install:
-image::../images/campagin-creation-2.png[]
+
+image::../images/campaign-creation-2.png[]
 
 * Select a target group of devices:
-image::../images/campagin-creation-3.png[]
 
-* Finalize the campaign:
-image::../images/campagin-creation-4.png[]
+image::../images/campaign-creation-3.png[]
+
+* Finalize and launch the campaign:
+
+image::../images/campaign-creation-4.png[]
+
+== Monitoring campaign status
+
+Once you have some campaigns created, your campaigns tab will show you the status of your running and completed campaigns:
+
+image::../images/campaigns-page.png[]
+
+You can click an individual campaign to see its status in more detail:
+
+image::../images/campaign-detailed-view.png[]
+
 

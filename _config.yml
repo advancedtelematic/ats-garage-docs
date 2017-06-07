@@ -30,6 +30,7 @@ sections: [
     #['feat', 'ATS Garage Features'],
     ['faq', 'Questions'],
     ['tips', 'Tips and Tricks'],
+    ['usage', Using ATS Garage],
 #    ['hidden', '']
 ]
 
@@ -40,7 +41,7 @@ sections: [
 # Note that any sections which aren't assigned to any navigation tab will not show 
 # up in navigation anywhere
 navigation_tabs: [
-    ['Guides', 'guides', ['quickstarts', 'tips', 'start-yocto', 'start-package', 'start-manual', 'using-ats-garage', 'feat']],
+    ['Guides', 'guides', ['quickstarts', 'tips', 'usage', 'start-yocto', 'start-package', 'start-manual', 'using-ats-garage', 'feat']],
     ['Reference', 'reference', ['bas', 'cli-dev', 'faq']]
 ]
 

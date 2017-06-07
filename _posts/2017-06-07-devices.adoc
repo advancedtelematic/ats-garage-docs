@@ -1,8 +1,8 @@
-= Devices
-:page-layout: default
+= Managing devices
+:page-layout: page
 :page-categories: [usage]
 :page-date: 2017-06-07 13:51:37
-:page-order: 99
+:page-order: 1
 :icons: font
 
 .Devices page

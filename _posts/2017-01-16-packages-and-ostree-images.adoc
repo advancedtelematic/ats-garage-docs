@@ -1,9 +1,0 @@
-= Packages and OSTree images
-:page-layout: page
-:page-categories: [feat]
-:page-order: 2
-:page-date: 2017-01-16 22:22:15
-
-The *Packages* tab gives an overview of all of the packages and system images you've uploaded to ATS Garage or pushed to TreeHub.
-
-You can also link:../feat/blacklisting-packages.html[blacklist packages] from here.

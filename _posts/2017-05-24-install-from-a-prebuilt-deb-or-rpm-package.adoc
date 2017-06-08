@@ -1,0 +1,23 @@
+= Install from a pre-built .deb or .rpm package
+:page-layout: default
+:page-categories: [quickstarts]
+:page-date: 2017-05-24 11:15:57
+:page-order: 10
+:icons: font
+
+== Installation from pre-built packages
+
+It's possible to use ATS Garage as a front-end/web interface for package management, without any of the Yocto support. To use this option, first go to the https://app.atsgarage.com/#/profile/access-keys[**Provisioning Keys**, window="_blank"] tab of your profile.
+
+image::../images/provisioning-key-menu.png[]
+
+Then, you can manually create a device and download a pre-built package for it with device credentials baked in. From the provisioning page, click *get pre-builds DEB/RPM*, and name your device.
+
+image::../images/pre-builds.png[]
+
+This will take you to the device page:
+
+image::../images/manual-device-page.png[]
+
+From there, just download a deb or rpm (x86-64 only, sorry) and install it on your target machine. Remember, this package has device credentials baked in, so it can only be installed on a single machine.
+

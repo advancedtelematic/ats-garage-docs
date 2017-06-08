@@ -1,0 +1,1 @@
+../../_posts/2017-05-23-adding-ats-garage-updating-to-an-existing-yocto-project.adoc

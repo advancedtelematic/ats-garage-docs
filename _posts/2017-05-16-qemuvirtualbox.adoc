@@ -1,0 +1,145 @@
+= QEMU/VirtualBox
+:page-layout: page
+:page-categories: [quickstarts]
+:page-date: 2017-05-16 15:49:22
+:page-order: 3
+:icons: font
+:toc: macro
+
+
+ATS Garage lets you easily manage OTA updates to embedded devices running custom-built Yocto images. This is a guide for building a simple Yocto image that you can run in Virtualbox or QEMU. This is a good way to get started if you don't know yet what hardware your project will use, or if you just want to try out the features of ATS Garage without worrying about physical devices.
+
+toc::[]
+
+== 0. Prerequisites
+
+A build machine with the following:
+
+* A x86-64 Linux distro link:http://www.yoctoproject.org/docs/2.2/ref-manual/ref-manual.html#detailed-supported-distros[supported by the Yocto project] with the link:http://www.yoctoproject.org/docs/current/ref-manual/ref-manual.html#required-packages-for-the-host-development-system[required packages] installed. (On a Debian-based system, you should be able to install all the required packages with `sudo apt-get install gawk wget git-core diffstat unzip texinfo gcc-multilib build-essential chrpath socat libsdl1.2-dev xterm repo`.)
+** Many/most distros that aren't on the officially supported list will still work just fine, but YMMV.
+** Although the Yocto project as a whole does support architectures other than x86-64 for the build machine, one of the layers we'll be using only supports x86-64.
+** You *can* run this all inside a VM, but a Yocto build is a pretty resource-intensive process, so generally we don't recommend it. If you do, make sure there's plenty of ram and disk space available to the VM.
+* 100GB of free disk space
+* link:https://android.googlesource.com/tools/repo/[repo]
+** link:https://source.android.com/source/downloading#installing-repo[Download the latest version] directly from Google, or
+** install it from your distro's packages if available (`apt-get install repo`)
+
+== 1. Generate provisioning credentials
+
+**Device Provisioning** is the process of attaching individual credentials and certificates to a device. ATS Garage automates this process for you, allowing you to use the same unmodified disk image on many different devices and registering each one with ATS Garage the first time it boots.
+
+Go to the https://app.atsgarage.com/#/profile/access-keys[**Provisioning Keys**, window="_blank"] tab of your profile.
+
+image::../images/provisioning-key-menu.png[]
+
+Create a new key, select its period of validity, and then download it.
+
+image::../images/provisioning-screen.png[]
+
+It comes as a zip file containing a provisioning key and credentials for your build system to publish images. You don't need to unzip it; just save it somewhere. You'll need it when you set up your Yocto build.
+
+== 2. Create your Yocto build environment
+
+First, clone a manifest file for the quickstart project:
+
+----
+mkdir myproject
+cd myproject
+repo init -u https://github.com/advancedtelematic/updater-repo.git
+repo sync
+----
+
+This will download the basic Yocto layers you need.
+
+.What is this actually doing?
+****
+Yocto is a set of tools, templates and methods for building Linux systems from scratch. Most Yocto-built systems use a common set of base layers. The Yocto project maintains a *reference distribution* called Poky; we include that as a base layer, then add layers containing hardware support for specific boards (in this case the Raspberry Pi). Finally, we include a layer called meta-rust allowing us to compile the ATS Garage client (written in https://www.rust-lang.org/[Rust]), and the *meta-updater* layer containing the ATS Garage client and supporting tooling.
+
+All of these layers are assembled into a built Linux system by Bitbake, the build tool of the Yocto Project, based on the instructions in the recipes inside the layers.
+****
+
+Now you can run the following script to get the environment set up:
+
+----
+source meta-updater/scripts/envsetup.sh qemux86-64
+----
+
+== 3. Customize your build
+
+The environment setup script will have created a build directory and placed you in it. It also generates a configuration file, located at `conf/local.conf`. This file is where we'll make our modifications to the base config.
+
+=== Mandatory configuration keys
+
+There are two things that are mandatory to change: you need to select a client to installfootnote:[ATS develops two open source clients compatible with ATS Garage, one written in Rust called rvi-sota-client, and one written in C++ called aktualizr. We'll use the Rust client for now; it gets the newest features first, and currently is the only one of the two that fully supports Uptane updates.], and add the provisioning credentials bundle you downloaded earlier. Add the following two lines to your local.conf:
+
+----
+SOTA_PACKED_CREDENTIALS = "/path/to/your/credentials.zip"
+SOTA_CLIENT = "rvi-sota-client"
+----
+
+=== Optional configuration keys
+
+* *Set image name*
+
+When you build a filesystem image, it gets automatically uploaded to ATS Garage. By default, the image will be named `{MACHINE}-ota`, and you'll see the various versions of the image under that name. You can also choose to set your own name as follows:
+
+----
+OSTREE_BRANCHNAME = "my-super-great-project"
+----
+
+* *Persistent Yocto shared state cache and download directory*
+
+Yocto caches its build artefacts to speed up future builds. By default, these are stored under the build directory of the current project. However, if you're planning to build several different projects that have some shared base files, you might want them to share their cache directories, both to save space and speed up your builds. You can do that as follows:
+
+----
+SSTATE_DIR = "/path/to/your/shared-sstate"
+DL_DIR = "/path/to/your/shared-download"
+----
+
+* *Remote Yocto shared state cache*
+
+Yocto also supports the use of remote caches. ATS provides one; you can configure your build to use it as follows:
+
+----
+SSTATE_MIRRORS ?= "file://.* https://bitbake-cache.atsgarage.com/PATH;downloadfilename=PATH"
+----
+
+This will save you some compilation time, as bitbake downloads some intermediate build artefacts instead of building them itself.
+
+* *Add extra packages*
+
+There are quite a lot of packages available to install that aren't installed by default. You can add extra packages to your image with *IMAGE_INSTALL_append*; for example, this will install vim:
+
+----
+IMAGE_INSTALL_append = " vim " <1>
+----
+<1> Note the spaces before and after the package name. This option dumbly appends a string to an install list, so we wrap it in spaces to make sure we don't alter the list in unexpected ways.
+
+You can get a list of all the available packages in the layers you have configured with `bitbake-layers show-recipes`
+
+== 4. Bitbake
+
+Now you're ready to build an image.
+
+----
+bitbake core-image-minimal
+----
+
+image::https://imgs.xkcd.com/comics/compiling.png[float="left",align="center"]
+
+This step will take a while. If you used the build mirror, it might be as little as 10-15 minutes. Building everything from scratch, it will likely take a few hours.
+
+== 5. Run the built image with QEMU
+
+The build process creates disk images as an artefact. You can then directly run them with QEMU. The meta-updater layer contains a helper script to launch the images:
+
+----
+../meta-updater-qemux86-64/scripts/run-qemu [image name] [mac address]
+----
+
+Both arguments are optional; image name defaults to `core-image-minimal`, and if a mac address isn't specified, a random one is generated.
+
+You should see your new device appear in ATS Garage shortly after it boots. It will generate a random name for itself during autoprovisioning; you can change the name later.
+
+[discrete]
+== link:../quickstarts/pushing-updates.html[Next: Pushing your first update >>]

@@ -8,6 +8,12 @@ category: feat
 
 == Welcome to ATS Garage
 
-ATS Garage is the best way to get software updates to embedded devices, especially for automotive applications. It consists of two parts: the ATS Garage site, which manages all your devices and updates, and the ATS Garage client, a small daemon you can install on your devices to OTA-enable them.
+ATS Garage is a tool to manage software updates on embedded devices. It works with Yocto-built embedded Linux projects to deliver blazingly fast, secure, managed updates to your devices.
 
-== link:/using-ats-garage/introduction.html[ATS Garage docs] | link:/bas/understanding-the-ats-garage-client.html[ATS Garage Client docs]
+=== Built for automotive, ready for IoT
+
+ATS Garage uses the same base as our software updating product for enterprises, link:https://advancedtelematic.com/en/products.html#ota-plus[OTA Plus]. It supports many of the same features, including the link:https://uptane.org[Uptane security framework] and multi-ECU updates. Some things are simplified, however, making it easy to start and work with projects in early development. Since everything on the client side (and the core of the server-side code) is open source, you can build secure updates into your device right from the prototyping phase with confidence that you'll be ready with a production-grade update system once your product ships.
+
+== Get started now
+
+Learn how to get started with our link:/quickstarts/raspberry-pi.html[Raspberry Pi quickstart] project, with link:/quickstarts/automotive-grade-linux.html[Automotive Grade Linux], or if you've already got a Yocto-based project, you can just link:/quickstarts/adding-ats-garage-updating-to-an-existing-yocto-project.html[add our open source meta-updater layer] to your build.

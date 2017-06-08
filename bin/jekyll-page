@@ -83,12 +83,12 @@ if File.exists?(filepath)
 end
 
 content = <<END
----
-layout: page
-title: \"#{title}\"
-category: #{category}
-date: #{now}
----
+= #{title}
+:page-layout: page
+:page-categories: [#{category}]
+:page-date: #{now}
+:page-order: 99
+:icons: font
 
 
 END

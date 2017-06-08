@@ -1,1 +1,0 @@
-../../_posts/2017-01-16-impact-analysis-of-blacklisted-packages.adoc

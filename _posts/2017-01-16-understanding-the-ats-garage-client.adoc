@@ -2,6 +2,8 @@
 :page-layout: page
 :page-categories: [bas]
 :page-date: 2017-01-16 18:12:09
+:page-order: 1
+:icons: font
 
 Although it's easy to get started with our quickstart guides and Yocto layers, there are quite a lot of moving pieces under the hood that make ATS Garage work. Here, we're going to walk through what's actually happening when you:
 

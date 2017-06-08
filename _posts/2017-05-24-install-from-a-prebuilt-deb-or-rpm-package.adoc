@@ -7,7 +7,7 @@
 
 == Installation from pre-built packages
 
-It's possible to use ATS Garage as a front-end/web interface for package management, without any of the Yocto support. To use this option, first go to the **Provisioning Keys** tab of your profile.
+It's possible to use ATS Garage as a front-end/web interface for package management, without any of the Yocto support. To use this option, first go to the https://app.atsgarage.com/#/profile/access-keys[**Provisioning Keys**, window="_blank"] tab of your profile.
 
 image::../images/provisioning-key-menu.png[]
 

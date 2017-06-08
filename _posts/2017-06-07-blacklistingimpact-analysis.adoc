@@ -21,7 +21,7 @@ To blacklist a whole image, just click the ban icon next to the image.
 
 == Impact analysis
 
-The *Impact analysis* tab lets you view stats about the impact of packages you've blacklisted to help you make decisions about your update priorities. Results are dynamically updated as your vehicles complete update campaigns.
+The https://app.atsgarage.com/#/impact-analysis[*Impact analysis* tab, window="_blank"] lets you view stats about the impact of packages you've blacklisted to help you make decisions about your update priorities. Results are dynamically updated as your vehicles complete update campaigns.
 
 .Impact analysis
 image::../images/impact-analysis.png[]

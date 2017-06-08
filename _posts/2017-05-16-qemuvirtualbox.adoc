@@ -28,7 +28,7 @@ A build machine with the following:
 
 **Device Provisioning** is the process of attaching individual credentials and certificates to a device. ATS Garage automates this process for you, allowing you to use the same unmodified disk image on many different devices and registering each one with ATS Garage the first time it boots.
 
-Go to the **Provisioning Keys** tab of your profile.
+Go to the https://app.atsgarage.com/#/profile/access-keys[**Provisioning Keys**, window="_blank"] tab of your profile.
 
 image::../images/provisioning-key-menu.png[]
 

@@ -24,7 +24,7 @@ The branch name defaults to {MACHINE}-ota, so if you were building for raspberry
 
 === List files in a particular commit
 
-    $OSTREE ls --repo $REPO [path]
+    $OSTREE ls --repo $REPO [commit] [path]
 
 The -R option is supported, for recursive file listing.
 

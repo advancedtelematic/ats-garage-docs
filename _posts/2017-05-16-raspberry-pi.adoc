@@ -141,4 +141,5 @@ TIP: You can also write the image using `dd`, but since the wrong kind of typo i
 
 Now, put the card into your Pi, plug it into a *wired* internet connection, and power it on. You should see it come online in a minute or two. It will generate a random name for itself during autoprovisioning; you can change the name later.
 
+[discrete]
 == link:../quickstarts/pushing-updates.html[Next: Pushing your first update >>]

@@ -141,4 +141,5 @@ Both arguments are optional; image name defaults to `core-image-minimal`, and if
 
 You should see your new device appear in ATS Garage shortly after it boots. It will generate a random name for itself during autoprovisioning; you can change the name later.
 
+[discrete]
 == link:../quickstarts/pushing-updates.html[Next: Pushing your first update >>]

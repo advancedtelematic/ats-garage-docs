@@ -16,11 +16,11 @@ Alternatively, you can use link:docker.com[Docker] to build and preview the site
 
 == Publishing
 
-    aws s3 sync --delete _site/ s3://docs.advancedtelematic.com
+    aws s3 sync --delete _site/ s3://docs.atsgarage.com
 
 or
 
-   docker run --rm -it -v $(pwd):/project -u $(id -u):$(id -g) --env-file=s3_credentials.env mesosphere/aws-cli s3 sync --delete _site/ s3://docs.advancedtelematic.com
+   docker run --rm -it -v $(pwd):/project -u $(id -u):$(id -g) --env-file=s3_credentials.env mesosphere/aws-cli s3 sync --delete _site/ s3://docs.atsgarage.com
 
 
 The first option requires that you have the aws command line tools set up and configured with credentials that are valid for the given s3 bucket. The second option requires you to create an `s3_credentials.env` file that looks like this:

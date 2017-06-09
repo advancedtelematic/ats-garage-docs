@@ -1,0 +1,10 @@
+---
+layout: default
+title: "Page not found"
+category: feat
+---
+:icons: font
+
+== 404 Page not found
+
+The page you were looking for doesn't exist.

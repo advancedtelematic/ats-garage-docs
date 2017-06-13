@@ -4,6 +4,9 @@
 :page-date: 2017-06-13 10:51:53
 :page-order: 99
 :icons: font
+:toc: macro
+
+toc::[]
 
 == Build problems
 

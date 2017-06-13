@@ -71,4 +71,7 @@ notBefore=Jun  6 08:44:44 2017 GMT
 notAfter=Jun  7 00:45:14 2018 GMT
 ----
 
-If you're seeing server errors in the autoprovisioning log from a valid provisioning key, please link:mailto:support@atsgarage.com[contact us].
+.Don't see your problem here?
+****
+We'd love to hear from you about how we can improve the docs and make ATS Garage better. Contact link:mailto:support@atsgarage.com[support@atsgarage.com] and we'll do our best to help.
+****

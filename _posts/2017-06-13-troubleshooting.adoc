@@ -1,0 +1,71 @@
+= Troubleshooting
+:page-layout: page
+:page-categories: [tips]
+:page-date: 2017-06-13 10:51:53
+:page-order: 99
+:icons: font
+
+== Build problems
+
+=== GnuTLS build fails with older kernels
+
+GnuTLS currently requires a kernel >= 3.17 to build. If you're using an older kernel, you'll see an error like this:
+
+----
+../../../gnutls-3.5.3/lib/nettle/rnd-linux.c: In function 'have_getrandom':
+../../../gnutls-3.5.3/lib/nettle/rnd-linux.c:59:42: error: 'SYS_getrandom' undeclared (first use in this function)
+ #  define getrandom(dst,s,flags) syscall(SYS_getrandom, (void*)dst, (size_t)s, (unsigned int)flags)
+----
+
+This is an upstream problem; until it's fixed in upstream poky, you can link:../files/gnutls-fix.patch[download this patch] to your `poky` directory and apply it to fix the issue.
+
+=== Build didn't work after switching architectures
+
+You might have tried something like this:
+
+----
+source meta-updater/scripts/envsetup.sh raspberrypi3
+
+{ build an image ... }
+
+cd ..
+source meta-updater/scripts/envsetup.sh qemux86-64
+
+----
+
+*This doesn't work.* The setup script sets up certain environment variables for bitbake, but it also generates your `local.conf` and `bblayers.conf` files. If it finds existing files, however, it leaves them alone, and only sets up the environment. If you want to switch architectures, you also need to change your config files. You can do that by deleting/renaming your old ones and re-generating the config files. Don't forget to add your credentials and other customizations to the re-generated files!
+
+Depending on your use case, however, it often makes more sense to just keep separate project directories for your separate architectures, and share the state cache and downloads directories between them.
+
+== Runtime problems
+
+=== Device never comes online
+
+If you can boot your device, but it never shows up in your ATS Garage account, the autoprovisioning service has failed. You can inspect the logs to see what went wrong:
+
+----
+journalctl -u sota_client_autoprovision
+----
+
+To attempt to restart the service, use
+
+----
+systemctl restart sota_client_autoprovision
+----
+
+Other things to check:
+
+* Autoprovisioning depends on a valid source of time, and checks for NTP sync before proceeding. Check `timedatectl status` on your device to verify NTP sync.
+* Did a valid credentials bundle get added to the build? Look in `/var/sota`; you should see `sota_provisioning_credentials.p12` and `sota_provisioning_url.env`.
+* Has the provisioning key expired? Check the key's period of validity with openssl:
+
+----
+root@raspberrypi3:~# openssl pkcs12 -in /var/sota/sota_provisioning_credentials.p12 -nodes \
+ | openssl x509 -noout -startdate -enddate
+Enter Import Password:
+MAC verified OK
+notBefore=Jun  6 08:44:44 2017 GMT
+notAfter=Jun  7 00:45:14 2018 GMT
+----
+
+If you're seeing server errors in the autoprovisioning log from a valid provisioning key, please link:mailto:support@atsgarage.com[contact us].

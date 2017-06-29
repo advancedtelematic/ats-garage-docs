@@ -5,136 +5,89 @@
 :icons: font
 
 
-The ATS Garage client communicates with other processes on the host system over a command and event API. This API can function over a number of different gateways, configurable in the [gateway] section of the client config file.
+The ATS Garage client (aktualizr) communicates with other processes on the host system over a command and event API. This API can function over D-Bus or via simple unix domain sockets.
 
-The client receives *commands*, and broadcasts *events*. Any interested parties on the system can subscribe to events, and send commands to the client. A quick overview of the commands and events is given here; if you want more detailed information on the exact structure of the command and event bodies, check out the RustDocs for link:http://advancedtelematic.github.io/rvi_sota_server/gen_docs/client/sota/datatype/command/enum.Command.html[commands] and link:http://advancedtelematic.github.io/rvi_sota_server/gen_docs/client/sota/datatype/event/enum.Event.html[events], respectively.
+The client receives *commands*, and broadcasts *events*. Any interested parties on the system can subscribe to events, and send commands to the client.
 
 == Events
 
-`Error(String)` — General error event with a printable representation for debugging.
+`Error(String)` -- General error event with a printable representation for debugging.
 
-`Authenticated` — Authentication with SOTA Core was successful.
+`Authenticated` -- Authentication with SOTA Core was successful.
 
-`NotAuthenticated` — An operation failed because we are not currently authenticated.
+`NotAuthenticated` -- An operation failed because we are not currently authenticated.
 
-`UpdatesReceived(Vec<UpdateRequest>)` — Client has received a notification from Core of pending or in-flight updates. It includes a vector of one or more update UUIDs received from Core.
+`UpdatesReceived(Vec<UpdateRequest>)` -- Client has received a notification from Core of pending or in-flight updates. It includes a vector of one or more update UUIDs received from Core.
 
-`UpdateAvailable(UpdateAvailable)` — Used only when using RVI: a notification from RVI of a pending update.
+`UpdateAvailable(UpdateAvailable)` -- Used only when using RVI: a notification from RVI of a pending update.
 
-`NoUpdateRequests` — The client has no more outstanding update requests.
+`NoUpdateRequests` -- The client has no more outstanding update requests.
 
-`FoundInstalledPackages(Vec<Package>)` — The following packages are installed on the device.
+`FoundInstalledPackages(Vec<Package>)` -- The following packages are installed on the device.
 
-`FoundSystemInfo(String)` — An update on the system information was received.
+`FoundSystemInfo(String)` -- An update on the system information was received.
 
-`DownloadingUpdate(UpdateRequestId)` — Downloading an update.
+`DownloadingUpdate(UpdateRequestId)` -- Downloading an update.
 
-`DownloadComplete(DownloadComplete)` — An update was downloaded.
+`DownloadComplete(DownloadComplete)` -- An update was downloaded.
 
-`DownloadFailed(UpdateRequestId, String)` — Downloading an update failed.
+`DownloadFailed(UpdateRequestId, String)` -- Downloading an update failed.
 
-`InstallingUpdate(UpdateRequestId)` — Installing an update.
+`InstallingUpdate(UpdateRequestId)` -- Installing an update.
 
-`InstallComplete(UpdateReport)` — An update was installed.
+`InstallComplete(UpdateReport)` -- An update was installed.
 
-`InstallFailed(UpdateReport)` — The installation of an update failed.
+`InstallFailed(UpdateReport)` -- The installation of an update failed.
 
-`UpdateReportSent` — An update report was sent to the Core server.
+`UpdateReportSent` -- An update report was sent to the Core server.
 
-`InstalledPackagesSent` — A list of installed packages was sent to the Core server.
+`InstalledPackagesSent` -- A list of installed packages was sent to the Core server.
 
-`InstalledSoftwareSent` — A list of installed software was sent to the Core server.
+`InstalledSoftwareSent` -- A list of installed software was sent to the Core server.
 
-`SystemInfoSent` — The system information was sent to the Core server.
+`SystemInfoSent` -- The system information was sent to the Core server.
 
-`InstalledSoftwareNeeded` — A broadcast event requesting an update on externally installed software.
+`InstalledSoftwareNeeded` -- A broadcast event requesting an update on externally installed software.
 
+`UptaneTimestampUpdated` -- A new signed nonce was received from the Uptane timestamp server
+
+`UptaneTargetsUpdated` -- A new targets.json was received from the Uptane director
 
 == Commands
 
-`Authenticate(Option<ClientCredentials>)` — Authenticate with the auth server.
+`Authenticate(Option<ClientCredentials>)` -- Authenticate with the auth server.
 
-`Shutdown` — Shutdown the client immediately.
+`Shutdown` -- Shutdown the client immediately.
 
-`GetUpdateRequests` — Check for any pending or in-flight updates.
+`GetUpdateRequests` -- Check for any pending or in-flight updates.
 
 TIP: Assuming a polling interval is set, the client will periodically check for updates. If the polling interval is set to 0, this command can be sent to force the client to check for updates. This would be useful, for example, in a system with SMS shoulder-tap notifications.
 
-`ListInstalledPackages` — List the installed packages on the system.
+`ListInstalledPackages` -- List the installed packages on the system.
 
-`ListSystemInfo` — List the system information.
+`ListSystemInfo` -- List the system information.
 
 TIP: This tells the client to invoke the command set for `system_info` in the client configuration file.
 
-`StartDownload(UpdateRequestId)` — Start downloading an update.
+`StartDownload(UpdateRequestId)` -- Start downloading an update.
 
-`StartInstall(UpdateRequestId)` — Start installing an update.
+`AbortDownload(UpdateRequestId)` -- Abort the download of an update.
+
+`StartInstall(UpdateRequestId)` -- Start installing an update.
 
 TIP: This only applies if the package_manager is set to `deb` or `rpm` in the config file. If it's set to `off`, the software loading manager would start the install after it sees a DownloadComplete event.
 
-`SendInstalledPackages(Vec<Package>)` — Send a list of packages to the Core server.
+`SendInstalledPackages(Vec<Package>)` -- Send a list of packages to the Core server.
 
-TIP: SendInstalledPackages is intended to send a complete list of all packages on the device. Each time you send the command, the complete list of packages on Core will be *overwritten* with the info you send—not updated or appended.
+TIP: SendInstalledPackages is intended to send a complete list of all packages on the device. Each time you send the command, the complete list of packages on Core will be *overwritten* with the info you send--not updated or appended.
 
-`SendInstalledSoftware(InstalledSoftware)` — Send a list of all packages and firmware to the Core server.
+`SendInstalledSoftware(InstalledSoftware)` -- Send a list of all packages and firmware to the Core server.
 
-`SendSystemInfo` — Send the system information to the Core server.
+`SendSystemInfo` -- Send the system information to the Core server.
 
-`SendUpdateReport(UpdateReport)` — Send a package update report to the Core server.
+`SendUpdateReport(UpdateReport)` -- Send a package update report to the Core server.
 
 == Gateways
 
-Different subsets of commands and events are used in each gateway depending on its purpose.
-
-The Websocket gateway supports subscribing to every event in the client. This gateway would be useful for integrating update notifications and control into an HTML5 UI, for example, or for any other use case where very detailed tracking of client behaviour is needed.
-
-The HTTP and Console gateways support sending any command to the client, and will receive the final event after interpreting it. These gateways are primarily used for testing.
-
-The D-Bus and Socket gateways are intended for listening for `DownloadComplete` events to inform an external installer of available updates. This installer can then reply to the client with the installation outcome (with a `SendUpdateReport` command) and the currently installed packages (with a `SendInstalledPackages` command).
-
 If you are interested in implementing an external software installer using the command and event gateways, we would love to hear from you. link:mailto:support@atsgarage.com[Contact ATS Garage Support] and we'll do our best to support your efforts.
 
-==== SendUpdateReport
-
-The Unix domain socket gateway supports a limited version of the SendUpdateReport command. The form of the command over unix domain sockets is `SendUpdateReport update_id result_code`.
-
-* The update ID is the one received from the `DownloadComplete` message.
-* The result of the update attempt, either in numerical or verbal form. The possible update codes are enumerated here:
-
-[cols="1,2,5",options="header"]
-|===
-| Numerical | Verbal | Description
-|0  | OK | Operation executed successfully
-|1  | ALREADY_PROCESSED | Operation has already been processed
-|2  | DEPENDENCY_FAILURE | Dependency failure during package install, upgrade, or removal
-|3  | VALIDATION_FAILED | Update image integrity has been compromised
-|4  | INSTALL_FAILED | Package installation failed
-|5  | UPGRADE_FAILED | Package upgrade failed
-|6  | REMOVAL_FAILED | Package removal failed
-|7  | FLASH_FAILED | The module loader could not flash its managed module
-|8  | CREATE_PARTITION_FAILED | Partition creation failed
-|9  | DELETE_PARTITION_FAILED | Partition deletion failed
-|10 | RESIZE_PARTITION_FAILED | Partition resize failed
-|11 | WRITE_PARTITION_FAILED | Partition write failed
-|12 | PATCH_PARTITION_FAILED | Partition patching failed
-|13 | USER_DECLINED | User declined the update
-|14 | SOFTWARE_BLACKLISTED | Software was blacklisted
-|15 | DISK_FULL | Ran out of disk space
-|16 | NOT_FOUND | Software package not found
-|17 | OLD_VERSION | Tried to downgrade to older version
-|18 | INTERNAL_ERROR | SWM Internal integrity error
-|19 | GENERAL_ERROR | Other error
-|===
-
-==== SendInstalledPackages command
-
-The command syntax is:
-----
-SendInstalledPackages pkg1_name pkg1_version pkg2_name pkg2_version [...] pkgN_name pkgN_version
-----
-
-Note that the package version must be included for each package name, and neither the name nor version may contain spaces. Here is a valid example:
-
-----
-SendInstalledPackages gcc 7.63 Movie&MusicPlayer rc2-beta3 ECU9274927BF82-firmware gitID-2fab572
-----

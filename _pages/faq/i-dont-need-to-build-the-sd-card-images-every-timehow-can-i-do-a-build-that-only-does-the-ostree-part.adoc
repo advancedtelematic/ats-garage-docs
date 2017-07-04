@@ -1,0 +1,1 @@
+../../_posts/2017-06-29-i-dont-need-to-build-the-sd-card-images-every-timehow-can-i-do-a-build-that-only-does-the-ostree-part.adoc

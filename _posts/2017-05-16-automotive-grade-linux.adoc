@@ -41,11 +41,11 @@ All of these layers are assembled into a built Linux system by Bitbake, the buil
 
 === 2.2 Check out latest meta-updater layer
 
-AGL's version of meta-updater is usually a few revisions behind the latest one. ATS Garage is always tested against the latest github revision of on the *morty* branch of meta-updater, so we'll check out that one.
+AGL's version of meta-updater is usually a few revisions behind the latest one. ATS Garage is always tested against the latest github revision on the *morty* branch of meta-updater, so we'll check out that one.
 
 ----
 cd meta-updater
-git checkout morty
+git checkout github/morty
 cd ..
 ----
 

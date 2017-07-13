@@ -18,43 +18,56 @@ navigation: 2
 codeurl: 'https://app.atsgarage.com/'
 
 # Categories that can appear in the navigation
-sections: [
-    ['quickstarts', 'Quickstart Guides'],
-    ['manual', 'Manual Setup Guides'],
-    #['start-yocto', 'Getting started with Yocto'],
-    #['start-package', 'Getting started with packages'],
-    #['start-manual', 'Getting started with manual configurations'],
-    #['cli-dev', 'Developer Docs'],
-    #['using-ats-garage', 'Using ATS Garage'],
-    ['bas', 'Basics'],
-    #['feat', 'ATS Garage Features'],
-    ['faq', 'Questions'],
-    ['tips', 'Tips and Tricks'],
-    ['usage', Using ATS Garage],
-#    ['hidden', '']
-]
+sections:
+  - id: quickstarts
+    title: Quickstart Guides
+  - id: manual
+    title: Manual Setup Guides
+  - id: bas
+    title: Basics
+  - id: faq
+    title: Questions
+  - id: tips
+    title: Tips and Tricks
+  - id: usage
+    title: Using ATS Garage
 
-# This creates navigation tabs. First element in the array is the name of the tab,
-# second is the id of the tab's div, third is the list of sections that should
-# appear in the tab
+
+# This creates navigation tabs. 'title' is the display name of the tab, 'tab_id'
+# is the id of the tab's div, and 'topics' is the list of sections (by id) that 
+# should appear in the tab.
 # 
 # Note that any sections which aren't assigned to any navigation tab will not show 
 # up in navigation anywhere
-navigation_tabs: [
-    ['Guides', 'guides', ['quickstarts', 'tips', 'usage', 'start-yocto', 'start-package', 'start-manual', 'using-ats-garage', 'feat']],
-    ['Reference', 'reference', ['bas', 'cli-dev', 'faq']]
-]
+navigation_tabs:
+  - title: Guides
+    tab_id: guides
+    topics:
+      - quickstarts
+      - tips
+      - usage
+      - start-yocto
+      - start-package
+      - start-manual
+      - using-ats-garage
+      - feat
+  - title: Reference
+    tab_id: reference
+    topics:
+      - bas
+      - cli-dev
+      - faq
+
 
 # Links that should appear as top-bar navigation items. Docs should always be
 # the last one, because of a stupid hack.
-header_links: [
-    ['How it works', 'http://atsgarage.com/en/how-it-works.html'],
-    ['Pricing', 'http://atsgarage.com/en/pricing.html'],
-    ['News', 'http://atsgarage.com/en/news.html'],
-#    ['FAQ', 'http://atsgarage.com/en/FAQ.html'],
-    ['Contact', 'http://atsgarage.com/en/contact.html'],
-    ['Docs', '/']
-]
+header_links: 
+  How it works: http://atsgarage.com/en/how-it-works.html
+  Pricing: http://atsgarage.com/en/pricing.html
+  News: http://atsgarage.com/en/news.html
+  Contact: http://atsgarage.com/en/contact.html
+  Docs: "/"
+
 
 # Keep as an empty string if served up at the root. If served up at a specific
 # path (e.g. on GitHub pages) leave off the trailing slash, e.g. /my-project
@@ -70,7 +83,16 @@ highlighter: pygments
 future: true
 
 # Exclude non-site files
-exclude: ['bin', 'README.md','README.adoc','Gemfile*','Makefile','Dockerfile','publish-docs.sh','design','s3_credentials.env']
+exclude: 
+  - 'bin'
+  - 'README.md'
+  - 'README.adoc'
+  - 'Gemfile*'
+  - 'Makefile'
+  - 'Dockerfile'
+  - 'publish-docs.sh'
+  - 'design'
+  - 's3_credentials.env'
 
 gems: 
   - jekyll-asciidoc

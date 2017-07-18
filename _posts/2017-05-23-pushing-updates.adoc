@@ -35,16 +35,18 @@ To demonstrate this, we're going to try a two-step task. First, we're going to i
 
 NOTE: Pandora doesn't work with IP addresses outside of the United States, so if your IP address is not US-American, it won't work by default. There is a `control-proxy` configuration option in pianobar though; see the manpage for details.
 
-We've created a simple layer called https://github.com/advancedtelematic/meta-jukebox[`meta-jukebox`] to use in this guide. First, clone it into your project directory:
+We've created a simple layer called https://github.com/advancedtelematic/meta-jukebox[`meta-jukebox`] to use in this guide. It has one layer dependency: link:https://github.com/imyller/meta-nodejs[`meta-nodejs`]. First, clone those two layers into your project directory:
 
 ----
 git clone https://github.com/advancedtelematic/meta-jukebox
+git clone https://github.com/imyller/meta-nodejs
 ----
 
-Then, add it to your `bblayers.conf`. Add this line to `build/conf/bblayers.conf`:
+Then, add them to your `bblayers.conf`. Add these lines to `build/conf/bblayers.conf`:
 
 ----
 BBLAYERS += "${METADIR}/meta-jukebox"
+BBLAYERS += "${METADIR}/meta-nodejs"
 ----
 
 Next, add the following two lines to your `local.conf`:
@@ -62,9 +64,20 @@ Now rebuild your image with `bitbake [image-name]`, where `[image-name]` is the 
 
 Okay, so you got pianobar running. But maybe you don't want to have to ssh into your device when you want to change channels or songs. Let's install https://github.com/kylejohnson/Patiobar[Patiobar] so we can control it using a web interface.
 
-Patiobar is also included in `meta-jukebox`, but it depends on one more layer: https://github.com/imyller/meta-nodejs[`meta-nodejs`] provides up-to-date recipes for node. (There actually are node.js recipes in the default layers, but they're quite out of date.)
+Patiobar is also included in `meta-jukebox`. To build, just add `patiobar` to `IMAGE_INSTALL_append` in your local.conf.
 
-The process is the same as in part 1: clone the https://github.com/imyller/meta-nodejs[`meta-nodejs`] layer and add it to your `bblayers.conf` the same way you added `meta-jukebox`. Then add `patiobar` to `IMAGE_INSTALL_append` in your local.conf.
+[WARNING]
+====
+If you are building for 32-bit ARM (i.e. Raspberry Pi), you'll need some supporting packages. On Ubuntu/Debian:
+
+----
+sudo dpkg --add-architecture i386
+sudo apt-get update
+sudo apt-get install g++-multilib libssl-dev:i386 libcrypto++-dev:i386 zlib1g-dev:i386
+----
+
+For more details, see the https://github.com/imyller/meta-nodejs#cross-compiling-for-32-bit-target-on-64-bit-host[meta-nodejs README].
+====
 
 The Patiobar recipe also includes a systemd service that will create a pianobar config based on options you set in your local.conf, and then starts both Patiobar and Pianobar in screen sessions. You can add these three lines if you wish:
 
@@ -78,8 +91,6 @@ PANDORA_PROXY=myproxy.example.com:3128 <3>
 <3> An HTTP proxy server to use for Pandora API calls. You can leave it blank to use no proxy, or set it to 'auto' to automatically search for and select a US proxy on startup.
 
 Now, rebuild your image and push it to your device.
-
-TIP: If you're cross-compiling for a 32-bit architecture like the Raspberry Pi and you get build errors, you probably just need to install a couple of extra packages on your build system. They're listed in the https://github.com/imyller/meta-nodejs#cross-compiling-for-32-bit-target-on-64-bit-host[meta-nodejs README].
 
 After a reboot, Patiobar should launch automatically. Point your web browser to port 3000 on the device, and start listening!
 

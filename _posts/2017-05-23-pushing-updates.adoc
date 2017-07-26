@@ -19,9 +19,11 @@ The simplest update you can do is just adding an extra package to your image, ch
 Because you probably noticed it was missing the first time you went to edit a config file on your device, let's install vim. Add this line to your local.conf:
 
 ----
-IMAGE_INSTALL_append = " vim " <1>
+IMAGE_INSTALL_append = " vim " <1> <2>
 ----
 <1> Note the spaces before and after the package name. The `IMAGE_INSTALL_append` option naively appends a string to the list of packages to install, so we wrap it in spaces to make sure we don't alter the list in unexpected ways.
+
+<2> If you already added vim, try adding man or gdb.
 
 Now rebuild your image with `bitbake [image-name]`, where `[image-name]` is the same as the one you built in the quickstart guide, and push it to your device using ATS Garage. Once you reboot, vim will be available.
 

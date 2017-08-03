@@ -5,7 +5,9 @@
 :page-order: 2
 :icons: font
 
-ATS Garage is built for managing update campaigns to fleets of devices in the field. The https://app.atsgarage.com/#/campaigns[*Campaigns*, window="_blank"] tab is where you create, monitor, and manage them.
+ATS Garage is built for managing update campaigns to fleets of devices in the field. The https://app.atsgarage.com/#/campaigns[*Campaigns*, window="_blank"] tab is where you create, monitor, and manage them. This brief video shows you how to create groups and update campaigns:
+
+video::228062564[vimeo,854,480]
 
 == Creating a campaign
 

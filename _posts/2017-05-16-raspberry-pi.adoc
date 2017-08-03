@@ -6,9 +6,13 @@
 :icons: font
 :toc: macro
 
-ATS Garage lets you easily manage OTA updates to embedded devices running custom-built Yocto images. This is a guide for building a simple Yocto image for the Raspberry Pi. You can use it as a base image for another project, or as a template for how to get started.
+ATS Garage lets you easily manage OTA updates to embedded devices running custom-built Yocto images. This is a guide for building a simple Yocto image for the Raspberry Pi. You can use it as a base image for another project, or as a template for how to get started. The whole process only takes about 3 minutes of your time--watch the video guide to see just how easy it is.
 
 toc::[]
+
+== Video guide
+
+video::228062652[vimeo,854,480]
 
 == 0. Prerequisites
 

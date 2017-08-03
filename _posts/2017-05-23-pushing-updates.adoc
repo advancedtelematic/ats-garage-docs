@@ -10,11 +10,14 @@ Every time you bitbake a new image, it is automatically pushed to ATS Garage. Yo
 
 toc::[]
 
+
 == Add a new package from an existing recipe
 
 The simplest update you can do is just adding an extra package to your image, choosing from packages that there are already recipes for. You can see a list of all the packages available with the `bitbake-layers show-recipes` command.
 
 === Example task: Install vim
+
+video::228062403[vimeo,854,480]
 
 Because you probably noticed it was missing the first time you went to edit a config file on your device, let's install vim. Add this line to your local.conf:
 

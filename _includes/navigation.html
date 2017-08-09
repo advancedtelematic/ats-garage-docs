@@ -1,29 +1,22 @@
 <ul class="nav nav-tabs nav-justified" data-tabs="tabs">
     {% for tab in site.navigation_tabs %}
-    {% assign tab_title = tab[0] %}
-    {% assign tab_id = tab[1] %}
-    {% assign topics = tab[2] %}
-    <li {% if topics contains page.categories[0] %} class="active" {% endif %}{% if page.layout == "default" %}{% if forloop.first %} class="active"{% endif %}{% endif %}><a data-toggle="tab" href="#{{ tab_id }}">{{ tab_title }}</a></li>
+    <li {% if tab.topics contains page.categories[0] %} class="active" {% endif %}{% if page.layout == "default" %}{% if forloop.first %} class="active"{% endif %}{% endif %}><a data-toggle="tab" href="#{{ tab.tab_id }}">{{ tab.title }}</a></li>
     {% endfor %}
 </ul>
 
 <div class="tab-content">
 
     {% for tab in site.navigation_tabs %}
-    {% assign tab_title = tab[0] %}
-    {% assign tab_id = tab[1] %}
-    {% assign topics = tab[2] %}
-
-    <div id="{{ tab_id }}" class="tab-pane fade in {% if topics contains page.categories[0] %} active {% endif %}{% if page.layout == "default" %}{% if forloop.first %} active {% endif %}{% endif %}">
+    <div id="{{ tab.tab_id }}" class="tab-pane fade in {% if tab.topics contains page.categories[0] %} active {% endif %}{% if page.layout == "default" %}{% if forloop.first %} active {% endif %}{% endif %}">
 
         <ul class="nav nav-list">
-        {% for topic in topics %}
+        {% for topic in tab.topics %}
             {% for section in site.sections %}
-                {% if topic == section[0] %}
+                {% if topic == section.id %}
                     {% assign sorted_pages = site.categories[topic] | sort:"order" %}
                     {% for p in sorted_pages %}
                             {% if forloop.first %}
-                                <li class="nav-header nav-section-title">{{ section[1] }}</li>
+                                <li class="nav-header nav-section-title">{{ section.title }}</li>
                             {% endif %}
                         <li><a class="nav-link {% if p.path == page.path %} active {% endif %}" href="{{  site.baseurl }}{{ p.url }}">{{ p.title }}</a></li>
                     {% endfor %}

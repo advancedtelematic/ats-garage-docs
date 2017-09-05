@@ -39,7 +39,7 @@ This is all done with the meta-updater Yocto layer. Building the rootfs image an
 
 == Installing updates on devices
 
-The ATS Garage client is written to be modular and minimal. It ATS Garage, we generally assume that updates will be OSTree images, but in fact ATS Garage can be used to send all kinds of other updates, and can be configured for use in a wide variety of scenarios.
+The ATS Garage client is written to be modular and minimal. In ATS Garage, we generally assume that updates will be OSTree images, but in fact ATS Garage can be used to send all kinds of other updates, and can be configured for use in a wide variety of scenarios.
 
 First, let's describe an update sent with the default setup:
 
@@ -68,4 +68,4 @@ If this workflow doesn't fit the needs of a particular situation, though, virtua
 . The client then emits an `UpdateReportSent` event.
 ****
 
-These design choices for the client allow it to be useful in a wide variety of situations, while remaining easy to use and full featured for our ATS Garage quickstart setups. If you're interested in a custom client setup and need more information, please contact us at mailto:support@atsgarage.com. We'd be happy to help.
+These design choices for the client allow it to be useful in a wide variety of situations, while remaining easy to use and full featured for our ATS Garage quickstart setups. If you're interested in a custom client setup and need more information, please contact us at link:mailto:support@atsgarage.com[support@atsgarage.com]. We'd be happy to help.

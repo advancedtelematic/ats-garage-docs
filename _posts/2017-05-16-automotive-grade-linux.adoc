@@ -9,7 +9,7 @@
 :machine: <machine-name>
 :image: agl-demo-platform
 
-ATS Garage lets you easily manage OTA updates to embedded devices running custom-built Yocto images. It works great with Automotive Grade Linux, so building an AGL image is one easy way to get started. If your planned project is automotive, AGL is a great choice to start out with.
+ATS Garage lets you easily manage OTA updates to embedded devices running custom-built Yocto images. It works great with Automotive Grade Linux, so building an AGL image is one easy way to get started. If your planned project is automotive, AGL is a great choice to start out with. Out of the box, ATS Garage works with AGL builds for QEMU, Raspberry Pi, or Renasas Porterboard M2.
 
 toc::[]
 
@@ -21,7 +21,7 @@ include::../_pages/quickstarts/raspberry-pi.adoc[tags=prereqs;provisioning]
 
 === 2.1 Get AGL master manifest
 
-First, clone a manifest file for AGL master:
+First, clone a manifest file for AGL masterfootnote:[AGL Master should generally be working and buildable at all times, and has a more up-to-date meta-updater revision than the Chinook or Dab point releases.]:
 
 ----
 mkdir myproject
@@ -39,30 +39,22 @@ Yocto is a set of tools, templates and methods for building Linux systems from s
 All of these layers are assembled into a built Linux system by Bitbake, the build tool of the Yocto Project, based on the instructions in the recipes inside the layers.
 ****
 
-=== 2.2 Check out latest meta-updater layer
-
-AGL's version of meta-updater is usually a few revisions behind the latest one. ATS Garage is always tested against the latest github revision on the *morty* branch of meta-updater, so we'll check out that one.
-
-----
-cd meta-updater
-git checkout github/morty
-cd ..
-----
-
-=== 2.3 Run environment setup script
+=== 2.2 Run environment setup script
 
 Now you can run the following script to get the environment set up:
 
 ----
 source meta-agl/scripts/aglsetup.sh -m <target-architecture> agl-demo agl-appfw-smack agl-sota <1>
 ----
-<1> Where `target-architecture` is one of: `raspberrypi2`, `raspberrypi3`, or `qemux86-64`.
+<1> Where `<target-architecture>` is one of: `raspberrypi3`, `porter`, or `qemux86-64`.
+
+IMPORTANT: Only `raspberrypi3`, `porter`, and `qemux86-64` will work out of the box. If you want to create an ATS Garage-compatible build for one of the other architectures AGL supports, you'll need to write a BSP layer for that board. You can take the link:https://github.com/advancedtelematic/meta-updater-raspberrypi/tree/morty/recipes-bsp[Raspberry Pi BSP] as an example of what's needed. You can also link:mailto:support@atsgarage.com[contact us directly] to inquire about commercial development of BSP layers for specific boards.
 
 include::../_pages/quickstarts/raspberry-pi.adoc[tags=config;bitbake]
 
 == 5. Put the built image on your device's boot media
 
-The build process creates disk images as an artefact. The exact image you'll need will vary depending on the architecture you're building forfootnote:[For example, building the `agl-demo-platform` target for Raspberry Pi 3 creates an image at `/tmp/deploy/images/raspberrypi3/agl-demo-platform-raspberrypi3.rootfs.rpi-sdimg-ota`.], but it will be located in the `/tmp/deploy/images` directory under your build directory. We recommend using https://etcher.io/[Etcher, window="_blank"] or https://etcher.io/cli/[Etcher CLI, window="_blank"] to write the image.
+The build process creates disk images as an artefact. The exact image you'll need will vary depending on the architecture you're building forfootnote:[For example, building the `agl-demo-platform` target for Raspberry Pi 3 creates an image at `build/tmp/deploy/images/raspberrypi3/agl-demo-platform-raspberrypi3.rootfs.rpi-sdimg-ota`; the Porterboard image would be at `tmp/deploy/images/porter/agl-demo-platform-porter.wic`.], but it will be located in the `/tmp/deploy/images` directory under your build directory. We recommend using https://etcher.io/[Etcher, window="_blank"] or https://etcher.io/cli/[Etcher CLI, window="_blank"] to write the image, or following the normal flashing procedure for your device if applicable.
 
 TIP: You can also write the image using `dd`, but since the wrong kind of typo in a dd command is so dangerous, we don't recommend it.
 

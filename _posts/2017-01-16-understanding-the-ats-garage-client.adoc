@@ -39,33 +39,16 @@ This is all done with the meta-updater Yocto layer. Building the rootfs image an
 
 == Installing updates on devices
 
-The ATS Garage client is written to be modular and minimal. In ATS Garage, we generally assume that updates will be OSTree images, but in fact ATS Garage can be used to send all kinds of other updates, and can be configured for use in a wide variety of scenarios.
+In ATS Garage, we generally assume that updates will be OSTree images, but in fact ATS Garage can be used to send all kinds of other updates.footnote:[For more information on using ATS Garage for other types of update, please contact us at link:mailto:hello@atsgarage.com[hello@atsgarage.com].] But for now, let's look at the default OSTree update process.
 
-First, let's describe an update sent with the default setup:
-
-.OSTree default update flow
+.ATS Garage device update flow
 ****
 . The client polls ATS Garage servers periodically to check if there are any new updates.
-. If there are, the client requests to download the update. (For OSTree updates, the initial download is simply a metadata file pointing to a particular OSTree commit.)
+. If there are, the client requests to download the update, which consists of a metadata file pointing to a particular OSTree commit. (For other types of update, the download might be something else, like application binaries, installation packages containing binaries and install scripts, or data packs.)
 . The update is cryptographically checked for validity following the https://uptane.org[Uptane specification].
 . The client checks if the reference is available locally; if it's not, the commit is downloaded from TreeHub, only actually downloading objects not already present in the repo.
 . Each object's SHA is checked for correctness.
 . Once all objects are downloaded and verified, a flag is set telling OSTree to boot into the new filesystem the next time it boots.
 ****
 
-If this workflow doesn't fit the needs of a particular situation, though, virtually everything about it can be changed and/or integrated into an external system; every time the client does something, it emits an *event*, and each of the things is does can be triggered by a *command*. (See the link:../cli-dev/client-commandevent-api.html[API docs] for more details.) Let's go through the process again, but this time describing how it would look if there were an external software loading manager (SWLM) controlling the client through the API, and some other update package format was in use--for example, perhaps the update is to a maps package, and needs to call a special installer to manage the updating.
 
-.API-controlled update flow with an external software loading manager (SWLM)
-****
-. The client has update polling disabled. Instead of checking periodically, it listens for a `GetUpdateRequests` command. When it receives one from the SWLM, it checks with ATS Garage for updates.
-. The server responds that an update is available, so the client emits an `UpdatesReceived` event.
-. The SWLM then decides what to do; if it wants to download the update, it sends a `StartDownload` command.
-. The client emits a `DownloadingUpdate` event to notify the SWLM and any other listeners that the download has started.
-. When the download completes, it first checks the update for validity following the https://uptane.org[Uptane specification], then emits a `DownloadComplete` event when it successfully finishes.
-. Again, the SWLM decides what to do, and because the update is for the maps package, it passes the update off to some other installer to complete.
-. Once the install finishes (success or failure), the SWLM sends a `SendUpdateReport` command to the client.
-. The client passes the update report on to ATS Garage.
-. The client then emits an `UpdateReportSent` event.
-****
-
-These design choices for the client allow it to be useful in a wide variety of situations, while remaining easy to use and full featured for our ATS Garage quickstart setups. If you're interested in a custom client setup and need more information, please contact us at link:mailto:support@atsgarage.com[support@atsgarage.com]. We'd be happy to help.

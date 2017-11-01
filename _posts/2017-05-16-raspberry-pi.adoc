@@ -15,7 +15,7 @@ toc::[]
 
 == Video guide
 
-video::228062652[vimeo,854,480]
+video::229851072[vimeo,854,480]
 
 // tag::prereqs[]
 

@@ -94,14 +94,14 @@ exclude:
   - 'design'
   - 's3_credentials.env'
 
-gems: 
+plugins: 
   - jekyll-asciidoc
   - octopress-debugger
+  - asciidoctor-github-include
 
 asciidoctor:
   attributes:
-    - hardbreaks!
-    - source-highlighter=pygments
-    - pygments-css=style
+    source-highlighter: pygments
+    pygments-css: style
 
 

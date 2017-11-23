@@ -46,14 +46,15 @@ IFS=$'\n\t'
 rm -rf _site
 
 # build latest docs and serve them locally, to check that nothing is horribly broken
-docker run --rm -v "$(pwd)":/site -u "$(id -u)":"$(id -g)" -p 4000:4000 advancedtelematic/jekyll-asciidoc jekyll s -H 0.0.0.0
+docker run --rm -v "$(pwd)":/site -u "$(id -u)":"$(id -g)" -p 4000:4000 advancedtelematic/jekyll-asciidoc jekyll s --config _config.yml,_secrets.yml -H 0.0.0.0
 
 if ! ask "Push this site to S3?" Y; then
     exit 1
 fi
 
+# Update the Algolia index?
 if ask "Rebuild search index?" Y; then
-    docker run --rm -v "$(pwd)":/site -u "$(id -u)":"$(id -g)" -p 4000:4000 advancedtelematic/jekyll-asciidoc jekyll algolia push
+    docker run --rm -v "$(pwd)":/site -u "$(id -u)":"$(id -g)" -p 4000:4000 advancedtelematic/jekyll-asciidoc jekyll algolia push --config _config.yml,_secrets.yml
 fi
 
 # push to s3 using CLI

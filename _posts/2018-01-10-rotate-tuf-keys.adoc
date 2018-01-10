@@ -11,7 +11,6 @@ ATS Garage has a link:../concepts/ats-garage-security-with-uptane.html[security 
 As part of the quickstart, your ATS Garage account creates initial keys and stores them online.
 Before using ATS Garage in production, however, you must create offline keys that you manage yourself, then rotate out the initial online keys.
 
-
 == Install the `garage-sign` tool
 
 On a debian machine, download the `garage-deploy` package and install it:
@@ -45,20 +44,27 @@ garage-sign gen-keys --repo mytufrepo --name myroot --type rsa
 garage-sign gen-keys --repo mytufrepo --name mytargets --type rsa
 ----
 
-These keys must be kept offline on secure hardware.
+It is critical to keep these keys offline on secure hardware.
+Do not lose these keys.
 
 Finally, rotate the online keys with your new offline keys:
 
 ----
+garage-sign targets pull --repo mytufrepo
 garage-sign rotate --repo mytufrepo --old-root-alias origroot --new-root myroot --new-targets mytargets
+garage-sign targets sign --repo mytufrepo --key-name mytargets
+garage-sign targets push --repo mytufrepo
 ----
 
-This command will:
+These commands will:
 
-- remove the original root key from ATS Garage
-- generate a new `root.json` with the new `root` and `targets` keys
-- sign the new `root.json` with both the old and new `root` keys
-- upload the new signed `root.json` to ATS Garage
+- pull the current `targets.json` from ATS Garage
+- remove the original `root` key from ATS Garage
+- generate a new `root.json` with the new `root` and `targets` key
+- sign the new `root.json` with both the old and new `root` key
+- upload the newly signed `root.json` to ATS Garage
+- sign the current `targets.json` with the new `targets` key
+- upload the newly signed `targets.json` to ATS Garage
 
 You have successfully taken the TUF keys offline.
 Note that you will no longer be able to upload packages through the ATS Garage application.
@@ -75,5 +81,4 @@ Update your `conf/local.conf` to use the new `offline-credentials.zip` file and 
 
 As part of the `bitbake` process, the images are signed with your offline TUF keys.
 The signed `targets.json` is then uploaded to your ATS Garage account.
-
 

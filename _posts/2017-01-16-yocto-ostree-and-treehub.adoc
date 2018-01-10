@@ -1,6 +1,6 @@
 = Yocto, OSTree, and TreeHub
 :page-layout: page
-:page-categories: [bas]
+:page-categories: [concepts]
 :page-date: 2017-01-16 18:07:47
 
 

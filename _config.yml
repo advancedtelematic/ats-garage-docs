@@ -23,8 +23,8 @@ sections:
     title: Quickstart Guides
   - id: manual
     title: Manual Setup Guides
-  - id: bas
-    title: Basics
+  - id: concepts
+    title: Concepts
   - id: faq
     title: Questions
   - id: tips
@@ -54,7 +54,7 @@ navigation_tabs:
   - title: Reference
     tab_id: reference
     topics:
-      - bas
+      - concepts
       - cli-dev
       - faq
 

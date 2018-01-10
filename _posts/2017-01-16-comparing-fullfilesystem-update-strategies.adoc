@@ -1,6 +1,6 @@
 = Comparing full-filesystem update strategies
 :page-layout: page
-:page-categories: [bas]
+:page-categories: [concepts]
 :page-date: 2017-01-16 21:56:51
 :icons: font
 :page-order: 3

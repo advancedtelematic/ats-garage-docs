@@ -1,6 +1,6 @@
 = Understanding ATS Garage
 :page-layout: page
-:page-categories: [bas]
+:page-categories: [concepts]
 :page-date: 2017-01-16 18:12:09
 :page-order: 1
 :icons: font
@@ -20,7 +20,7 @@ When you build a filesystem image, you include a provisioning key. When a device
 
 == Building the image
 
-The way ATS Garage does full-filesystem updates is unique, and offers link:../bas/comparing-fullfilesystem-update-strategies.html[significant benefits over other systems]. ATS Garage makes use of link:http://ostree.readthedocs.io/en/latest/[libOSTree] to store the whole filesystem in a git-like repository (content-addressed object store); file objects in the repository are then hardlinked into their place in the filesystem at boot time by a specially configured boot loader. We've done integration work to use OSTree with link:http://www.denx.de/wiki/U-Boot/WebHome[u-boot] and link:https://www.gnu.org/software/grub/[GRUB], but in principle other boot loaders can also be integrated.
+The way ATS Garage does full-filesystem updates is unique, and offers link:../concepts/comparing-fullfilesystem-update-strategies.html[significant benefits over other systems]. ATS Garage makes use of link:http://ostree.readthedocs.io/en/latest/[libOSTree] to store the whole filesystem in a git-like repository (content-addressed object store); file objects in the repository are then hardlinked into their place in the filesystem at boot time by a specially configured boot loader. We've done integration work to use OSTree with link:http://www.denx.de/wiki/U-Boot/WebHome[u-boot] and link:https://www.gnu.org/software/grub/[GRUB], but in principle other boot loaders can also be integrated.
 
 When you do a Yocto build integrating our open-source link:https://github.com/advancedtelematic/meta-updater[meta-updater] layer, you get two different artefacts:
 

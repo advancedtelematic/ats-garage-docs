@@ -1,6 +1,6 @@
 = Understanding ATS Garage
 :page-layout: page
-:page-categories: [bas]
+:page-categories: [concepts]
 :page-date: 2017-01-16 18:12:09
 :page-order: 1
 :icons: font

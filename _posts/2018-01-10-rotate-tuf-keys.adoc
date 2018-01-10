@@ -4,14 +4,11 @@
 :page-date: 2018-01-10 13:39:47
 :page-order: 99
 :icons: font
-:toc: macro
 :garage-deploy-version: 0.2.0-82
 
 As part of the quickstart, your ATS Garage account creates and stores online the keys for signing the TUF repository of images.
 Before you go into production, as a main security feature of the Uptane model used by ATS Garage,
 you must rotate these online keys with offline keys that you manage yourself.
-
-toc::[]
 
 
 == Install the `garage-sign` tool

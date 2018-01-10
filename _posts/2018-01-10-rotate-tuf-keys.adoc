@@ -4,6 +4,7 @@
 :page-date: 2018-01-10 13:39:47
 :page-order: 99
 :icons: font
+:toc: macro
 :sectnums:
 :garage-deploy-version: 0.2.0-82
 
@@ -11,10 +12,13 @@ ATS Garage has a link:../concepts/ats-garage-security-with-uptane.html[security 
 As part of the quickstart, your ATS Garage account creates initial keys and stores them online.
 Before using ATS Garage in production, however, you must create offline keys that you manage yourself, then rotate out the initial online keys.
 
+toc::[]
+
 == Install the `garage-sign` tool
 
 On a debian machine, download the `garage-deploy` package and install it:
 
+[subs="attributes"]
 ----
 wget https://github.com/advancedtelematic/aktualizr/releases/download/offline-signing-{garage-deploy-version}/garage_deploy-amd64.deb
 sudo dpkg -i garage_deploy-amd64.deb
@@ -26,7 +30,7 @@ This package contains both the `garage-deploy` and `garage-sign` tools, but for 
 
 === Create a local TUF repository
 
-A TUF repository is just a directory structure containing signed metadata. Create a new one called _mytufrepo_ with `garage-sign`:
+A TUF repository is just a directory structure containing signed metadata in JSON format. Create a new one called _mytufrepo_ with `garage-sign`:
 
 ----
 garage-sign init --repo mytufrepo --credentials /path/to/credentials.zip
@@ -44,32 +48,50 @@ garage-sign gen-keys --repo mytufrepo --name myroot --type rsa
 garage-sign gen-keys --repo mytufrepo --name mytargets --type rsa
 ----
 
-It is critical to keep these keys offline on secure hardware.
-Do not lose these keys.
+****
+IMPORTANT: It is critical to keep these keys offline on secure hardware. *Do not lose these keys.*
+****
 
-Finally, rotate the online keys with your new offline keys:
+=== Rotate the online keys with your new offline keys
 
+This is a four-step process:
+
+. Pull the current `targets.json` from ATS Garage:
++
 ----
 garage-sign targets pull --repo mytufrepo
-garage-sign rotate --repo mytufrepo --old-root-alias origroot --new-root myroot --new-targets mytargets
+----
+. Perform a complete root key rotation:
++
+----
+garage-sign rotate --repo mytufrepo --old-root-alias origroot \
+    --new-root myroot --new-targets mytargets
+----
++
+This command
++
+* removes the original `root` key from ATS Garage,
+* generates a new `root.json` with the keys generated in the previous step (`myroot` and `mytargets`),
+* signs the new `root.json` with both the old and new `root` keys, and
+* uploads the newly signed `root.json` to ATS Garage
++
+. Sign the current `targets.json` with the new `targets` key:
++
+----
 garage-sign targets sign --repo mytufrepo --key-name mytargets
+----
++
+. Upload the newly signed `targets.json` to ATS Garage:
++
+----
 garage-sign targets push --repo mytufrepo
 ----
 
-These commands will:
+You have now successfully taken the TUF keys offline.
 
-- pull the current `targets.json` from ATS Garage
-- remove the original `root` key from ATS Garage
-- generate a new `root.json` with the new `root` and `targets` key
-- sign the new `root.json` with both the old and new `root` key
-- upload the newly signed `root.json` to ATS Garage
-- sign the current `targets.json` with the new `targets` key
-- upload the newly signed `targets.json` to ATS Garage
+NOTE: After rotating keys, you will no longer be able to upload packages through the ATS Garage web UI--only the usual way, through bitbake.
 
-You have successfully taken the TUF keys offline.
-Note that you will no longer be able to upload packages through the ATS Garage application.
-
-== Push new images with `bitbake`
+== Push new images with bitbake
 
 Export the new offline `targets` into a new credentials file that you can use with `bitbake`:
 
@@ -77,8 +99,7 @@ Export the new offline `targets` into a new credentials file that you can use wi
 garage-sign export-credentials --repo mytufrepo --target-key-name mytargets --to offline-credentials.zip
 ----
 
-Update your `conf/local.conf` to use the new `offline-credentials.zip` file and run `bitbake` as before.
+Update your `local.conf` to use the new `offline-credentials.zip` file and run `bitbake` as before.
 
-As part of the `bitbake` process, the images are signed with your offline TUF keys.
-The signed `targets.json` is then uploaded to your ATS Garage account.
+As part of the `bitbake` process, the image's metadata inside `targets.json` is signed with your offline TUF keys. The signed `targets.json` is then uploaded to your ATS Garage account.
 

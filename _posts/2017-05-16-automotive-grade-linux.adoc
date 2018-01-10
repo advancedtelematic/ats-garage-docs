@@ -9,7 +9,7 @@
 :machine: <machine-name>
 :image: agl-demo-platform
 
-ATS Garage lets you easily manage OTA updates to embedded devices running custom-built Yocto images. It works great with Automotive Grade Linux, so building an AGL image is one easy way to get started. If your planned project is automotive, AGL is a great choice to start out with. Out of the box, ATS Garage works with AGL builds for QEMU, Raspberry Pi Model 3, or Renesas R-Car Starter Kit Pro (M3ULCB). For the easiest getting-started experience, we currently recommend Raspberry Pi or QEMU.
+ATS Garage lets you easily manage OTA updates to embedded devices running custom-built Yocto images. It works great with Automotive Grade Linux, so building an AGL image is one easy way to get started. If your planned project is automotive, AGL is a great choice to start out with. Out of the box, ATS Garage works with AGL builds for QEMU and Raspberry Pi Model 3.
 
 toc::[]
 
@@ -46,15 +46,15 @@ Now you can run the following script to get the environment set up:
 ----
 source meta-agl/scripts/aglsetup.sh -m <target-architecture> agl-demo agl-appfw-smack agl-sota <1>
 ----
-<1> Where `<target-architecture>` is one of: `raspberrypi3`, `m3ulcb`, or `qemux86-64`.
+<1> Where `<target-architecture>` is either `raspberrypi3` or `qemux86-64`.
 
-IMPORTANT: Only `raspberrypi3`, `m3ulcb`, and `qemux86-64` will work out of the box. If you want to create an ATS Garage-compatible build for one of the other architectures AGL supports, you'll need to write a BSP layer for that board. You can take the link:https://github.com/advancedtelematic/meta-updater-raspberrypi/tree/morty/recipes-bsp[Raspberry Pi BSP] as an example of what's needed. You can also link:mailto:support@atsgarage.com[contact us directly] to inquire about commercial development of BSP layers for specific boards.
+IMPORTANT: Only `raspberrypi3` and `qemux86-64` will work out of the box. If you want to create an ATS Garage-compatible build for one of the other architectures AGL supports, you'll need to write a BSP layer for that board. You can take the link:https://github.com/advancedtelematic/meta-updater-raspberrypi/tree/morty/recipes-bsp[Raspberry Pi BSP] as an example of what's needed. You can also link:mailto:support@atsgarage.com[contact us directly] to inquire about commercial development of BSP layers for specific boards.
 
 include::../_pages/quickstarts/raspberry-pi.adoc[tags=config;bitbake]
 
 == 5. Put the built image on your device's boot media
 
-The build process creates disk images as an artefact. The exact image you'll need will vary depending on the architecture you're building forfootnote:[For example, building the `agl-demo-platform` target for Raspberry Pi 3 creates an image at `build/tmp/deploy/images/raspberrypi3/agl-demo-platform-raspberrypi3.rootfs.rpi-sdimg-ota`; the m3ulcb image would be at `tmp/deploy/images/m3ulcb/agl-demo-platform-m3ulcb.wic`.], but it will be located in the `/tmp/deploy/images` directory under your build directory. We recommend using https://etcher.io/[Etcher, window="_blank"] or https://etcher.io/cli/[Etcher CLI, window="_blank"] to write the image, or following the normal flashing procedure for your device if applicable.
+The build process creates disk images as an artefact. The exact image you'll need will vary depending on the architecture you're building forfootnote:[For example, building the `agl-demo-platform` target for Raspberry Pi 3 creates an image at `build/tmp/deploy/images/raspberrypi3/agl-demo-platform-raspberrypi3.wic`.], but it will be located in the `/tmp/deploy/images` directory under your build directory. We recommend using https://etcher.io/[Etcher, window="_blank"] or https://etcher.io/cli/[Etcher CLI, window="_blank"] to write the image, or following the normal flashing procedure for your device if applicable.
 
 TIP: You can also write the image using `dd`, but since the wrong kind of typo in a dd command is so dangerous, we don't recommend it.
 

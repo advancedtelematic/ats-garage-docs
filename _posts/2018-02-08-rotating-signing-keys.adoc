@@ -1,12 +1,12 @@
-= Rotating TUF Keys
+= Rotating signing keys
 :page-layout: page
 :page-categories: [prod]
-:page-date: 2018-01-10 13:39:47
+:page-date: 2018-02-08 17:55:08
 :page-order: 99
 :icons: font
 :toc: macro
 :sectnums:
-:garage-deploy-version: 2018.3
+:garage-deploy-version: 0.2.0-82
 
 ATS Garage has a link:../concepts/ats-garage-security-with-uptane.html[security concept] that includes signing system images with secure, offline keys.
 As part of the quickstart, your ATS Garage account creates initial keys and stores them online.
@@ -16,12 +16,12 @@ toc::[]
 
 == Install the `garage-sign` tool
 
-On a debian machine, download the `garage-deploy` package and install it:
+On a debian machine, download the `offline-signing` package and install it:
 
 [subs="attributes"]
 ----
-wget https://github.com/advancedtelematic/aktualizr/releases/download/{garage-deploy-version}/garage_deploy.deb
-sudo apt install ./garage_deploy.deb
+wget https://github.com/advancedtelematic/aktualizr/releases/download/offline-signing-{garage-deploy-version}/garage_deploy-amd64.deb
+sudo dpkg -i garage_deploy-amd64.deb
 ----
 
 This package contains both the `garage-deploy` and `garage-sign` tools, but for rotating keys we will only need `garage-sign`.
@@ -102,4 +102,5 @@ garage-sign export-credentials --repo mytufrepo --target-key-name mytargets --to
 Update your `local.conf` to use the new `offline-credentials.zip` file and run `bitbake` as before.
 
 As part of the `bitbake` process, the image's metadata inside `targets.json` is signed with your offline TUF keys. The signed `targets.json` is then uploaded to your ATS Garage account.
+
 

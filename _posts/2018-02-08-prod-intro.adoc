@@ -1,0 +1,8 @@
+= Introduction
+:page-layout: page
+:page-categories: [prod]
+:page-date: 2018-02-08 16:13:24
+:page-order: 1
+:icons: font
+
+ATS Garage is designed to integrate easily into development workflows: you build your image, push it, set auto-updates for some of your test-bench devices, and so on. But once you're ready to move from testing into production, you may want to add a bit of friction to the release process.

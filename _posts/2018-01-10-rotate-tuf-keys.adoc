@@ -6,7 +6,7 @@
 :icons: font
 :toc: macro
 :sectnums:
-:garage-deploy-version: 0.2.0-82
+:garage-deploy-version: 2018.3
 
 ATS Garage has a link:../concepts/ats-garage-security-with-uptane.html[security concept] that includes signing system images with secure, offline keys.
 As part of the quickstart, your ATS Garage account creates initial keys and stores them online.
@@ -20,8 +20,8 @@ On a debian machine, download the `garage-deploy` package and install it:
 
 [subs="attributes"]
 ----
-wget https://github.com/advancedtelematic/aktualizr/releases/download/offline-signing-{garage-deploy-version}/garage_deploy-amd64.deb
-sudo dpkg -i garage_deploy-amd64.deb
+wget https://github.com/advancedtelematic/aktualizr/releases/download/{garage-deploy-version}/garage_deploy.deb
+sudo apt install ./garage_deploy.deb
 ----
 
 This package contains both the `garage-deploy` and `garage-sign` tools, but for rotating keys we will only need `garage-sign`.

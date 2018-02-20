@@ -42,34 +42,20 @@ Depending on your use case, however, it often makes more sense to just keep sepa
 
 == Runtime problems
 
-=== Device never comes online
+=== File ownership incorrect after an update (static UID to name mapping)
 
-If you can boot your device, but it never shows up in your ATS Garage account, the autoprovisioning service has failed. You can inspect the logs to see what went wrong:
+Yocto assigns numeric user IDs (UIDs) to Linux login names at system build time. This dynamic assignment does not always work correctly for an embedded system that is receiving software updates, because the numeric UID of a service can change between builds, but any files the service created on the file system will remain owned by the original UID.
 
-----
-journalctl -u sota_client_autoprovision
-----
+The solution is to manually set the contents of `/etc/passwd` and `/etc/group` for your system, so that the UIDs remain stable between builds.
 
-To attempt to restart the service, use
+This is required if you have a service that does all of the following:
 
-----
-systemctl restart sota_client_autoprovision
-----
+* Creates files
+* Runs as an account that is not one of the 'standard' accounts (`root`, `floppy`, `man`, `tape`, etc)
+* The recipe for the service creates the user (using `useradd`)
 
-Other things to check:
+In this case, you should set link:http://www.yoctoproject.org/docs/2.4.1/mega-manual/mega-manual.html#var-USERADDEXTENSION[USERADDEXTENSION] to `"useradd-staticids"`. The link:http://www.yoctoproject.org/docs/2.4.1/mega-manual/mega-manual.html#ref-classes-useradd[useradd] section of the Yocto Mega Manual describes this process in more detail.
 
-* Autoprovisioning depends on a valid source of time, and checks for NTP sync before proceeding. Check `timedatectl status` on your device to verify NTP sync.
-* Did a valid credentials bundle get added to the build? Look in `/var/sota`; you should see `sota_provisioning_credentials.p12` and `sota_provisioning_url.env`.
-* Has the provisioning key expired? Check the key's period of validity with openssl:
-
-----
-root@raspberrypi3:~# openssl pkcs12 -in /var/sota/sota_provisioning_credentials.p12 -nodes \
- | openssl x509 -noout -startdate -enddate
-Enter Import Password:
-MAC verified OK
-notBefore=Jun  6 08:44:44 2017 GMT
-notAfter=Jun  7 00:45:14 2018 GMT
-----
 
 .Don't see your problem here?
 ****

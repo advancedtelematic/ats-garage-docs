@@ -2,7 +2,7 @@
 :page-layout: page
 :page-categories: [concepts]
 :page-date: 2018-01-10 13:55:45
-:page-order: 99
+:page-order: 80
 :icons: font
 :toc: macro
 

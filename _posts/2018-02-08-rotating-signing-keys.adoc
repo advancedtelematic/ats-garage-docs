@@ -1,16 +1,18 @@
 = Rotating signing keys
 :page-layout: page
+:page-redirect_from: /quickstarts/rotate-tuf-keys
 :page-categories: [prod]
 :page-date: 2018-02-08 17:55:08
-:page-order: 99
+:page-order: 2
 :icons: font
 :toc: macro
 :sectnums:
-:garage-deploy-version: 2018.3
+:garage-deploy-version: 2018.5
+
 
 ATS Garage has a link:../concepts/ats-garage-security-with-uptane.html[security concept] that includes signing system images with secure, offline keys.
 As part of the quickstart, your ATS Garage account creates initial keys and stores them online.
-Before using ATS Garage in production, however, you must create offline keys that you manage yourself, then rotate out the initial online keys.
+Before using ATS Garage in production, however, you should create offline keys that you manage yourself, then rotate out the initial online keys.
 
 toc::[]
 

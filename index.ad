@@ -16,4 +16,4 @@ ATS Garage uses the same base as our software updating product for enterprises, 
 
 == Get started now
 
-Learn how to get started with our link:/quickstarts/raspberry-pi.html[Raspberry Pi quickstart] project, with link:/quickstarts/automotive-grade-linux.html[Automotive Grade Linux], or if you've already got a Yocto-based project, you can just link:/quickstarts/adding-ats-garage-updating-to-an-existing-yocto-project.html[add our open source meta-updater layer] to your build.
+Try our link:/quickstarts/start-intro.html[getting started] projects! You can easily build your and update your own linux distro for link:/quickstarts/raspberry-pi.html[Raspberry Pi] or use a link:/quickstarts/qemuvirtualbox.html[virtual machine]. You can also integrate ATS Garage updating in link:/quickstarts/automotive-grade-linux.html[Automotive Grade Linux], or if you've already got a Yocto-based project, you can just link:/quickstarts/adding-ats-garage-updating-to-an-existing-yocto-project.html[add our open source meta-updater layer] to your build.

@@ -1,0 +1,89 @@
+= Implicit Provisioning with HSM
+:page-layout: page
+:page-categories: [quickstarts]
+:page-date: 2018-01-21 13:39:47
+:page-order: 99
+:icons: font
+:toc: macro
+:sectnums:
+
+ATS Garage by default automatically provisions any device that successfully connects with valid `registration` credentials (included in the `credentials.zip` file that you downloaded). The device receives its certificate and key during this online provisioning process, and uses this certificate for subsequent requests to receive updates.
+
+For production-level security, you should enable a Hardware Security Module (HSM) on your device to store the device certificate and key. In this case, these device credentials should be generated offline, and when the device connects with these credentials, it will be implicitly provisioned on your ATS Garage account.
+
+toc::[]
+
+== Update your `bitbake` build
+
+To enable implicit provisioning with HSM in your device image, add the following lines to your `conf/local.conf`:
+
+----
+SOTA_CLIENT_FEATURES = "hsm"
+SOTA_CLIENT_PROV = "aktualizr-hsm-prov"
+----
+
+For more details, see the link:https://github.com/advancedtelematic/aktualizr/blob/master/docs/hsm-provisioning.adoc[aktualizr docs].
+
+== Software HSM
+
+For testing, we wil use a software HSM emulation to store the device key and certificate.
+
+See link:../quickstarts/qemuvirtualbox.html[QEMU/Virtualbox] for details on how to run a QEMU instance.
+
+To enable `ssh/scp` in your QEMU image, add the following to your `conf/local.conf`:
+
+----
+IMAGE_INSTALL_append = " dropbear "
+----
+
+Now run the QEMU image. You can confirm that the device is *not* automatically provisioned in your ATS Garage account.
+
+== Generate a CA certificate and key
+
+If you do not have your own CA certificate for signing device certificates, you can generate a self-signed certificate for testing.
+
+For example, you can use the scripts in link:https://github.com/advancedtelematic/ota-community-edition[`ota-community-edition`]:
+
+----
+git clone git@github.com:advancedtelematic/ota-community-edition.git
+cd ota-community-edition/
+./scripts/genserver.sh
+----
+
+This script creates a `./ota.ce/devices/` directory with the `ca.crt` certificate and a `ca.key` private key. Keep the private key safe and secure.
+
+NOTE: The `ca.crt` certificate must be to uploaded to your ATS Garage account (please contact ATS Support for more information) in order to authenticate the device certificates that you generate.
+
+== Generate device certificate and key
+
+Now you can generate a device certificate with a device ID `mydevice1` by:
+
+----
+./scripts/genclient.sh mydevice1
+----
+
+This script creates a `./ota.ce/devices/mydevice1` directory with the device certificate and key.
+
+Next add the `root.crt` CA certificates of the ATS Garage gateway that your devices are connecting to (in this case `7c209482-e4e2-4b2c-892e-55c63c1501f2`):
+
+----
+cd ./ota.ce/devices/mydevice1/
+sni=7c209482-e4e2-4b2c-892e-55c63c1501f2.tcpgw.staging.atsgarage.com
+openssl s_client -connect $sni:8000 -servername $sni -showcerts | \
+  sed -n '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > root.crt
+----
+
+Now you can test that the device certificate can be used to connect to the ATS Garage gateway:
+
+----
+openssl s_client -connect $sni:8000 -servername $sni -CAfile root.crt -cert client.pem -key pkey.pem 
+----
+
+Finally, you can copy the device certificate and key into the HSM of the device. For a QEMU device, run as above:
+
+----
+scp -P 2222 -pr mydevice1/ root@localhost:/var/sota/token
+----
+
+The device should now appear online in your ATS Garage account.
+

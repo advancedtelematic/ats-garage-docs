@@ -50,11 +50,11 @@ garage-deploy command line options:
                                  same format as curl --cacert
 ----
 +
-For example, to deploy an image called `new-feature` with SHA `001ee11a28e3e08f3e93e31425f0721a7fb44946919284b629ca85a1cc3073cb` and make it installable on all Raspberry Pi devices on your target account, the command would be:
+For example, to deploy an image called `acme-modelB` with SHA `001ee11a28e3e08f3e93e31425f0721a7fb44946919284b629ca85a1cc3073cb` and make it installable on all Raspberry Pi devices on your target account, the command would be:
 +
 ----
 garage-deploy --commit 001ee11a28e3e08f3e93e31425f0721a7fb44946919284b629ca85a1cc3073cb \
-  --name new-feature -f source-credentials.zip -t dest-credentials.zip -h raspberrypi3
+  --name acme-modelB -f source-credentials.zip -p dest-credentials.zip -h raspberrypi3
 ----
 +
 . Log into the destination account, and verify that your image has been deployed

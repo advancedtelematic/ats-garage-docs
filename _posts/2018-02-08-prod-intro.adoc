@@ -21,7 +21,7 @@ Chances are, your developer team isn't responsible for making the decision to pu
 
 '''
 
-To make this workflow possible, create an account for each environment you find useful (e.g. dev, QA, beta, production, etc.), and then read about link:example.com[using garage-deploy to cross-deploy images from one account to another].
+To make this workflow possible, create an account for each environment you find useful (e.g. dev, QA, beta, production, etc.), and then read about link:../prod/crossdeploying-device-images-to-a-different-account.html[using garage-deploy to cross-deploy images from one account to another].
 
 == Manage your own chain(s) of trust
 

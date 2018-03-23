@@ -2,14 +2,15 @@
 # Sass front matter -- do not remove
 ---
 
-@import url("ats.css");
+@import url("here.css");
 
-/* All of the Asciidoctor stylesheet rules are in ats.css. That one is built
+/* All of the Asciidoctor stylesheet rules are in here.css. That one is built
    using asciidoctor-stylesheet-builder. Anything jekyll- or site-specific 
    should go here.
 */
 
 
+$aqua: rgb(0,175,170);
 $mint: rgb(151,226,217);
 $mint-active: rgb(125, 233, 218);
 $gray: rgb(190,190,190);
@@ -20,41 +21,20 @@ $nav-bg-color: rgb(237,237,237);
 }
 
 @mixin active-link {
-    color: $mint;
+    color: $aqua;
 }
 
 @font-face {
-    font-family:icons; src:url(/fonts/icons/icomoon.ttf) 
+    font-family:icons; src:url(../fonts/icons/icomoon.ttf) 
 }
 
-@font-face { 
-    font-family: akkurat;
-    src: url(/fonts/Akkurat-Regular/AkkuratStd.eot?#iefix) format("embedded-opentype"),
-        url(/fonts/Akkurat-Regular/AkkuratStd.otf) format("opentype"),
-        url(/fonts/Akkurat-Regular/AkkuratStd.woff) format("woff"),
-        url(/fonts/Akkurat-Regular/AkkuratStd.ttf) format("truetype"),
-        url(/fonts/Akkurat-Regular/AkkuratStd.svg#AkkuratStd) format("svg");
-    font-weight: 400;
-    font-style: normal
-}
-@font-face {
-    font-family: akkurat;
-    src: url(/fonts/Akkurat-Bold/Akkurat-Bold.eot?#iefix) format("embedded-opentype"),
-        url(/fonts/Akkurat-Bold/Akkurat-Bold.otf) format("opentype"),
-        url(/fonts/Akkurat-Bold/Akkurat-Bold.woff) format("woff"),
-        url(/fonts/Akkurat-Bold/Akkurat-Bold.ttf) format("truetype"),
-        url(/fonts/Akkurat-Bold/Akkurat-Bold.svg#AkkuratStd) format("svg");
-    font-weight: 700;
-    font-style: normal;
-}
+
 
 html {
     height: 100%;
 }
 
 body {
-    font-family: akkurat, sans-serif;
-    font-size: 14.4px;
     position: relative;
 }
 

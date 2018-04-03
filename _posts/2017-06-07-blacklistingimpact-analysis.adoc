@@ -5,9 +5,9 @@
 :page-order: 4
 :icons: font
 
-Often, the reason you need to run an update campaign is that you've discovered a bug or security hole in something that's currently deployed. ATS Garage lets you blacklist packages and images, and shows you how many of your devices are affected by the blacklisted version.
+Often, the reason you need to run an update campaign is that you've discovered a bug or security hole in something that's currently deployed. {product-name} lets you blacklist packages and images, and shows you how many of your devices are affected by the blacklisted version.
 
-It's important to understand the distinction here between a package and an image. ATS Garage, by default, manages full filesystem images built by Yocto. Each filesystem image also has a manifest of the software packages installed on it.
+It's important to understand the distinction here between a package and an image. {product-name-short}, by default, manages full filesystem images built by Yocto. Each filesystem image also has a manifest of the software packages installed on it.
 
 You can blacklist either an image or a package. Either way, the *Impact Analysis* tab will report how many of your devices are affected by the packages you've blacklisted.
 

@@ -27,7 +27,7 @@ These can be found on the provisioning keys page. We'll assume you named them `s
 +
 . Select an image and commit ID to deploy, and the hardware ID(s) to deploy it to
 +
-The image name is the one that appears in your ATS Garage account--it will be the same as the `MACHINE` setting in Yocto by default, or the `OSTREE_BRANCHNAME` option if you set it. The commit ID is the hash of the OSTree commit, visible in the package details. The hardware IDs are for the destination account, and are equivalent to the `MACHINE` setting in your yocto build.
+The image name is the one that appears in your {product-name} account--it will be the same as the `MACHINE` setting in Yocto by default, or the `OSTREE_BRANCHNAME` option if you set it. The commit ID is the hash of the OSTree commit, visible in the package details. The hardware IDs are for the destination account, and are equivalent to the `MACHINE` setting in your yocto build.
 +
 . Run `garage-deploy`
 +

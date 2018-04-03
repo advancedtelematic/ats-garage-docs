@@ -94,6 +94,9 @@ exclude:
   - '_site-ats'
   - '_site-here'
 
+include:
+  - '_test'
+
 plugins: 
   - jekyll-asciidoc
   - octopress-debugger
@@ -103,5 +106,5 @@ asciidoctor:
   attributes:
     product-name: ATS Garage
     product-name-short: ATS Garage
-
+    app-url: https://app.atsgarage.com
 

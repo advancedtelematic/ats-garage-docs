@@ -12,7 +12,7 @@ If you already have a Yocto-based project that you want to update using {product
 3.  Set up your https://www.yoctoproject.org/docs/2.1/ref-manual/ref-manual.html#var-DISTRO[distro]. If you are using "poky", the default distro in Yocto, you can change it in your conf/local.conf to "poky-sota". Alternatively, if you are using your own or a third-party distro configuration, you can add `INHERIT += " sota"` to it, thus combining the capabilities of your distro with meta-updater features.
 4.  {app-url}/#/profile/access-keys[Create a provisioning key, window="_blank"] and add it to your local.conf.
 
-You can then build your image as usual, with bitbake. After building the root file system, bitbake will then create an https://ostree.readthedocs.io/en/latest/manual/adapting-existing/[OSTree-enabled version] of it, commit it to your local OSTree repo, and push it to ATS Garage. Additionally, a live disk image will be created (normally named $\{IMAGE_NAME}.-sdimg-ota e.g. core-image-raspberrypi3.rpi-sdimg-ota). You can control this behaviour through <<variables in your local.conf,ATS Garage-related variables in your local.conf>>.
+You can then build your image as usual, with bitbake. After building the root file system, bitbake will then create an https://ostree.readthedocs.io/en/latest/manual/adapting-existing/[OSTree-enabled version] of it, commit it to your local OSTree repo, and push it to {product-name-short}. Additionally, a live disk image will be created (normally named $\{IMAGE_NAME}.-sdimg-ota e.g. core-image-raspberrypi3.rpi-sdimg-ota). You can control this behaviour through <<variables in your local.conf,{product-name-short}-related variables in your local.conf>>.
 
 == Supported boards
 
@@ -34,12 +34,12 @@ You may take a look into the https://github.com/advancedtelematic/meta-updater-m
 
 Although in the BSP layers we've created so far we've used U-Boot, other boot loaders can be configured to work with OSTree as well.
 
-== ATS Garage-related variables in local.conf
+== {product-name-short}-related variables in local.conf
 
 * OSTREE_REPO - path to your OSTree repository. Defaults to "$\{DEPLOY_DIR_IMAGE}/ostree_repo"
 * OSTREE_BRANCHNAME - the branch your rootfs will be committed to. Defaults to "ota"
 * OSTREE_OSNAME - OS deployment name on your target device. For more information about deployments and osnames see the https://ostree.readthedocs.io/en/latest/manual/deployment/[OSTree documentation]. Defaults to "poky".
 * OSTREE_INITRAMFS_IMAGE - initramfs/initrd image that is used as a proxy while booting into an OSTree deployment. Do not change this setting unless you are sure that your initramfs can serve as such a proxy.
-* SOTA_PACKED_CREDENTIALS - A zipped provisioning key bundle downloaded from ATS Garage, as a fully qualified path.
+* SOTA_PACKED_CREDENTIALS - A zipped provisioning key bundle downloaded from {product-name-short}, as a fully qualified path.
 * SOTA_CLIENT - Which SOTA client to install. This is mostly a legacy option; the default client, *aktualizr*, is our recommended solution. *rvi-sota-client* is our former client, written in Rust.
 

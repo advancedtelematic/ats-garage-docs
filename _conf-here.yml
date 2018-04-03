@@ -94,4 +94,5 @@ asciidoctor:
   attributes:
     product-name: HERE OTA Connect
     product-name-short: OTA Connect
+    app-url: https://connect.ota.here.com
 

@@ -52,16 +52,10 @@ navigation_tabs:
       - prod
       - tips
       - usage
-      - start-yocto
-      - start-package
-      - start-manual
-      - using-ats-garage
-      - feat
   - title: Reference
     tab_id: reference
     topics:
       - concepts
-      - cli-dev
       - faq
 
 
@@ -74,9 +68,7 @@ header_links:
   Contact: http://atsgarage.com/en/contact.html
   Docs: "/"
 
-
-# Keep as an empty string if served up at the root. If served up at a specific
-# path (e.g. on GitHub pages) leave off the trailing slash, e.g. /my-project
+# Legacy config option. Shouldn't be used anymore.
 baseurl: '' 
 
 # Dates are not included in permalinks
@@ -109,5 +101,7 @@ plugins:
 
 asciidoctor:
   attributes:
+    product-name: ATS Garage
+    product-name-short: ATS Garage
 
 

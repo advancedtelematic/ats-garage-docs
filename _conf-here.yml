@@ -33,7 +33,7 @@ sections:
   - id: tips
     title: Tips and Tricks
   - id: usage
-    title: Using ATS Garage
+    title: Using OTA Connect
   - id: prod
     title: Moving to Production
 
@@ -52,31 +52,14 @@ navigation_tabs:
       - prod
       - tips
       - usage
-      - start-yocto
-      - start-package
-      - start-manual
-      - using-ats-garage
-      - feat
   - title: Reference
     tab_id: reference
     topics:
       - concepts
-      - cli-dev
       - faq
 
 
-# Links that should appear as top-bar navigation items. Docs should always be
-# the last one, because of a stupid hack.
-header_links: 
-  How it works: http://atsgarage.com/en/how-it-works.html
-  Pricing: http://atsgarage.com/en/pricing.html
-  News: http://atsgarage.com/en/news.html
-  Contact: http://atsgarage.com/en/contact.html
-  Docs: "/"
-
-
-# Keep as an empty string if served up at the root. If served up at a specific
-# path (e.g. on GitHub pages) leave off the trailing slash, e.g. /my-project
+# Legacy config option. Shouldn't be used anymore.
 baseurl: '' 
 
 # Dates are not included in permalinks
@@ -109,5 +92,6 @@ plugins:
 
 asciidoctor:
   attributes:
-
+    product-name: HERE OTA Connect
+    product-name-short: OTA Connect
 

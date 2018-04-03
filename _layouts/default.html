@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta charset="utf-8">
@@ -34,6 +35,10 @@
             </div>
         </div>
         {% include footer.html %}
+
+        {% if site.google_analytics_id != "" %}
+        {% include google_analytics.html %}
+        {% endif %}
 
         <script src=".{% unless page.dir == '/' %}.{% endunless %}/js/main.js"></script>
     </body>

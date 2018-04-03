@@ -1,0 +1,111 @@
+# Site variant. Should be either 'here' or 'ats'
+variant: here
+
+# Site title and subtitle. This is used in _includes/header.html
+title: 'Documentation'
+subtitle: 'HERE OTA Connect SaaS'
+
+# if you wish to integrate disqus on pages set your shortname here
+disqus_shortname: ''
+
+# if you use google analytics, add your tracking id here
+google_analytics_id: ''
+
+# Enable/show navigation. There are there options:
+#   0 - always hide
+#   1 - always show
+#   2 - show only if posts are present
+navigation: 2
+
+# URL to source code, used in _includes/footer.html
+codeurl: 'https://app.atsgarage.com/'
+
+# Categories that can appear in the navigation
+sections:
+  - id: quickstarts
+    title: Getting Started
+  - id: manual
+    title: Manual Setup Guides
+  - id: concepts
+    title: Concepts
+  - id: faq
+    title: Questions
+  - id: tips
+    title: Tips and Tricks
+  - id: usage
+    title: Using ATS Garage
+  - id: prod
+    title: Moving to Production
+
+
+# This creates navigation tabs. 'title' is the display name of the tab, 'tab_id'
+# is the id of the tab's div, and 'topics' is the list of sections (by id) that 
+# should appear in the tab.
+# 
+# Note that any sections which aren't assigned to any navigation tab will not show 
+# up in navigation anywhere
+navigation_tabs:
+  - title: Guides
+    tab_id: guides
+    topics:
+      - quickstarts
+      - prod
+      - tips
+      - usage
+      - start-yocto
+      - start-package
+      - start-manual
+      - using-ats-garage
+      - feat
+  - title: Reference
+    tab_id: reference
+    topics:
+      - concepts
+      - cli-dev
+      - faq
+
+
+# Links that should appear as top-bar navigation items. Docs should always be
+# the last one, because of a stupid hack.
+header_links: 
+  How it works: http://atsgarage.com/en/how-it-works.html
+  Pricing: http://atsgarage.com/en/pricing.html
+  News: http://atsgarage.com/en/news.html
+  Contact: http://atsgarage.com/en/contact.html
+  Docs: "/"
+
+
+# Keep as an empty string if served up at the root. If served up at a specific
+# path (e.g. on GitHub pages) leave off the trailing slash, e.g. /my-project
+baseurl: '' 
+
+# Dates are not included in permalinks
+permalink: none
+
+# Syntax highlighting
+highlighter: pygments
+
+# Since these are pages, it doesn't really matter
+future: true
+
+# Exclude non-site files
+exclude: 
+  - 'bin'
+  - 'README.md'
+  - 'README.adoc'
+  - 'Gemfile*'
+  - 'Makefile'
+  - 'Dockerfile'
+  - 'publish-docs.sh'
+  - 'design'
+  - 's3_credentials.env'
+
+plugins: 
+  - jekyll-asciidoc
+  - octopress-debugger
+  - asciidoctor-github-include
+
+asciidoctor:
+  attributes:
+
+

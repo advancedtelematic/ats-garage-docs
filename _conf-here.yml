@@ -99,6 +99,8 @@ exclude:
   - 'publish-docs.sh'
   - 'design'
   - 's3_credentials.env'
+  - '_site-ats'
+  - '_site-here'
 
 plugins: 
   - jekyll-asciidoc

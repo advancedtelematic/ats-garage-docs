@@ -93,6 +93,7 @@ exclude:
   - 's3_credentials.env'
   - '_site-ats'
   - '_site-here'
+  - '_tmp-git'
 
 include:
   - '_test'

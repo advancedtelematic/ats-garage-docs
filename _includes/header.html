@@ -8,8 +8,10 @@
               <span class="icon-bar middle-bar"></span>
               <span class="icon-bar bottom-bar"></span>
             </button>
+{% case site.variant %}
+  {% when 'ats' %}
             <a class="top-bar navbar-brand" href="/index.html"><img class="top-bar unfolded-header" src="/images/ATS-Garage_Logo.svg" alt="Advanced Telematic Systems"></a>
-          </div>
+          </div>            
           <ul class="top-bar nav navbar-nav navbar-right visible-md visible-lg visible-sm">
             <li class="top-bar visible-sm visible-md visible-lg">
               <a class="top-bar ats-garage-btn" href="https://app.atsgarage.com/" target="_blank">START NOW <span>OR LOGIN</span>
@@ -25,9 +27,9 @@
                 <a class="inverted btn-small text-center uppercase" href="https://app.atsgarage.com/login" target="_blank">Login</a>
               </div>
               <ul class="top-bar nav nav-list navbar-nav">
-	            {% for header_link in site.header_links %}
-	                <li class="top-bar {% if forloop.last %}docs{% endif %}"><a href="{{ header_link[1] }}">{{ header_link[0] }}</a></li>
-	            {% endfor %}
+              {% for header_link in site.header_links %}
+                  <li class="top-bar {% if forloop.last %}docs{% endif %}"><a href="{{ header_link[1] }}">{{ header_link[0] }}</a></li>
+              {% endfor %}
 
                 <li class="visible-xs second-menu separator"></li>
                 <li class="second-menu visible-xs clearfix">
@@ -46,6 +48,10 @@
                 </li>
               </ul>
             </div>
+  {% when 'here' %}
+            <a class="top-bar navbar-brand" href=".{% unless page.dir == '/' %}.{% endunless %}/index.html"><img class="top-bar unfolded-header" src=".{% unless page.dir == '/' %}.{% endunless %}/images/HERE_Logo_2016_POS_sRGB.png" alt="HERE Technologies"></a>
+          </div>            
+{% endcase %}
           </div>
         </div>
       </nav>

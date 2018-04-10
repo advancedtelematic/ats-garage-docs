@@ -5,7 +5,7 @@
 :page-order: 1
 :icons: font
 
-.https://app.atsgarage.com/#/devices[Devices page, window="_blank"]
+.link:{app-url}/#/devices[Devices page, window="_blank"]
 image::../images/devices-page.png[]
 
 On this page, you can:

@@ -1,39 +1,48 @@
-ATS Garage Docsite
-------------------
+= ATS Garage Docsite
+:icons: font
 
 This is the source for docs.atsgarage.com. It's built with Jekyll, a static site generator.
 
 The text is written in Asciidoc, and rendered by link:http://asciidoctor.org[Asciidoctor]. Asciidoctor exercises a large number of styles, and has a tool to build stylesheets called asciidoctor-stylesheet-factory. ats.css is built with that tool; if you need to edit anything in there, do it via a pull request link:https://github.com/advancedtelematic/asciidoctor-stylesheet-factory[on our fork of asciidoctor-stylesheet-factory]. Any CSS changes that are specific to the ATS Garage docsite should be done in main.scss, though.
 
-== Building
+== Configuration
 
-To build the site, you can `bundle install`, then do `jekyll build`. `jekyll serve` will start a server to preview it locally on http://localhost:4000.
+Building and deploying the site requires a github access token with access to ATS private repos, and a set of AWS IAM credentials with access to the `docs.atsgarage.com` S3 bucket.
 
-Alternatively, you can use link:docker.com[Docker] to build and preview the site. That's probably a better idea anyway, as everything will be standardized and you won't have to worry about conflicts, etc..
+=== Github token
 
-    docker run -it -v $(pwd):/site -p 4000:4000 advancedtelematic/jekyll-asciidoc jekyll s -H 0.0.0.0 (to preview)
-    docker run -it -v $(pwd):/site -p 4000:4000 advancedtelematic/jekyll-asciidoc jekyll b (to build)
+. https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line[Generate the token.]
+. Copy `_secrets.yml.example` to `_secrets.yml`, substituting your token.
 
-== Publishing
+=== AWS credentials
 
-    aws s3 sync --delete _site/ s3://docs.atsgarage.com
+. Get the `docs` IAM credentials from the Infra team.
+. copy `s3_credentials.env.example` to `s3_credentials.env`, substituting the real credentials.
 
-or
+== Build
 
-   docker run --rm -it -v $(pwd):/project -u $(id -u):$(id -g) --env-file=s3_credentials.env mesosphere/aws-cli s3 sync --delete _site/ s3://docs.atsgarage.com
+Build/serve the site from a local jekyll install:
 
+   bundle install
+   jekyll build --config _config.yml,_secrets.yml
+   jekyll serve --config _config.yml,_secrets.yml # view site at http://localhost:4000
 
-The first option requires that you have the aws command line tools set up and configured with credentials that are valid for the given s3 bucket. The second option requires you to create an `s3_credentials.env` file that looks like this:
+Build/serve the site with link:docker.com[Docker]:
 
-..................................................
-AWS_ACCESS_KEY_ID=...
-AWS_SECRET_ACCESS_KEY=...
-AWS_DEFAULT_REGION=eu-central-1
-..................................................
+    docker run -it -v $(pwd):/site -p 4000:4000 advancedtelematic/jekyll-asciidoc jekyll s --config _config.yml,_secrets.yml -H 0.0.0.0
+    docker run -it -v $(pwd):/site -p 4000:4000 advancedtelematic/jekyll-asciidoc jekyll b --config _config.yml,_secrets.yml
 
-A script called `publish-docs.sh` is provided which builds the site, serves it locally so you can check that everything looks okay, and then pushes it to S3. It expects the AWS S3 upload credentials file to be named `s3_credentials.env`.
+== Publish
 
-There's an IAM user called `docs` which has access to only this bucket; ask Alaa or Alex for the credentials for that user if you need to push the site.
+   bundle install
+   jekyll build --config _config.yml,_secrets.yml
+   docker run --rm -it -v $(pwd):/project -u $(id -u):$(id -g) \
+     --env-file=s3_credentials.env mesosphere/aws-cli s3 sync \
+     --delete _site/ s3://docs.atsgarage.com
+
+OR
+
+   ./publish-docs.sh
 
 == Debugging
 

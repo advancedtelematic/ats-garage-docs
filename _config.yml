@@ -20,17 +20,19 @@ codeurl: 'https://app.atsgarage.com/'
 # Categories that can appear in the navigation
 sections:
   - id: quickstarts
-    title: Quickstart Guides
+    title: Getting Started
   - id: manual
     title: Manual Setup Guides
-  - id: bas
-    title: Basics
+  - id: concepts
+    title: Concepts
   - id: faq
     title: Questions
   - id: tips
     title: Tips and Tricks
   - id: usage
     title: Using ATS Garage
+  - id: prod
+    title: Moving to Production
 
 
 # This creates navigation tabs. 'title' is the display name of the tab, 'tab_id'
@@ -44,6 +46,7 @@ navigation_tabs:
     tab_id: guides
     topics:
       - quickstarts
+      - prod
       - tips
       - usage
       - start-yocto
@@ -54,7 +57,7 @@ navigation_tabs:
   - title: Reference
     tab_id: reference
     topics:
-      - bas
+      - concepts
       - cli-dev
       - faq
 
@@ -94,14 +97,12 @@ exclude:
   - 'design'
   - 's3_credentials.env'
 
-gems: 
+plugins: 
   - jekyll-asciidoc
   - octopress-debugger
+  - asciidoctor-github-include
 
 asciidoctor:
   attributes:
-    - hardbreaks!
-    - source-highlighter=pygments
-    - pygments-css=style
 
 

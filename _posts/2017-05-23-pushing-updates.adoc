@@ -17,7 +17,7 @@ The simplest update you can do is just adding an extra package to your image, ch
 
 === Example task: Install vim
 
-video::228062403[vimeo,854,480]
+video::229856096[vimeo,854,480]
 
 Because you probably noticed it was missing the first time you went to edit a config file on your device, let's install vim. Add this line to your local.conf:
 

@@ -1,6 +1,6 @@
 = Yocto, OSTree, and TreeHub
 :page-layout: page
-:page-categories: [bas]
+:page-categories: [concepts]
 :page-date: 2017-01-16 18:07:47
 
 
@@ -18,9 +18,17 @@ ATS has created a `meta-updater` layer for Yocto, making it easy to get over-the
 
 link:http://ostree.readthedocs.io/en/latest/[OSTree] is an open-source tool that combines a "git-like" model for committing and downloading bootable filesystem trees, along with a layer for deploying them and managing the bootloader configuration. It is actively developed and support by Red Hat, and used in link:http://flatpak.org/[flatpak] and link:http://www.projectatomic.io/[Project Atomic].
 
-For more on why OSTree is the best tool for the job of doing embedded device updates, take a look at link:../bas/comparing-fullfilesystem-update-strategies.html[Comparing full-filesystem update strategies].
+For more on why OSTree is the best tool for the job of doing embedded device updates, take a look at link:../concepts/comparing-fullfilesystem-update-strategies.html[Comparing full-filesystem update strategies].
 
-(If you're contemplating trying to do embedded software updates using a generic package manager or by rebooting into an "update mode", take a deep breath and think about your life choices.)
+.Doing It Wrong™: Bad choices for embedded updates
+****
+* Package managers
++
+Hey, every Linux distro does it this way--why don't I use it for my embedded system? The problem with this approach is that updates aren't atomic, so it's quite easy to get the system into a state that requires user intervention to fix, especially if it's rebooted during an update. That might be fine on the desktop or on a server, but it doesn't work for embedded devices.
+* "Update Mode" and similar designs
++
+Fortunately, we rarely see this design in the wild anymore. When we do, it's typically a legacy of days when microcontroller flashing would be done in person, with a new image streamed over a serial interface to overwrite the old system. This is a very poor choice for embedded, because it's extremely common for users to disconnect the device while the new image is being flashed, potentially bricking the device or requiring a more difficult intervention to fix. Lower-end home routers and DSL modems sometimes go this route; doing a quick Google search for "link:https://www.google.com/search?q=firmware+update+bricked+router[firmware update bricked router]" should show why this is a bad idea.
+****
 
 == TreeHub
 

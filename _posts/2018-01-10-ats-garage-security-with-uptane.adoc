@@ -1,4 +1,4 @@
-= ATS Garage security: The Uptane framework
+= {product-name-short} security: The Uptane framework
 :page-layout: page
 :page-categories: [concepts]
 :page-date: 2018-01-10 13:55:45
@@ -7,7 +7,7 @@
 :toc: macro
 
 
-ATS Garage aligns with the https://uptane.org[Uptane] security framework. Uptane was developed in response to the clear need for a comprehensive security model for automotive updates, and is the first security system that provides serious compromise resilience in that spacefootnote:["Uptane is the first compromise-resilient software update security system for the automotive industry.", https://uptane.org].
+{product-name} aligns with the https://uptane.org[Uptane] security framework. Uptane was developed in response to the clear need for a comprehensive security model for automotive updates, and is the first security system that provides serious compromise resilience in that spacefootnote:["Uptane is the first compromise-resilient software update security system for the automotive industry.", https://uptane.github.io].
 
 == Uptane structure
 
@@ -22,6 +22,6 @@ The second comes from the *Director*, which controls what updates (selected from
 
 == Signing updates of system images
 
-ATS manages the Director for you. When you create an update campaign, we update the Director behind the scenes, signing the metadata for each image-device tuple in the campaign.
+{product-name-short} manages the Director for you. When you create an update campaign, we update the Director behind the scenes, signing the metadata for each image-device tuple in the campaign.
 
-The TUF keys should be managed on your side; we provide tooling to help you do just that. When you build a new device, bitbake automatically signs the image for you, using TUF keys that you specify in the build's `local.conf`{zwsp}footnote:[The TUF keys are packed inside the zip file specified by the `SOTA_PACKED_CREDENTIALS` line.]. Your initial key is created by ATS Garage, delivered to you inside your `credentials.zip` file, and kept online for convenience and bootstrapping; for any production use you should link:../quickstarts/rotate-tuf-keys.html[rotate your TUF key] and store it securely offlinefootnote:[Proceed with caution! Once you take the key offline, ATS cannot recover it.].
+The TUF keys should be managed on your side; we provide tooling to help you do just that. When you build a new device, bitbake automatically signs the image for you, using TUF keys that you specify in the build's `local.conf`{zwsp}footnote:[The TUF keys are packed inside the zip file specified by the `SOTA_PACKED_CREDENTIALS` line.]. Your initial key is created by {product-name}, delivered to you inside your `credentials.zip` file, and kept online for convenience and bootstrapping; for any production use you should link:../quickstarts/rotate-tuf-keys.html[rotate your TUF key] and store it securely offlinefootnote:[Proceed with caution! Once you take the key offline, HERE Technologies cannot recover it.].

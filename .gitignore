@@ -1,4 +1,5 @@
-_site/
+_site*
 Gemfile.lock
 s3_credentials.env
 _secrets.yml
+_tmp-git

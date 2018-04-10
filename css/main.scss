@@ -2,14 +2,19 @@
 # Sass front matter -- do not remove
 ---
 
+{% case site.variant %}
+  {% when 'ats' %}
 @import url("ats.css");
-
-/* All of the Asciidoctor stylesheet rules are in ats.css. That one is built
+  {% when 'here' %}
+@import url("here.css");
+{% endcase %}
+/* All of the Asciidoctor stylesheet rules are in here.css. That one is built
    using asciidoctor-stylesheet-builder. Anything jekyll- or site-specific 
    should go here.
 */
 
 
+$aqua: rgb(0,175,170);
 $mint: rgb(151,226,217);
 $mint-active: rgb(125, 233, 218);
 $gray: rgb(190,190,190);
@@ -20,13 +25,19 @@ $nav-bg-color: rgb(237,237,237);
 }
 
 @mixin active-link {
+{% case site.variant %}
+  {% when 'ats' %}
     color: $mint;
+  {% when 'here' %}
+    color: $aqua;
+{% endcase %}
 }
 
 @font-face {
-    font-family:icons; src:url(/fonts/icons/icomoon.ttf) 
+    font-family:icons; src:url(../fonts/icons/icomoon.ttf) 
 }
 
+{% if site.variant == 'ats' %}
 @font-face { 
     font-family: akkurat;
     src: url(/fonts/Akkurat-Regular/AkkuratStd.eot?#iefix) format("embedded-opentype"),
@@ -47,14 +58,13 @@ $nav-bg-color: rgb(237,237,237);
     font-weight: 700;
     font-style: normal;
 }
+{% endif %}
 
 html {
     height: 100%;
 }
 
 body {
-    font-family: akkurat, sans-serif;
-    font-size: 14.4px;
     position: relative;
 }
 
@@ -238,7 +248,7 @@ h1, h2, h3, h4 {
 }
 
 .navbar-header {
-    width: 185px;
+    width: 140px;
 
     .navbar-brand {
         width: 100%;
@@ -521,7 +531,6 @@ h1, h2, h3, h4 {
         }
 
         .unfolded-header {
-            width: 100%;
             max-height: 54px!important;
             max-width: 140px;
             display: block;

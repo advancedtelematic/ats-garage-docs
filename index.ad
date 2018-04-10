@@ -1,19 +1,13 @@
----
-layout: default
-title: "Welcome to ATS Garage"
-category: feat
----
+= Welcome to {product-name}
+:page-layout: default
+:page-category: feat
 :icons: font
 
 
-== Welcome to ATS Garage
+== Welcome to {product-name}
 
-ATS Garage is a tool to manage software updates on embedded devices. It works with Yocto-built embedded Linux projects to deliver blazingly fast, secure, managed updates to your devices.
-
-=== Built for automotive, ready for IoT
-
-ATS Garage uses the same base as our software updating product for enterprises, link:https://advancedtelematic.com/en/products.html#ota-plus[OTA Plus]. It supports many of the same features, including the link:https://uptane.org[Uptane security framework] and multi-ECU updates. Some things are simplified, however, making it easy to start and work with projects in early development. Since everything on the client side (and the core of the server-side code) is open source, you can build secure updates into your device right from the prototyping phase with confidence that you'll be ready with a production-grade update system once your product ships.
+{product-name} is a tool to manage software updates on embedded devices. It works with Yocto-built embedded Linux projects to deliver blazingly fast, secure, managed updates to your devices.
 
 == Get started now
 
-Try our link:/quickstarts/start-intro.html[getting started] projects! You can easily build your and update your own linux distro for link:/quickstarts/raspberry-pi.html[Raspberry Pi] or use a link:/quickstarts/qemuvirtualbox.html[virtual machine]. You can also integrate ATS Garage updating in link:/quickstarts/automotive-grade-linux.html[Automotive Grade Linux], or if you've already got a Yocto-based project, you can just link:/quickstarts/adding-ats-garage-updating-to-an-existing-yocto-project.html[add our open source meta-updater layer] to your build.
+Try our link:/quickstarts/start-intro.html[getting started] projects! You can easily build and update your own linux distro for link:/quickstarts/raspberry-pi.html[Raspberry Pi] or use a link:/quickstarts/qemuvirtualbox.html[virtual machine]. You can also integrate {product-name-short} updating in link:/quickstarts/automotive-grade-linux.html[Automotive Grade Linux], or if you've already got a Yocto-based project, you can just link:/quickstarts/adding-ats-garage-updating-to-an-existing-yocto-project.html[add our open source meta-updater layer] to your build.

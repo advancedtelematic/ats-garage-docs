@@ -9,7 +9,7 @@
 :machine: <machine-name>
 :image: agl-demo-platform
 
-ATS Garage lets you easily manage OTA updates to embedded devices running custom-built Yocto images. It works great with Automotive Grade Linux, so building an AGL image is one easy way to get started. If your planned project is automotive, AGL is a great choice to start out with. Out of the box, ATS Garage works with AGL builds for QEMU and Raspberry Pi Model 3.
+{product-name} lets you easily manage OTA updates to embedded devices running custom-built Yocto images. It works great with Automotive Grade Linux, so building an AGL image is one easy way to get started. If your planned project is automotive, AGL is a great choice to start out with. Out of the box, {product-name} works with AGL builds for QEMU and Raspberry Pi Model 3.
 
 toc::[]
 
@@ -30,7 +30,7 @@ repo init -b eel -m eel_4.99.4.xml -u https://gerrit.automotivelinux.org/gerrit/
 repo sync
 ----
 
-This will download the basic Yocto layers you need. Generally, ATS recommends using AGL's latest point release.
+This will download the basic Yocto layers you need. Generally, HERE Technologies recommends using AGL's latest point release.
 
 .What is this actually doing?
 ****
@@ -48,7 +48,7 @@ source meta-agl/scripts/aglsetup.sh -m <target-architecture> agl-demo agl-appfw-
 ----
 <1> Where `<target-architecture>` is either `raspberrypi3` or `qemux86-64`.
 
-IMPORTANT: Only `raspberrypi3` and `qemux86-64` will work out of the box. If you want to create an ATS Garage-compatible build for one of the other architectures AGL supports, you'll need to write a BSP layer for that board. You can take the link:https://github.com/advancedtelematic/meta-updater-raspberrypi/tree/morty/recipes-bsp[Raspberry Pi BSP] as an example of what's needed. You can also link:mailto:support@atsgarage.com[contact us directly] to inquire about commercial development of BSP layers for specific boards.
+IMPORTANT: Only `raspberrypi3` and `qemux86-64` will work out of the box. If you want to create an {product-name-short}-compatible build for one of the other architectures AGL supports, you'll need to write a BSP layer for that board. You can take the link:https://github.com/advancedtelematic/meta-updater-raspberrypi/tree/morty/recipes-bsp[Raspberry Pi BSP] as an example of what's needed. You can also link:mailto:support@atsgarage.com[contact us directly] to inquire about commercial development of BSP layers for specific boards.
 
 include::../_pages/quickstarts/raspberry-pi.adoc[tags=config;bitbake]
 
@@ -66,7 +66,7 @@ sudo resize2fs /dev/sdX2 <1>
 ----
 <1> Where /dev/sdX is the device you wrote the image to.
 
-You should now be able to boot your device and have it show up in your ATS Garage account.
+You should now be able to boot your device and have it show up in your {product-name-short} account.
 
 [discrete]
 == link:../quickstarts/pushing-updates.html[Next: Pushing your first update >>]

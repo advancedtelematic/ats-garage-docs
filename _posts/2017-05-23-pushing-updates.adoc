@@ -6,7 +6,7 @@
 :icons: font
 :toc: macro
 
-Every time you bitbake a new image, it is automatically pushed to ATS Garage. You can then send the updated image out to any of your devices. In this guide, you learn a few ways to push updated system images from your build machine or workstation to ATS Garage.
+Every time you bitbake a new image, it is automatically pushed to {product-name}. You can then send the updated image out to any of your devices. In this guide, you learn a few ways to push updated system images from your build machine or workstation to {product-name-short}.
 
 toc::[]
 
@@ -28,7 +28,7 @@ IMAGE_INSTALL_append = " vim " <1> <2>
 
 <2> If you already added vim, try adding man or gdb.
 
-Now rebuild your image with `bitbake [image-name]`, where `[image-name]` is the same as the one you built in the quickstart guide, and push it to your device using ATS Garage. Once you reboot, vim will be available.
+Now rebuild your image with `bitbake [image-name]`, where `[image-name]` is the same as the one you built in the quickstart guide, and push it to your device using {product-name-short}. Once you reboot, vim will be available.
 
 == Add a new layer someone else created
 
@@ -63,7 +63,7 @@ LICENSE_FLAGS_WHITELIST += " commercial " <2>
 <1> This tells bitbake to include the `pianobar` package in the built image. Note the spaces before and after the package name. The `IMAGE_INSTALL_append` option naively appends a string to the list of packages to install, so we wrap it in spaces to make sure we don't alter the list in unexpected ways.
 <2> Pianobar has a dependency that doesn't have a fully open source license: it uses ffmpeg for mp3 decoding. By default, Yocto won't allow that. You need to explicitly permit it by whitelisting commercial licenses.
 
-Now rebuild your image with `bitbake [image-name]`, where `[image-name]` is the same as the one you built in the quickstart guide. Once you push the updated image to your device with ATS Garage and reboot, you can type `pianobar` to start playing Pandora radio.
+Now rebuild your image with `bitbake [image-name]`, where `[image-name]` is the same as the one you built in the quickstart guide. Once you push the updated image to your device with {product-name-short} and reboot, you can type `pianobar` to start playing Pandora radio.
 
 === Example task part 2: Install Patiobar (web front end)
 

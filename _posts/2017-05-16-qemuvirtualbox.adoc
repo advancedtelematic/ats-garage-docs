@@ -9,7 +9,7 @@
 :machine: qemux86-64
 :image: core-image-minimal
 
-ATS Garage lets you easily manage OTA updates to embedded devices running custom-built Yocto images. This is a guide for building a simple Yocto image that you can run in Virtualbox or QEMU. This is a good way to get started if you don't know yet what hardware your project will use, or if you just want to try out the features of ATS Garage without worrying about physical devices.
+{product-name} lets you easily manage OTA updates to embedded devices running custom-built Yocto images. This is a guide for building a simple Yocto image that you can run in Virtualbox or QEMU. This is a good way to get started if you don't know yet what hardware your project will use, or if you just want to try out the features of {product-name} without worrying about physical devices.
 
 toc::[]
 
@@ -36,7 +36,7 @@ By default, QEMU will run your image in snapshot mode, *discarding any changes y
 If the specified overlay image doesn't yet exist, it will be created first, or launched directly if it does exist.
 ****
 
-You should see your new device appear in ATS Garage shortly after it boots. It will generate a random name for itself during autoprovisioning; you can change the name later.
+You should see your new device appear in {product-name-short} shortly after it boots. It will generate a random name for itself during autoprovisioning; you can change the name later.
 
 
 [discrete]

@@ -15,28 +15,32 @@ To make a campaign, you need to:
 
 * Give the campaign a name:
 
-image::../images/campaign-creation-1.png[]
+image::../images/screenshot_campaign_1.png[]
 
-* Select an image to install:
+* Select a package or image to install:
 
-image::../images/campaign-creation-2.png[]
+image::../images/screenshot_campaign_2.png[]
 
-* Select a target group of devices:
+* Select the version of the package you want to update from, the version to update to, and the affected ECUs/hardware IDs:
 
-image::../images/campaign-creation-3.png[]
+image::../images/screenshot_campaign_3.png[]
 
-* Finalize and launch the campaign:
+* Select the target group or groups of devices:
 
-image::../images/campaign-creation-4.png[]
+image::../images/screenshot_campaign_4.png[]
+
+* Check the details selected, and launch the campaign:
+
+image::../images/screenshot_campaign_summary.png[]
 
 == Monitoring campaign status
 
 Once you have some campaigns created, your campaigns tab will show you the status of your running and completed campaigns:
 
-image::../images/campaigns-page.png[]
+image::../images/screenshot_campaign_overview.png[]
 
 You can click an individual campaign to see its status in more detail:
 
-image::../images/campaign-detailed-view.png[]
+image::../images/screenshot_campaign_status_detail.png[]
 
 

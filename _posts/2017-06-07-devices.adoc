@@ -6,7 +6,7 @@
 :icons: font
 
 .link:{app-url}/#/devices[Devices page, window="_blank"]
-image::../images/devices-page.png[]
+image::../images/screenshot_devices_page.png[]
 
 On this page, you can:
 

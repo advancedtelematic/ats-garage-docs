@@ -6,7 +6,7 @@
 :icons: font
 
 .Individual device page
-image::../images/device-page.png[]
+image::../images/screenshot_single_device_page.png[]
 
 On this page, you can:
 

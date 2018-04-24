@@ -41,11 +41,11 @@ You'll need a build machine with the following:
 
 Go to the {app-url}/#/profile/access-keys[**Provisioning Keys**, window="_blank"] tab of your profile.
 
-image::../images/provisioning-key-menu.png[]
+image::../images/screenshot_provisioning_key_1.png[]
 
 Create a new key, select its period of validity, and then download it.
 
-image::../images/provisioning-screen.png[]
+image::../images/screenshot_provisioning_key_2.png[]
 
 It comes as a zip file containing a provisioning key and credentials for your build system to publish images. You don't need to unzip it; just save it somewhere. You'll need it when you set up your Yocto build.
 

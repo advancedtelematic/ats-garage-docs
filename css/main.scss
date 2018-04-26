@@ -2,12 +2,7 @@
 # Sass front matter -- do not remove
 ---
 
-{% case site.variant %}
-  {% when 'ats' %}
-@import url("ats.css");
-  {% when 'here' %}
 @import url("here.css");
-{% endcase %}
 /* All of the Asciidoctor stylesheet rules are in here.css. That one is built
    using asciidoctor-stylesheet-builder. Anything jekyll- or site-specific 
    should go here.
@@ -36,29 +31,6 @@ $nav-bg-color: rgb(237,237,237);
 @font-face {
     font-family:icons; src:url(../fonts/icons/icomoon.ttf) 
 }
-
-{% if site.variant == 'ats' %}
-@font-face { 
-    font-family: akkurat;
-    src: url(/fonts/Akkurat-Regular/AkkuratStd.eot?#iefix) format("embedded-opentype"),
-        url(/fonts/Akkurat-Regular/AkkuratStd.otf) format("opentype"),
-        url(/fonts/Akkurat-Regular/AkkuratStd.woff) format("woff"),
-        url(/fonts/Akkurat-Regular/AkkuratStd.ttf) format("truetype"),
-        url(/fonts/Akkurat-Regular/AkkuratStd.svg#AkkuratStd) format("svg");
-    font-weight: 400;
-    font-style: normal
-}
-@font-face {
-    font-family: akkurat;
-    src: url(/fonts/Akkurat-Bold/Akkurat-Bold.eot?#iefix) format("embedded-opentype"),
-        url(/fonts/Akkurat-Bold/Akkurat-Bold.otf) format("opentype"),
-        url(/fonts/Akkurat-Bold/Akkurat-Bold.woff) format("woff"),
-        url(/fonts/Akkurat-Bold/Akkurat-Bold.ttf) format("truetype"),
-        url(/fonts/Akkurat-Bold/Akkurat-Bold.svg#AkkuratStd) format("svg");
-    font-weight: 700;
-    font-style: normal;
-}
-{% endif %}
 
 html {
     height: 100%;

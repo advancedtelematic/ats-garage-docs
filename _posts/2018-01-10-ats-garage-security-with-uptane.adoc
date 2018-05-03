@@ -18,7 +18,7 @@ The most important concept in Uptane is that there are two sets of metadata, fro
 
 The first comes from the *TUF Repository*{zwsp}footnote:[It's called the TUF repository because it uses https://theupdateframework.com/[The Update Framework].]. The TUF Repository contains metadata for update packages that are _valid_ install targets, and its metadata is signed by a chain of trust with offline keys.
 
-The second comes from the *Director*, which controls what updates (selected from the valid install targets) should actually be installed on devices. The Director uses online keys, and is part of the ATS Garage service.
+The second comes from the *Director*, which controls what updates (selected from the valid install targets) should actually be installed on devices. The Director uses online keys, and is part of the {product-name-short} service.
 
 == Signing updates of system images
 

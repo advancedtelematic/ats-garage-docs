@@ -111,16 +111,6 @@ SSTATE_DIR = "/path/to/your/shared-sstate"
 DL_DIR = "/path/to/your/shared-download"
 ----
 
-* *Remote Yocto shared state cache*
-
-Yocto also supports the use of remote caches. ATS provides one; you can configure your build to use it as follows:
-
-----
-SSTATE_MIRRORS ?= "file://.* https://bitbake-cache.atsgarage.com/PATH;downloadfilename=PATH"
-----
-
-This will save you some compilation time, as bitbake downloads some intermediate build artefacts instead of building them itself.
-
 * *Add extra packages*
 
 There are quite a lot of packages available to install that aren't installed by default. You can add extra packages to your image with *IMAGE_INSTALL_append*; for example, this will install vim:

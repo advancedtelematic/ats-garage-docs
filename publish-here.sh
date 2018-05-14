@@ -25,10 +25,10 @@ docker run --rm -v "$(pwd)":/site -u "$(id -u)":"$(id -g)" -p 4000:4000 advanced
     --config _conf-here.yml,_secrets.yml --destination ./_tmp-git/passthrough/dev_guide/ats_custom_asciidoc/1.0.0/auto/en-US/html
 # add the files, make a commit
 cd _tmp-git
-git remote set-url --push origin ssh://${1}@gerrit.it.here.com
+git remote add push_origin ssh://${1}@gerrit.it.here.com
 git add passthrough/dev_guide/ats_custom_asciidoc/1.0.0/auto/en-US/html/
 git commit -m "Content generated from ats-garage-docs@${COMMIT_ID}"
-git push origin master
+git push push_origin master
 
 # clean up
 cd ..

@@ -7,7 +7,7 @@
 :icons: font
 :toc: macro
 :sectnums:
-:garage-deploy-version: 2018.5
+:garage-deploy-version: 2018.6
 
 
 {product-name} has a link:../concepts/ats-garage-security-with-uptane.html[security concept] that includes signing system images with secure, offline keys.
@@ -46,8 +46,8 @@ This directory should be secured on an encrypted filesystem.
 There are two roles in the repo, each of which needs a new key.
 
 ----
-garage-sign gen-keys --repo mytufrepo --name myroot --type rsa
-garage-sign gen-keys --repo mytufrepo --name mytargets --type rsa
+garage-sign key generate --repo mytufrepo --name myroot --type rsa
+garage-sign key generate --repo mytufrepo --name mytargets --type rsa
 ----
 
 ****
@@ -66,7 +66,7 @@ garage-sign targets pull --repo mytufrepo
 . Perform a complete root key rotation:
 +
 ----
-garage-sign rotate --repo mytufrepo --old-root-alias origroot \
+garage-sign move-offline --repo mytufrepo --old-root-alias origroot \
     --new-root myroot --new-targets mytargets
 ----
 +

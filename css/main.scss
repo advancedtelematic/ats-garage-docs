@@ -15,6 +15,36 @@ $mint-active: rgb(125, 233, 218);
 $gray: rgb(190,190,190);
 $nav-bg-color: rgb(237,237,237);
 
+.hidden {
+    display: none;
+}
+
+.switch {
+    border-width: 1px 1px 0 1px;
+    border-style: solid;
+    border-color: $aqua;
+    display: inline-block;
+}
+
+.switch--item {
+    padding: 10px;
+    background-color: #ffffff;
+    color: $aqua;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.switch--item:not(:first-child) {
+    border-width: 0 0 0 1px;
+    border-style: solid;
+    border-color: $aqua;
+}
+
+.switch--item.selected {
+    background-color: $aqua;
+    color: #ffffff;
+}
+
 @mixin transition($type: all, $duration: 0.2s) {
     transition: $type $duration ease-in;
 }

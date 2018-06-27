@@ -10,6 +10,33 @@ toc::[]
 
 == Build problems
 
+=== Bitbake fails with a strange Java error
+
+On Ubuntu 18.04 and some other distros, you may get an error with a Java stack trace that includes the following line:
+
+----
+java.security.InvalidAlgorithmParameterException: the trustAnchors parameter must be non-empty
+----
+
+This issue is due a change in the packaging for OpenJDK 9+ security certificates. It has a simple workaround, however.
+
+Run the following commands:
+
+----
+sudo rm /etc/ssl/certs/java/cacerts
+sudo update-ca-certificates --fresh
+----
+
+Try the bitbake build again.
+If the build still doesn't work, run the following commands:
+
+----
+sudo /usr/bin/printf '\xfe\xed\xfe\xed\x00\x00\x00\x02\x00\x00\x00\x00\xe2\x68\x6e\x45\xfb\x43\xdf\xa4\xd9\x92\xdd\x41\xce\xb6\xb2\x1c\x63\x30\xd7\x92' > /etc/ssl/certs/java/cacerts
+sudo /var/lib/dpkg/info/ca-certificates-java.postinst configure
+----
+
+More detailed info about the cause of the bug, as well as links to the bug in various distros' issue trackers, can be found link:https://github.com/mikaelhg/broken-docker-jdk9-cacerts/blob/master/README.md[on github].
+
 === GnuTLS build fails with older kernels
 
 GnuTLS currently requires a kernel >= 3.17 to build. If you're using an older kernel, you'll see an error like this:

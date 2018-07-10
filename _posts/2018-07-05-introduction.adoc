@@ -1,0 +1,10 @@
+= Introduction
+:page-layout: page
+:page-categories: [client-config]
+:page-date: 2018-07-05 11:14:13
+:page-order: 1
+:icons: font
+
+The {product-name} client, https://github.com/advancedtelematic/aktualizr[aktualizr], provides a lot of different configuration options. In https://github.com/advancedtelematic/meta-updater[meta-updater], we provide sensible defaults for doing updates with automatic provisioning on a single ECU. But especially for use in vehicles, you may need to do a lot more: configuring secondary ECUs of different types, managing different provisioning methods, and so on.
+
+Here, we provide reference documentation on aktualizr's usage and configuration.

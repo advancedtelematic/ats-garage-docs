@@ -13,13 +13,29 @@ For our recommended production workflow, you will need to move device images fro
 +
 NOTE: If you've link:../prod/rotating-signing-keys.html[rotated your signing keys] already, `garage-deploy` will already be installed, and you can skip this step.
 +
-On a debian machine, download the `garage-deploy` package and install it:
+On a Ubuntu 16.04 machine, download the `garage-deploy` package and install it:
 +
 [subs="attributes"]
 ----
 wget https://github.com/advancedtelematic/aktualizr/releases/download/{garage-deploy-version}/garage_deploy.deb
 sudo apt install ./garage_deploy.deb
 ----
++
+[TIP]
+====
+This package is built against Ubuntu 16.04 and may work for other distributions, but if it doesn't work for your setup, you can checkout https://github.com/advancedtelematic/aktualizr/tree/{garage-deploy-version}[aktualizr] and build the deb package or binary yourself:
+
+[subs="attributes"]
+----
+git clone --branch {garage-deploy-version} --recursive https://github.com/advancedtelematic/aktualizr
+cd aktualizr
+mkdir build
+cd build
+cmake -DBUILD_SOTA_TOOLS=ON ..
+make package # Or just `make` to get the binary
+sudo apt install ./garage_deploy.deb
+----
+====
 +
 . Download `credentials.zip` files for both accounts
 +

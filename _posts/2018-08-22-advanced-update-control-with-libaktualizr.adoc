@@ -5,4 +5,4 @@
 :page-order: 50
 :icons: font
 
-
+// TODO MERLIN: Figure out if we even want to try to document this beyond what is mentioned on the introduction page. Frankly, I think I doubt it. If you're using libaktualizr, what you probably want is code, doxygen docs, and the example hmi_stub app. Anything we can add here might just be cruft.

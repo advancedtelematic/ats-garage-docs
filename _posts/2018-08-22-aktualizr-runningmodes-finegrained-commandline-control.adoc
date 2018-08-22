@@ -1,0 +1,8 @@
+= Aktualizr running-modes: fine-grained command-line control
+:page-layout: page
+:page-categories: [client-config]
+:page-date: 2018-08-22 11:01:14
+:page-order: 30
+:icons: font
+
+

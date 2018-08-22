@@ -2,7 +2,7 @@
 :page-layout: page
 :page-categories: [client-config]
 :page-date: 2018-07-05 13:31:58
-:page-order: 99
+:page-order: 25
 :icons: font
 
 TODO: Explain the difference between different provisioning methods, why you might want to do one or another, and what steps you need to take for each.

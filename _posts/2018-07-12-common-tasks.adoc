@@ -1,0 +1,8 @@
+= Common tasks
+:page-layout: page
+:page-categories: [client-config]
+:page-date: 2018-07-12 10:22:51
+:page-order: 40
+:icons: font
+
+

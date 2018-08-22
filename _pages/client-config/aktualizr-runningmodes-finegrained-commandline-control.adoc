@@ -1,0 +1,1 @@
+../../_posts/2018-08-22-aktualizr-runningmodes-finegrained-commandline-control.adoc

@@ -1,0 +1,8 @@
+= Advanced update control with libaktualizr
+:page-layout: page
+:page-categories: [client-config]
+:page-date: 2018-08-22 11:02:20
+:page-order: 50
+:icons: font
+
+

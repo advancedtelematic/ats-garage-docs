@@ -5,7 +5,7 @@
 :page-order: 3
 :icons: font
 :sectnums:
-:garage-deploy-version: 2018.8
+:garage-deploy-version: 2018.9
 
 For our recommended production workflow, you will need to move device images from one account to another from time to time--for example, sending a development build you're happy with to the QA team, or sending that build to the deployment team once it's passed QA. We provide a tool called `garage-deploy` for doing just that.
 
@@ -13,17 +13,18 @@ For our recommended production workflow, you will need to move device images fro
 +
 NOTE: If you've link:../prod/rotating-signing-keys.html[rotated your signing keys] already, `garage-deploy` will already be installed, and you can skip this step.
 +
-On a Ubuntu 16.04 machine, download the `garage-deploy` package and install it:
+We currently provide released versions of `garage-deploy` for Ubuntu 18.04 (Bionic) and Ubuntu 16.04 (Xenial) which are available on https://github.com/advancedtelematic/aktualizr/releases/tag/{garage-deploy-version}.
+On a Ubuntu 18.04 machine, download the `garage-deploy` package and install it:
 +
 [subs="attributes"]
 ----
-wget https://github.com/advancedtelematic/aktualizr/releases/download/{garage-deploy-version}/garage_deploy.deb
-sudo apt install ./garage_deploy.deb
+wget https://github.com/advancedtelematic/aktualizr/releases/download/{garage-deploy-version}/garage_deploy-ubuntu_18.04.deb
+sudo apt install ./garage_deploy-ubuntu_18.04.deb
 ----
 +
 [TIP]
 ====
-This package is built against Ubuntu 16.04 and may work for other distributions, but if it doesn't work for your setup, you can checkout https://github.com/advancedtelematic/aktualizr/tree/{garage-deploy-version}[aktualizr] and build the deb package or binary yourself:
+These packages are specific to the distributions they were built for. If yours is not in the list, you can checkout https://github.com/advancedtelematic/aktualizr/tree/{garage-deploy-version}[aktualizr], install the required dependencies link:https://github.com/advancedtelematic/aktualizr/tree/{garage-deploy-version}#dependencies[listed here] (exact package names may vary) and build the deb package yourself:
 
 [subs="attributes"]
 ----
@@ -32,9 +33,11 @@ cd aktualizr
 mkdir build
 cd build
 cmake -DBUILD_SOTA_TOOLS=ON ..
-make package # Or just `make` to get the binary
+make package
 sudo apt install ./garage_deploy.deb
 ----
+
+Building a package will only work on Debian-based distributions. For other environments, it's possible to directly run the executable by itself: run `make garage-deploy` after the CMake invocation and the executable will be available in `build/src/sota_tools/garage-deploy`.
 ====
 +
 . Download `credentials.zip` files for both accounts

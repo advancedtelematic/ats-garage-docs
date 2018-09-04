@@ -39,7 +39,7 @@ This is all done with the meta-updater Yocto layer. Building the rootfs image an
 
 == Installing updates on devices
 
-In {product-name-short}, we generally assume that updates will be OSTree images, but in fact {product-name-short} can be used to send all kinds of other updates.footnote:[For more information on using {product-name} for other types of update, please contact us at link:mailto:hello@atsgarage.com[hello@atsgarage.com].] But for now, let's look at the default OSTree update process.
+In {product-name-short}, we generally assume that updates will be OSTree images, but in fact {product-name-short} can be used to send all kinds of other updates.footnote:[For more information on using {product-name} for other types of update, please contact us at link:mailto:ota-support@here.com[ota-support@here.com].] But for now, let's look at the default OSTree update process.
 
 .{product-name} device update flow
 ****

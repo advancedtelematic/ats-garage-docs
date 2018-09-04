@@ -50,7 +50,13 @@
             </div>
   {% when 'here' %}
             <a class="top-bar navbar-brand" href=".{% unless page.dir == '/' %}.{% endunless %}/index.html"><img class="top-bar unfolded-header" src=".{% unless page.dir == '/' %}.{% endunless %}/images/HERE_Logo_2016_POS_sRGB.png" alt="HERE Technologies"></a>
-          </div>            
+          </div>
+          <ul class="top-bar nav navbar-nav navbar-right visible-md visible-lg visible-sm">
+            <li class="top-bar visible-sm visible-md visible-lg">
+              <a class="top-bar ats-garage-btn" href="https://connect.ota.here.com/" target="_blank">START NOW <span>OR LOGIN</span>
+              </a>
+            </li>
+          </ul>
 {% endcase %}
           </div>
         </div>

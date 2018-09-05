@@ -5,7 +5,7 @@
 :page-order: 3
 :icons: font
 :sectnums:
-:garage-deploy-version: 2018.9
+:garage-deploy-version: 2018.11
 
 For our recommended production workflow, you will need to move device images from one account to another from time to time--for example, sending a development build you're happy with to the QA team, or sending that build to the deployment team once it's passed QA. We provide a tool called `garage-deploy` for doing just that.
 

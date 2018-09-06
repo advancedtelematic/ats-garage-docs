@@ -69,7 +69,7 @@ baseurl: ''
 permalink: none
 
 # Syntax highlighting
-highlighter: pygments
+highlighter: rouge
 
 # Since these are pages, it doesn't really matter
 future: true
@@ -93,10 +93,12 @@ plugins:
   - jekyll-asciidoc
   - octopress-debugger
   - asciidoctor-github-include
+  - jekyll-compass
 
 asciidoctor:
   attributes:
     product-name: HERE OTA Connect
     product-name-short: OTA Connect
     app-url: https://connect.ota.here.com
+    source-highlighter: rouge
 

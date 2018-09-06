@@ -1,8 +1,0 @@
-= Common tasks
-:page-layout: page
-:page-categories: [client-config]
-:page-date: 2018-07-12 10:22:51
-:page-order: 40
-:icons: font
-
-// TODO MERLIN: Decide if this is even necessary. It may be that the running-mode doc combined with config options documentation more or less obviates this. Also, we don't really know what tasks are common for our target audience here. ¯\_(ツ)_/¯

@@ -1,4 +1,4 @@
-= Automotive Grade Linux
+= Build an Automotive Grade Linux image
 :page-layout: page
 :page-categories: [quickstarts]
 :page-date: 2017-05-16 15:54:29
@@ -15,11 +15,11 @@ toc::[]
 
 // Most of the content here is the same as the Raspberry Pi instructions, so we re-use the chunks we can.
 
-include::../_pages/quickstarts/raspberry-pi.adoc[tags=prereqs;provisioning]
+include::../_pages/quickstarts/raspberry-pi.adoc[tags=prereqs]
 
-== 2. Create your AGL Yocto build environment
+== Create your AGL Yocto build environment
 
-=== 2.1 Get AGL master manifest
+=== Get AGL master manifest
 
 First, clone a manifest file for AGL Electric Eel:
 
@@ -39,7 +39,7 @@ Yocto is a set of tools, templates and methods for building Linux systems from s
 All of these layers are assembled into a built Linux system by Bitbake, the build tool of the Yocto Project, based on the instructions in the recipes inside the layers.
 ****
 
-=== 2.2 Run environment setup script
+=== Run environment setup script
 
 Now you can run the following script to get the environment set up:
 
@@ -52,7 +52,7 @@ IMPORTANT: Only `raspberrypi3` and `qemux86-64` will work out of the box. If you
 
 include::../_pages/quickstarts/raspberry-pi.adoc[tags=config;bitbake]
 
-== 5. Put the built image on your device's boot media
+== Put the built image on your device's boot media
 
 The build process creates disk images as an artefact. The exact image you'll need will vary depending on the architecture you're building forfootnote:[For example, building the `agl-demo-platform` target for Raspberry Pi 3 creates an image at `build/tmp/deploy/images/raspberrypi3/agl-demo-platform-raspberrypi3.wic`.], but it will be located in the `/tmp/deploy/images` directory under your build directory. We recommend using https://etcher.io/[Etcher, window="_blank"] or https://etcher.io/cli/[Etcher CLI, window="_blank"] to write the image, or following the normal flashing procedure for your device if applicable.
 

@@ -1,9 +1,9 @@
-= Rotating signing keys
+= Rotate signing keys
 :page-layout: page
 :page-redirect_from: /quickstarts/rotate-tuf-keys
 :page-categories: [prod]
 :page-date: 2018-02-08 17:55:08
-:page-order: 2
+:page-order: 3
 :icons: font
 :toc: macro
 :sectnums:

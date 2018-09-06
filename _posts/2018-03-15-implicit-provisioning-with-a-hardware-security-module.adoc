@@ -1,6 +1,6 @@
 = Implicit provisioning with a Hardware Security Module
 :page-layout: page
-:page-categories: [prod]
+:page-categories: [none]
 :page-date: 2018-03-15 13:51:21
 :page-order: 99
 :icons: font

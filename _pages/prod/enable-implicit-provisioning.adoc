@@ -1,0 +1,1 @@
+../../_posts/2018-08-29-enable-implicit-provisioning.adoc

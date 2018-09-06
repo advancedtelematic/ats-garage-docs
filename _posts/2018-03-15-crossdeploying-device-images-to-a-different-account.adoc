@@ -1,4 +1,4 @@
-= Cross-deploying device images to a different account
+= Cross-deploy device images to a different account
 :page-layout: page
 :page-categories: [prod]
 :page-date: 2018-03-15 13:52:05

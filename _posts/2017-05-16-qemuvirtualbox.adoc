@@ -1,4 +1,4 @@
-= QEMU/VirtualBox
+= Build a QEMU/VirtualBox image
 :page-layout: page
 :page-categories: [quickstarts]
 :page-date: 2017-05-16 15:49:22
@@ -13,9 +13,9 @@
 
 toc::[]
 
-include::../_pages/quickstarts/raspberry-pi.adoc[tags=prereqs;provisioning;env-setup;config;bitbake]
+include::../_pages/quickstarts/raspberry-pi.adoc[tags=prereqs;env-setup;config;bitbake]
 
-== 5. Run the built image with QEMU
+== Run the built image with QEMU
 
 The build process creates disk images as an artefact. You can then directly run them with QEMU. (If you don't already have it installed, install it with `apt-get install qemu` or similar.) The meta-updater layer contains a helper script to launch the images:
 

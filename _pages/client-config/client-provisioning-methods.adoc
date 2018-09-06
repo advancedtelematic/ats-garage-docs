@@ -1,0 +1,1 @@
+../../_posts/2018-07-05-client-provisioning-methods.adoc

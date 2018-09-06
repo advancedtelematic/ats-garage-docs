@@ -1,0 +1,56 @@
+@import "fonts/fira";
+@import "settings/here";
+@import "components/asciidoc";
+@import "components/awesome-icons";
+
+dt, th.tableblock, td.content, div.footnote {
+  // NOTE text-rendering is already set for p
+  text-rendering: optimizeLegibility;
+}
+
+// NOTE include blockquote for when it doesn't have a nested p
+p, blockquote, dt, td.content, span.alt {
+  font-size: 1.0625rem;
+}
+
+p {
+  margin-bottom: 1.25rem;
+}
+
+// restore font size in sidebar block and regular table cells
+.sidebarblock p, .sidebarblock dt, .sidebarblock td.content, p.tableblock {
+  font-size: 1em;
+}
+
+.exampleblock > .content {
+  // white
+  //background-color: #fff;
+  //border-color: $panel-border-color;
+  //@include single-box-shadow($panel-border-color, 0, 1px, 2px);
+
+  background-color: $aqua; 
+  border-color: $panel-border-color;
+  @include single-box-shadow($panel-border-color, 0, 1px, 4px);
+}
+
+
+// fancy link text decoration
+a {
+  border-bottom: 4px solid $aqua;
+  color: rgba(0,0,0,0.675);
+  text-decoration: none;
+}
+
+a:hover, a:focus {
+  color: rgba(0,0,0,0.675);
+  border-bottom: 4px solid $gray;
+  text-decoration: none;
+}
+
+pre, pre > code {
+    white-space: pre;
+    overflow-x: auto;
+    word-break: normal;
+    word-wrap: normal;
+}
+@import "components/print";

@@ -36,6 +36,8 @@ sections:
     title: Using OTA Connect
   - id: prod
     title: Moving to Production
+  - id: client-config
+    title: Client Configuration
 
 
 # This creates navigation tabs. 'title' is the display name of the tab, 'tab_id'
@@ -56,6 +58,7 @@ navigation_tabs:
     tab_id: reference
     topics:
       - concepts
+      - client-config
       - faq
 
 

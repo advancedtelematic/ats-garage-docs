@@ -39,6 +39,14 @@ Yocto is a set of tools, templates and methods for building Linux systems from s
 All of these layers are assembled into a built Linux system by Bitbake, the build tool of the Yocto Project, based on the instructions in the recipes inside the layers.
 ****
 
+==== Recommended: update to the latest meta-updater
+
+AGL Eel packages an out-of-date version of meta-updater. We strongly recommend checking out the tip of the `pyro` branch, instead:
+
+----
+git -C meta-updater/ checkout pyro
+----
+
 === Run environment setup script
 
 Now you can run the following script to get the environment set up:

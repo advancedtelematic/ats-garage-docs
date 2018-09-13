@@ -1,0 +1,51 @@
+= Install the "garage deploy" tool
+:page-layout: page
+:page-categories: [prod]
+:page-date: 2018-09-13 11:50:24
+:page-order: 2
+:icons: font
+:garage-deploy-version: 2018.11
+
+For our recommended production workflow, we recommend some extra security procedures. Before you can follow these procedures, you need to install our `garage-deploy` tool first.
+
+We currently provide released versions of `garage-deploy` for Ubuntu 18.04 (Bionic) and Ubuntu 16.04 (Xenial) which are available on https://github.com/advancedtelematic/aktualizr/releases/tag/{garage-deploy-version}.
+
+* To install `garage-deploy` on an Ubuntu 18.04 machine, download the `garage-deploy` package and install it with the following command:
++
+[subs="attributes"]
+----
+wget https://github.com/advancedtelematic/aktualizr/releases/download/{garage-deploy-version}/garage_deploy-ubuntu_18.04.deb
+sudo apt install ./garage_deploy-ubuntu_18.04.deb
+----
++
+[TIP]
+====
+These packages are specific to the distributions they were built for. If yours is not in the list, you can checkout https://github.com/advancedtelematic/aktualizr/tree/{garage-deploy-version}[aktualizr], install the required dependencies link:https://github.com/advancedtelematic/aktualizr/tree/{garage-deploy-version}#dependencies[listed here] (exact package names may vary) and build the deb package yourself:
+
+[subs="attributes"]
+----
+git clone --branch {garage-deploy-version} --recursive https://github.com/advancedtelematic/aktualizr
+cd aktualizr
+mkdir build
+cd build
+cmake -DBUILD_SOTA_TOOLS=ON ..
+make package
+sudo apt install ./garage_deploy.deb
+----
+
+Building a package will only work on Debian-based distributions. For other environments, it's possible to directly run the executable by itself: run `make garage-deploy` after the CMake invocation and the executable will be available in `build/src/sota_tools/garage-deploy`.
+====
+
+Once you've installed `garage-deploy` tool, you're ready to perform the following tasks:
+
+* Move device images from one account to another--for example, to send a development build to the QA team, or to send a release candidate to the deployment team.
++
+For more information, see "link:crossdeploying-device-images-to-a-different-account.html[Cross-deploy device images to a different account]".
++
+* Create offline signing keys that you manage yourself and rotate out the installed online keys. 
++
+For more information, see "link:rotating-signing-keys.html[Rotate signing keys]".
+
+
+
+

@@ -1,0 +1,1 @@
+../../_posts/2018-09-13-install-garage-sign-deploy.adoc

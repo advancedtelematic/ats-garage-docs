@@ -86,5 +86,5 @@ In this case, you should set link:http://www.yoctoproject.org/docs/2.4.1/mega-ma
 
 .Don't see your problem here?
 ****
-We'd love to hear from you about how we can improve the docs and make {product-name} better. Contact link:mailto:ota-support@here.com[ota-support@here.com] and we'll do our best to help.
+We'd love to hear from you about how we can improve the docs and make {product-name} better. Contact link:mailto:otaconnect.support@here.com[otaconnect.support@here.com] and we'll do our best to help.
 ****

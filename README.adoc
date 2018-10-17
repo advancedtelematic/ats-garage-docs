@@ -109,3 +109,15 @@ Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.
 Ook. Ook. Ook. Ook. Ook! Ook.
 ----
 ....
+
+== Contextual help in app
+
+The web app needs some contextual help pages. Since that's documentation, we want to keep the single source of truth here in the docs repo. We accomplish this by writing the contextual help pages in asciidoc (using `include::[]` statements as liberally as possible). For each contextual help page, do the following:
+
+. Create a new jekyll page with the category `context_help`:
++
+    ./bin/jekyll-page "My page title" context_help
++
+. Change the `:page_layout:` to `context_help` to make it render as raw HTML without the navigation, etc.
+. Write your doc.
+. It will render in the static site under `/context_help/page-name-slug.html` when the site is built.

@@ -34,7 +34,7 @@ You'll need a build machine with the following:
 
 Also, make sure that you've generated your link:generating-provisioning-credentials.html[provisioning credentials] first.
 // end::prereqs[]
-// tag::provisioning[]
+// tag::env-setup[]
 
 
 

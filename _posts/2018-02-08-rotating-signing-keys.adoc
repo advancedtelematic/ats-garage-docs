@@ -7,7 +7,7 @@
 :icons: font
 :toc: macro
 :sectnums:
-:garage-deploy-version: 2018.11
+:garage-deploy-version: 2018.13
 
 
 {product-name} has a link:../concepts/ats-garage-security-with-uptane.html[security concept] that includes signing system images with secure, offline keys.

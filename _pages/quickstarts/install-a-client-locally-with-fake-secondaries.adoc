@@ -1,0 +1,1 @@
+../../_posts/2018-11-19-install-a-client-locally-with-fake-secondaries.adoc

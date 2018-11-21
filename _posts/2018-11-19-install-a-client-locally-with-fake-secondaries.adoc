@@ -1,4 +1,4 @@
-= Install a client locally with fake secondaries
+= Create a "fake" device on your workstation
 :page-layout: page
 :page-categories: [quickstarts]
 :page-date: 2018-11-19 11:28:47
@@ -7,7 +7,7 @@
 :aktualizr-version: 2018.13
 :sectnums:
 
-You can try out OTA Connect without having to build a whole device. This can be useful for testing the system outside of actual device updates. In this guide, you will install an aktualizr binary on your local machine, create an environment where a fake device is configured, and run aktualizr from there.
+You can try out OTA Connect without having to build a whole device with Yocto. This can be useful for testing the system outside of actual device updates. In this guide, you will install an aktualizr binary on your local machine, create a directory with configuration files and credentials for aktualizr to use, and run aktualizr from there.
 
 == Prerequisites
 
@@ -84,7 +84,7 @@ Each directory should contain the following:
 
 * credentials.zip
 * sota_local.toml -- a config file for aktualizr
-* A `secondary_configs` directory, containing one or more JSON files representing secondaries
+* (Optional) A `secondary_configs` directory, containing one or more JSON files representing secondary ECUs.footnote:[OTA Connect is designed for automotive use cases, where there may be many distinct microcontrollers (ECUs, in automotive parlance) inside a vehicle--sometimes over 100. Updates are downloaded by one *primary* ECU, checked for authenticity, and then distributed to *secondary* ECUs throughout the vehicle.]
 
 An example directory is below:
 
@@ -138,4 +138,4 @@ This will start aktualizr in its normal mode: it will provision with the server 
 
 You should now be able to see your fake device provisioned into your OTA Connect account, with two secondary ECUs listed.
 
-NOTE: Because the aktualizr config uses relative paths, you *must* run aktualizr from the directory you created. You can use different directories to create different fake devices, as long as each one is kept separate.
+NOTE: Because the aktualizr config we've given uses relative paths, you *must* run aktualizr from the directory you created. However, if you prefer, you can use absolute paths in the config file instead. The reason we've chosen to use relative paths is to make it easy to create multiple distinct fake devices, by simply making a copy of the whole directory.

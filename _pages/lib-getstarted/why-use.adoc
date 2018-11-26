@@ -1,0 +1,5 @@
+== Why Use [PRODUCT NAME]
+
+////
+Outline the main use cases the product aims to address. The body of the guide must show how to use the product to implement these use cases.
+////

@@ -1,0 +1,17 @@
+== Run the Example
+
+////
+Include this topic for SDK products. ```
+////
+
+////
+        This topic needs to introduce one (and only one) of the major use cases for your product
+  through a basic sample project.
+
+  Tips:
+  - This major use case must illustrate one of the primary business values of your product,
+        shown in the simplest possible manner.
+  - Offer the project source code through GitHub or in the release package.
+////
+
+```

@@ -1,6 +1,13 @@
-== Task 1
+= Perform a Task
+:page-layout: page
+:page-categories: [lib-howto]
+:page-date: 2018-11-26 13:44:40
+:page-order: 1
+:icons: font
 
 ////
+"Perform a Task" is a placeholder title for a topics that describe how to accomplish common use cases. 
+
 The title of a task topic states the task using a bare-infinitive verb. For example:
 
     Create a Catalog
@@ -16,4 +23,8 @@ Link off to concept topics if there are important concepts if necessary. Use mul
 
 3. Example (if appropriate). For REST, show an example request and response. For libraries, show
 how to perform the task and how to use the results in a practical way.
+
+For inspiration on "How to <XXX>" topics, see this example: 
+https://developer.here.com/olp/documentation/data-visualization-library/dev_guide/pages/olp-generator.html#visualize-sdii-data-from-a-catalog
+
 ////

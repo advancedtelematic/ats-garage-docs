@@ -1,9 +1,0 @@
-== Install PRODUCT_NAME
-
-////
-            Use this topic to provide instructions on how to install your product.
-      This topic is not needed if your product does not require installation.
-
-      If there are multiple ways to install your product, provide the instructions in different
-      sections.
-////

@@ -1,3 +1,0 @@
-== Use Cases
-
-`Parent topic that introduces a list of use cases`

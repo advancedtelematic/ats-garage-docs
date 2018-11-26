@@ -1,0 +1,1 @@
+../../_posts/2018-11-26-use-case-a.adoc

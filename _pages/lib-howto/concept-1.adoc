@@ -1,3 +1,0 @@
-== Concept 1
-
-`If there are concepts that users need to understand to effectively work with your product, create one or more concept topics. Limit each concept to one top-level concept in the product. For example, in OLP, there is a concept for Catalogs, Layers, and Partitions. Within Layers, there are sections for layer types (volatile, versioned, and stream) rather than putting each type in a separate topic.`

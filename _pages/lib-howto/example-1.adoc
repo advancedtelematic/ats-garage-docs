@@ -1,0 +1,17 @@
+== Example 1
+
+////
+The example topics describe how to accomplish common use cases. The title of the topic should be in the imperative voice, for example:
+
+    Display the Louvre Museum Using Tiles
+
+Do not use gerunds, for example:
+
+    Displaying the Louvre Museum Using Tiles
+
+The introductory paragraph should describe a hypothetical but realistic scenario. For example:
+
+    You want to get the venue level so that you can display venue-specific data on end users' devices .
+
+Followed by an example request/response. Be sure to point out important parameters and explain why they are set as they are in the example. Use the example to teach important concepts as well as provide specifics on how to accomplish the hypothetical scenario.
+////

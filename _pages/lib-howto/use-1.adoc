@@ -1,0 +1,19 @@
+== Task 1
+
+////
+The title of a task topic states the task using a bare-infinitive verb. For example:
+
+    Create a Catalog
+    Get Metadata
+    ...
+
+The structure of the topic should be:
+
+1. Opening paragraph that sets the context for the task. Why would you need to perform the task? Are there any prerequisites?
+Link off to concept topics if there are important concepts if necessary. Use multiple paragraphs if needed.
+
+2. The procedure. Procedures are ordered lists of steps. Be very specific when writing steps. Provide example values where the user needs to specify a value.
+
+3. Example (if appropriate). For REST, show an example request and response. For libraries, show
+how to perform the task and how to use the results in a practical way.
+////

@@ -1,0 +1,31 @@
+== Get Support
+
+////
+This topic contains information on how to request support.
+
+Note: This information may need to be consistent with other products. Before editing the following content, find out if a standard already exists.
+////
+
+////
+For OLP, use the following: ```
+
+If you need help with this or any other HERE Open Location Platform Services, visit [platform.here.com](https://platform.here.com) for support.
+////
+
+For other products, use the following: ```
+
+If you need assistance with this or any other HERE product, select one
+of the following options.
+
+* If you have a HERE representative, contact them when you have
+questions/issues.
+* If you manage your applications and accounts through
+developer.here.com, log into your account and check the pages on the SLA
+report or API Health. If this does not clarify the issue, then check
+http://stackoverflow.com/questions/tagged/here-api[stackoverflow.com/questions/tagged/here-api].
+* If you have an evaluation plan, check
+http://stackoverflow.com/questions/tagged/here-api[stackoverflow.com/questions/tagged/here-api].
+* If you have questions about billing or your account,
+https://developer.here.com/contact-us[Contact Us].
+* If you have purchased your plan/product from a HERE reseller, contact
+your reseller.

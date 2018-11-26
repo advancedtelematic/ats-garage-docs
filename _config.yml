@@ -42,7 +42,8 @@ sections:
     title: Getting Started
   - id: lib-howto
     title: How To
-
+  - id: lib-concepts
+    title: Concepts
 
 # This creates navigation tabs. 'title' is the display name of the tab, 'tab_id'
 # is the id of the tab's div, and 'topics' is the list of sections (by id) that 
@@ -65,9 +66,10 @@ navigation_tabs:
       - client-config
       - faq
   - title: Integration Guide
-    tab_id: reference
+    tab_id: integrator-guide
     topics:
       - lib-getstarted
+      - lib-concepts
       - lib-howto
 
 # Legacy config option. Shouldn't be used anymore.

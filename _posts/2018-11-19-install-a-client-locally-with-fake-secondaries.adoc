@@ -84,7 +84,7 @@ Each directory should contain the following:
 
 * credentials.zip
 * sota_local.toml -- a config file for aktualizr
-* (Optional) A `secondary_configs` directory, containing one or more JSON files representing secondary ECUs.footnote:[OTA Connect is designed for automotive use cases, where there may be many distinct microcontrollers (ECUs, in automotive parlance) inside a vehicle--sometimes over 100. Updates are downloaded by one *primary* ECU, checked for authenticity, and then distributed to *secondary* ECUs throughout the vehicle.]
+* (Optional) A `secondary_configs` directory, containing one or more JSON files representing secondary ECUs.footnote:[The terms "primary" and "secondary" ECU are used in the Uptane specificaton. For more information about the difference between primary and secondary ECUs, see our overview of the link:../concepts/ats-garage-security-with-uptane.html#primary-vs-secondary[Uptane framework].]
 
 An example directory is below:
 

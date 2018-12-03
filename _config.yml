@@ -38,12 +38,8 @@ sections:
     title: Moving to Production
   - id: client-config
     title: Client Configuration
-  - id: lib-getstarted
-    title: Getting Started
-  - id: lib-howto
-    title: How To
-  - id: lib-concepts
-    title: Concepts
+  - id: using-libaktualizr
+    title: Using libaktualizr
 
 # This creates navigation tabs. 'title' is the display name of the tab, 'tab_id'
 # is the id of the tab's div, and 'topics' is the list of sections (by id) that 
@@ -63,14 +59,10 @@ navigation_tabs:
     tab_id: reference
     topics:
       - concepts
+      - using-libaktualizr
       - client-config
       - faq
-  - title: Integration Guide
-    tab_id: integrator-guide
-    topics:
-      - lib-getstarted
-      - lib-concepts
-      - lib-howto
+
 
 # Legacy config option. Shouldn't be used anymore.
 baseurl: '' 
@@ -113,4 +105,5 @@ asciidoctor:
     product-name-short: OTA Connect
     app-url: https://connect.ota.here.com
     source-highlighter: rouge
+    doxygenbase: https://advancedtelematic.github.io/aktualizr/
 

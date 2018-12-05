@@ -28,7 +28,6 @@ The TUF keys should be managed on your side; we provide tooling to help you do j
 
 == Primary and secondary ECUs 
 
-anchor:primary-vs-secondary[]
 In the Uptane framework, an ECU is categorized as either a primary or a secondary ECU. In most cases, a vehicle has one primary ECU and several secondary ECUs. The primary ECU is responsible for downloading and distributing software to the secondary ECUs. In many cases, the Telematics Control Unit (TCU) serves the role of primary ECU. A primary ECU also verifies and distributes the Uptane-compliant metadata associated with each piece of software.
 
 Secondary ECUs, such as the Transmission or Body control modules, receive the software and should also perform some form of metadata verification. If the ECU has sufficient processing capabilities, it should perform a full verification of the Uptane-compliant metadata, otherwise it should at least perform a partial verification. 

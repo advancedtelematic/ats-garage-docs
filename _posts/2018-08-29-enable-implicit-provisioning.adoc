@@ -26,21 +26,21 @@ To enable simulated implicit provisioning, follow these steps: ::
 1. Add the following lines to your local.conf:
 +
 ----
-SOTA_CLIENT_PROV = "aktualizr-implicit-prov"
+SOTA_CLIENT_PROV = "aktualizr-ca-implicit-prov"
 SOTA_PACKED_CREDENTIALS = "/path/to/your/credentials.zip"
 ----
 
 1. Build a standard image using the bitbake command.
 1. Boot the image.
 +
-The device should not automatically provision its credentials. To very this, log in to the {product-name} server and make sure that the device does not appear in the list of devices.
-1. Load the device credentials on to the device with `cert_provider` command:
+The device should not automatically provision its credentials. To verify this, log in to the {product-name} server and make sure that the device does not appear in the list of devices.
+1. Load the device credentials on to the device with `aktualizr-cert-provider` command:
 +
 ----
-cert_provider -c credentials.zip -t <device> -d /var/sota
+aktualizr-cert-provider -c credentials.zip -t <device> -d /var/sota
 ----
 +
-You can find the link:https://github.com/advancedtelematic/aktualizr/tree/master/src/cert_provider[`cert_provider` source] in the aktualizr repo.
+You can find the link:https://github.com/advancedtelematic/aktualizr/tree/master/src/cert_provider[`aktualizr-cert-provider` source] in the aktualizr repo.
 
 == Enable implicit provisioning with a Hardware Security Module (HSM)
 

@@ -1,6 +1,7 @@
 #!/bin/bash
 
-[ -z "$1" ] && echo "Usage: $0 <gerrit_username>" && exit 1
+[ -z "$1" ] && echo "This script pushes the docs to the here internal docs repo." \
+&& echo "Usage: $0 <gerrit_username>" && exit 1
 
 set -euo pipefail
 

@@ -7,7 +7,7 @@ The text is written in Asciidoc, and rendered by link:http://asciidoctor.org[Asc
 
 == Configuration
 
-Building the site requires a github access token with access to ATS private repos. Pushing the site to docs.atsgargae.com requires a set of AWS IAM credentials with access to the `docs.atsgarage.com` S3 bucket. Pushing to the dev portal requires push access to link:https://gerrit.it.here.com/#/admin/projects/DOCS/ota_update_platform[].
+Building the site requires a github access token with access to ATS private repos. Pushing the site to docs.atsgargae.com requires a set of AWS IAM credentials with access to the `docs.ota.here.com` S3 bucket. Pushing to the dev portal requires push access to link:https://gerrit.it.here.com/#/admin/projects/DOCS/ota_update_platform[].
 
 === Github token
 
@@ -21,32 +21,27 @@ Building the site requires a github access token with access to ATS private repo
 
 == Build
 
-There are two different config files, one for the ATS build, and one for the HERE build.
-
 Build the site with link:docker.com[Docker]:
 
-    ./build-ats.sh
-
-OR
-
-    ./build-here.sh
-
+    ./build.sh
 
 Build the site from a local jekyll install:
 
    bundle install
-   jekyll build --config _conf-<ats|here>.yml,_secrets.yml
+   jekyll build --config _config.yml,_secrets.yml
 
 
 
 
 == Publish
 
-    ./publish-ats.sh
+Publish to the web:
 
-OR
+    ./publish.sh <staging|prod|docs-ats>
 
-    ./publish-here.sh
+Publish HTML assets to the internal HERE docs repo:
+
+    ./publish-here.sh <gerrit_username>
 
 == Debugging
 
@@ -56,7 +51,7 @@ If it's a problem that only affects a single page, you can set the layout of tha
 
 == Navigation
 
-The sidebar navigation can be customized in `_conf-<ats|here>.yml`. The `sections` key lists the sections that will appear in the navigation, and the `navigation_tabs` key lists the tabs, and which sections each one contains. (Details in the yaml comments.)
+The sidebar navigation can be customized in `_config.yml`. The `sections` key lists the sections that will appear in the navigation, and the `navigation_tabs` key lists the tabs, and which sections each one contains. (Details in the yaml comments.)
 
 == Multiple-language code tabs/code samples
 

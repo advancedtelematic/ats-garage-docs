@@ -1,15 +1,15 @@
 # Site variant. Should be either 'here' or 'ats'
-variant: ats
+variant: here
 
 # Site title and subtitle. This is used in _includes/header.html
 title: 'Documentation'
-subtitle: 'ATS Garage'
+subtitle: 'HERE OTA Connect SaaS'
 
 # if you wish to integrate disqus on pages set your shortname here
 disqus_shortname: ''
 
 # if you use google analytics, add your tracking id here
-google_analytics_id: 'UA-69301419-1'
+google_analytics_id: ''
 
 # Enable/show navigation. There are there options:
 #   0 - always hide
@@ -33,7 +33,7 @@ sections:
   - id: tips
     title: Tips and Tricks
   - id: usage
-    title: Using ATS Garage
+    title: Using OTA Connect
   - id: prod
     title: Moving to Production
   - id: client-config
@@ -62,15 +62,6 @@ navigation_tabs:
       - faq
 
 
-# Links that should appear as top-bar navigation items. Docs should always be
-# the last one, because of a stupid hack.
-header_links: 
-  How it works: http://atsgarage.com/en/how-it-works.html
-  Pricing: http://atsgarage.com/en/pricing.html
-  News: http://atsgarage.com/en/news.html
-  Contact: http://atsgarage.com/en/contact.html
-  Docs: "/"
-
 # Legacy config option. Shouldn't be used anymore.
 baseurl: '' 
 
@@ -78,7 +69,7 @@ baseurl: ''
 permalink: none
 
 # Syntax highlighting
-highlighter: pygments
+highlighter: rouge
 
 # Since these are pages, it doesn't really matter
 future: true
@@ -93,22 +84,23 @@ exclude:
   - 'Dockerfile'
   - 'publish-docs.sh'
   - 'design'
-  - 's3_credentials.env'
+  - '*.env'
+  - '*.example'
+  - '_secret*'
   - '_site-ats'
   - '_site-here'
   - '_tmp-git'
-
-include:
-  - '_test'
 
 plugins: 
   - jekyll-asciidoc
   - octopress-debugger
   - asciidoctor-github-include
+  - jekyll-compass
 
 asciidoctor:
   attributes:
-    product-name: ATS Garage
-    product-name-short: ATS Garage
-    app-url: https://app.atsgarage.com
+    product-name: HERE OTA Connect
+    product-name-short: OTA Connect
+    app-url: https://connect.ota.here.com
+    source-highlighter: rouge
 

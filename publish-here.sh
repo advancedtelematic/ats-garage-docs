@@ -1,6 +1,7 @@
 #!/bin/bash
 
-[ -z "$1" ] && echo "Usage: $0 <gerrit_username>" && exit 1
+[ -z "$1" ] && echo "This script pushes the docs to the here internal docs repo." \
+&& echo "Usage: $0 <gerrit_username>" && exit 1
 
 set -euo pipefail
 
@@ -22,7 +23,7 @@ git clone ssh://${1}@rep-gerrit-ams.it.here.com:29418/DOCS/ota_update_platform.g
 rm -rf _tmp-git/passthrough/dev_guide/ats_custom_asciidoc/1.0.0/auto/en-US/html/*
 # build the site into the html artefacts directory
 docker run --rm -v "$(pwd)":/site -u "$(id -u)":"$(id -g)" -p 4000:4000 advancedtelematic/jekyll-asciidoc jekyll b \
-    --config _conf-here.yml,_secrets.yml --destination ./_tmp-git/passthrough/dev_guide/ats_custom_asciidoc/1.0.0/auto/en-US/html
+    --config _config.yml,_secrets.yml --destination ./_tmp-git/passthrough/dev_guide/ats_custom_asciidoc/1.0.0/auto/en-US/html
 # add the files, make a commit
 cd _tmp-git
 git remote add push_origin ssh://${1}@gerrit.it.here.com:29418/DOCS/ota_update_platform.git

@@ -1,1 +1,1 @@
-../../_posts/2018-11-28-get-started-libaktualizr.adoc
+../../_posts/2019-01-30-get-started-libaktualizr.adoc

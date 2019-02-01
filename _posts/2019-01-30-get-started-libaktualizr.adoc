@@ -226,11 +226,6 @@ The `Abort()` function will block until the command queue is empty and all curre
 
 Abort() is also called by the Aktualizr class destructor.
 
-| *Destroy the aktualizr object*
-| `Aktualizr::~Aktualizr(Config &config)`
-2+|Calls `Abort()` and destroys the aktualizr object.
-
-
 |===
 
 

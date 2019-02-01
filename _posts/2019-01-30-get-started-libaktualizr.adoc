@@ -17,8 +17,8 @@ For example, some in-vehicle interfaces are proprietary and under NDA, so their 
 
 For this purpose, you can also use the  libaktualizr to make your own OTA update client. Typical scenarios for making your own client could be:
 
- * You want to integrate HERE OTA Connect functionality with a third-party HMI
- * You want to integrate HERE OTA Connect with a third-party interface that installs software on secondary ECUs
+* You want to integrate HERE OTA Connect functionality with a third-party HMI
+* You want to integrate HERE OTA Connect with a third-party interface that installs software on secondary ECUs
 * You want to constrain network traffic and software updates to specific vehicle states
 * You want to provide motorists or service staff with progress indicators for specific software updates.
 
@@ -28,9 +28,7 @@ This guide shows you how to use libaktualizr so that you can integrate aktualizr
 
 Before you can work with libaktualizr, you must build the main aktualizr project.
 
-Aktualizr is open-source software distributed
-under the Mozilla Public License 2.0 and is located on github:
-https://github.com/advancedtelematic/aktualizr
+Aktualizr is an open-source software project distributed under the Mozilla Public License 2.0 and is located on github: https://github.com/advancedtelematic/aktualizr
 
 You should build the project on a Linux system and your compiler must support
 the C++11 version of the standard.
@@ -51,7 +49,7 @@ $ git clone --recursive https://github.com/advancedtelematic/aktualizr.git
 $ cd aktualizr
 $ mkdir build
 $ cd build
-$ cmake ..
+$ cmake -DCMAKE_BUILD_TYPE=Release ..
 $ make
 
 Note the `--recursive` flag in the `git clone` command, it is needed
@@ -66,7 +64,7 @@ To integrate libaktualizr in your application, you must first decide on one of t
 following build options:
 
 * Build libaktualizr "in tree" by adding it to an existing cmake project (recommended).
-* Build libaktualizr "out-of-tree" with a build system other than cmake.
+* Build libaktualizr "out-of-tree".
 
 === Building libaktualizr in-tree
 The easiest way to integrate with libaktualizr is to add it as a subdirectory
@@ -87,10 +85,7 @@ $ git clone --recursive https://github.com/advancedtelematic/aktualizr.git
 add_subdirectory(aktualizr)
 ----
 +
-This command automatically adds the needed entries to `INCLUDE_DIRECTORIES` variable,
-create `AKTUALIZR_EXTERNAL_LIBS` variable, which contains the list of external
-libraries required for linking with libaktualizr, and will create
-`aktualizr_static_lib` target. 
+This command automatically adds the needed entries to `INCLUDE_DIRECTORIES` variable, create the `AKTUALIZR_EXTERNAL_LIBS` variable, which contains the list of external libraries required for linking with libaktualizr, and create the `aktualizr_static_lib` target.
 
 
  . Do a test build of your application 
@@ -109,7 +104,7 @@ If you don't want to make libaktualizr part of your cmake project, it's also
 possible to build libaktualizr out-of-tree. In this case you will need
 to specify the required libraries and includes for your application manually. Refer to your system's documentation on how to specify additional libraries and include directories for the target application.
 
-Here's an example of how to specify the required libraries for an out-of-tree build:
+Here's an example of how to specify the required libraries for an out-of-tree build in cmake project:
 [source,cmake]
 ----
 target_link_libraries(your-app ${AKTUALIZR_PROJECT_DIR}/build/src/libaktualizr/libaktualizr_static_lib.a)
@@ -142,11 +137,11 @@ add_definitions(-DBOOST_LOG_DYN_LINK)
 
 Libaktualizr provides a C++ API for fetching information about available updates
 and currently running OTA campaigns, downloading and installing the updates,
-reporting the installation results, and so on.
+and reporting the installation results.
 
 If you're yet not familiar with OTA Connect concepts such as "campaigns", have a look at the https://connect.ota.here.com/#/campaigns[ OTA web app] first. You might need to register for a free develoepr account first. 
 
-The main library header is `src/libaktualizr/primary/aktualizr.h` and it also
+The main library header is https://github.com/advancedtelematic/aktualizr/blob/master/src/libaktualizr/primary/aktualizr.h[`primary/aktualizr.h`] and it also
 includes few other libaktualizr headers. 
 
 To use the API, add `src/libaktualizr` directory to your include path and add `#include "primary/aktualizr.h"` to your source file.
@@ -154,18 +149,13 @@ To use the API, add `src/libaktualizr` directory to your include path and add `#
 When using the API, consider the following points:
 
 * Most of the API calls, unless specified otherwise, are asynchronous and return
-`std::future` which contains the corresponding result type.
-* Result types are defined in the `src/libaktualizr/primary/results.h` header.
+an `std::future` which contains the corresponding result type.
+* Result types are defined in the https://github.com/advancedtelematic/aktualizr/blob/master/src/libaktualizr/primary/results.h[`primary/results.h`] header.
 * Asynchronous commands are posted to the command queue and executed
 in sequential order in a separate thread.
-* If the execution is paused, newly issued commands accumulate in the command queue and it's up to the caller to ensure that the queue doesn't get overloaded with unnecessary command duplicates.
-* If the execution fails or any other kind of an error occurs,  libaktualizr throws an exception.
-+
-For asynchronous calls, the exception will be stored
-in the shared state associated with `std::future`. All exceptions are subclassed
-from AktualizrException class.
+* If the execution is paused, newly issued commands accumulate in the command queue and it's up to the caller to ensure that the queue doesn't get overloaded with unnecessary duplicate commands.
 
-For an example of how to use the libaktualizr API, see the sample application. You can find it in the `src/hmi_stub` subfolder of the main aktualizr repository.
+For an example of how to use the libaktualizr API, see the sample application. You can find it in the `src/aktualizr_primary` subfolder of the main aktualizr repository.
 
 === API Description
 
@@ -181,8 +171,7 @@ For an example of how to use the libaktualizr API, see the sample application. Y
 Aktualizr::Aktualizr(boost::filesystem::path config)
 ----
 2+| An instance is constructed based on the provided config. A config should at least contain information about provisioning credentials (see
-`docs/automatic-provisioning.adoc`, `docs/implicit-provisioning.adoc` or
-`hsm-provisioning.adoc` depending on the used provisioning type),
+https://github.com/advancedtelematic/aktualizr/blob/master/docs/automatic-provisioning.adoc[`automatic-provisioning.adoc`], https://github.com/advancedtelematic/aktualizr/blob/master/docs/implicit-provisioning.adoc[`implicit-provisioning.adoc`] or https://github.com/advancedtelematic/aktualizr/blob/master/docs/hsm-provisioning.adoc[`hsm-provisioning.adoc`] depending on the used provisioning type),
 and about the local storage which will be used to store updates and metadata.
 For description of all configuration options, please, refer to the
 `docs/configuration.adoc` document and to the `config` folder for configuration
@@ -208,17 +197,16 @@ call. This will provision with the server if required. This must be called befor
 ----
 boost::signals2::connection Aktualizr::SetSignalHandler(std::function<void(shared_ptr<event::BaseEvent>)> &handler)
 ----
-2+| Returns a signal connection object, which can be disconnected if desired. The events are defined in the `src/libaktualizr/primary/events.h` header.
+2+| Returns a signal connection object, which can be disconnected if desired. The events are defined in the https://github.com/advancedtelematic/aktualizr/blob/master/src/libaktualizr/primary/events.h[`primary/events.h`] header.
 
 | *Pause a command*
 |[source,cpp]
 ----
 void Aktualizr::Pause()
 ----
-2+|Requests the currently running command to pause and freezes the command queue. All commands that were scheduled after the currently executed command will wait
-in the command queue until `Resume()` is issued.
+2+|Requests the currently running command to pause and freezes the command queue. All commands that were scheduled after the currently executed command will wait in the command queue until `Resume()` is issued.
 Commands that are issued after `Resume()` will be put on a command queue, but not executed until `Resume()` is called.
-The `Pause()` function returns immediately, while pausing the running command still may be in progress. The function has no effect in case execution was already paused.
+The `Pause()` function returns immediately, while pausing the running command still may be in progress. The function has no effect if the execution was already paused.
 
 |*Resume a paused command*
 |[source,cpp]
@@ -228,13 +216,15 @@ void Aktualizr::Resume()
 2+|Resumes the execution of a previously paused command and all subsequent commands in the command queue.
 Returns immediately. The function has no effect if the execution was not paused.
 
-| *Abort a command*
+| *Abort execution*
 |[source,cpp]
 ----
 void Aktualizr::Abort())
 ----
 2+|Requests the currently running command to abort and flushes the command queue.
-The `Abort()` function will block until the command queue is empty and no command is in an executed state. You can also call it on a previously paused instance, but this doesn't change it's paused state. If a paused command is aborted, the execution starts from where the command was last paused in the command queue.
+The `Abort()` function will block until the command queue is empty and all currently executing commands have stopped. You can also call Abort() on a previously paused class instance, this will clean the command queue, but the Aktualizr will remain in the paused state. To continue execution at some later point one needs to call Resume().
+
+Abort() is also called by the Aktualizr class destructor.
 
 | *Destroy the aktualizr object*
 | `Aktualizr::~Aktualizr(Config &config)`
@@ -257,7 +247,7 @@ The `Abort()` function will block until the command queue is empty and no comman
 ----
 std::future<result::CampaignCheck> Aktualizr::CampaignCheck()
 ----
-2+|The term "campaign" has a specific meaning in OTA Connect. A campiagn allows users to approve updates and deploy them to devices.
+2+|The term "campaign" has a specific meaning in OTA Connect. A campaign allows users to approve updates and deploy them to devices.
 
 |*Accept a campaign*
 |[source,cpp]
@@ -279,7 +269,7 @@ std::future<void> Aktualizr::CampaignAccept(const std::string &campaign_id)
 ----
 std::future<void> Aktualizr::SendDeviceData()
 ----
-2+|This data includes network status, installed packages, hardware, an so on.
+2+|This data includes network status, installed packages and hardware information.
 
 |*Check for updates*
 |[source,cpp]
@@ -300,14 +290,14 @@ std::future<result::Download> Aktualizr::Download(const std::vector<Uptane::Targ
 ----
 std::future<result::Install> Aktualizr::Install(const std::vector<Uptane::Target> &updates)
 ----
-2+|  Installs the softtware contained in the previously downloaded target files.
+2+|  Installs the software contained in the previously downloaded target files.
 
-| *???*
+| *Get a handle for downloaded target*
 |[source,cpp]
 ----
 std::ifstream Aktualizr::GetStoredTarget(const Uptane::Target &target)
 ----
-2+|??
+2+| Get target downloaded in Download call. Returned target is guaranteed to be verified and up-to-date according to the Uptane metadata downloaded in CheckUpdates call.
 
 |===
 
@@ -329,7 +319,7 @@ void Aktualizr::UptaneCycle()
 ----
 std::future<void> Aktualizr::RunForever()
 ----
-2+|  Asynchronously runs aktualizr indefinitely until `Shutdown` is called.
+2+|  Automatic check and install updates indefinitely: runs UptaneCycle() in a loop at regular intervals until the destructor is called.
 
 |===
 

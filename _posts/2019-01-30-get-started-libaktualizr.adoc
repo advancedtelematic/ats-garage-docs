@@ -219,7 +219,7 @@ Returns immediately. The function has no effect if the execution was not paused.
 | *Abort execution*
 |[source,cpp]
 ----
-void Aktualizr::Abort())
+void Aktualizr::Abort()
 ----
 2+|Requests the currently running command to abort and flushes the command queue.
 The `Abort()` function will block until the command queue is empty and all currently executing commands have stopped. You can also call Abort() on a previously paused class instance, this will clean the command queue, but the Aktualizr will remain in the paused state. To continue execution at some later point one needs to call Resume().

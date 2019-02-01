@@ -177,7 +177,9 @@ For an example of how to use the libaktualizr API, see the sample application. Y
 
 |*Construct an aktualizr instance*
 |[source,cpp]
+----
 Aktualizr::Aktualizr(boost::filesystem::path config)
+----
 2+| An instance is constructed based on the provided config. A config should at least contain information about provisioning credentials (see
 `docs/automatic-provisioning.adoc`, `docs/implicit-provisioning.adoc` or
 `hsm-provisioning.adoc` depending on the used provisioning type),
@@ -188,23 +190,31 @@ examples.
 
 |*Add a new secondary ECU*
 |[source,cpp]
+----
 void Aktualizr::AddSecondary(const std::shared_ptr<Uptane::SecondaryInterface> &secondary)
+----
 2+| You must call this function before you call `Initialize`. To find out more about primary and secondary ECUs, see our https://docs.ota.here.com/concepts/ats-garage-security-with-uptane.html#primary-and-secondary-ecus[Uptane description].
 
 |*Initialize aktualizr*
 |[source,cpp]
+----
 void Aktualizr::Initialize()
+----
 2+| Any secondary ECUs should be added before making this
 call. This will provision with the server if required. This must be called before using any other aktualizr functions except `AddSecondary`.
 
 |*Set a callback to receive event notifications*
 |[source,cpp]
+----
 boost::signals2::connection Aktualizr::SetSignalHandler(std::function<void(shared_ptr<event::BaseEvent>)> &handler)
+----
 2+| Returns a signal connection object, which can be disconnected if desired. The events are defined in the `src/libaktualizr/primary/events.h` header.
 
 | *Pause a command*
 |[source,cpp]
+----
 void Aktualizr::Pause()
+----
 2+|Requests the currently running command to pause and freezes the command queue. All commands that were scheduled after the currently executed command will wait
 in the command queue until `Resume()` is issued.
 Commands that are issued after `Resume()` will be put on a command queue, but not executed until `Resume()` is called.
@@ -212,13 +222,17 @@ The `Pause()` function returns immediately, while pausing the running command st
 
 |*Resume a paused command*
 |[source,cpp]
+----
 void Aktualizr::Resume()
+----
 2+|Resumes the execution of a previously paused command and all subsequent commands in the command queue.
 Returns immediately. The function has no effect if the execution was not paused.
 
 | *Abort a command*
 |[source,cpp]
+----
 void Aktualizr::Abort())
+----
 2+|Requests the currently running command to abort and flushes the command queue.
 The `Abort()` function will block until the command queue is empty and no command is in an executed state. You can also call it on a previously paused instance, but this doesn't change it's paused state. If a paused command is aborted, the execution starts from where the command was last paused in the command queue.
 
@@ -240,12 +254,16 @@ The `Abort()` function will block until the command queue is empty and no comman
 
 |*Check for campaigns*
 |[source,cpp]
+----
 std::future<result::CampaignCheck> Aktualizr::CampaignCheck()
+----
 2+|The term "campaign" has a specific meaning in OTA Connect. A campiagn allows users to approve updates and deploy them to devices.
 
 |*Accept a campaign*
 |[source,cpp]
+----
 std::future<void> Aktualizr::CampaignAccept(const std::string &campaign_id)
+----
 2+|A campaign contains an update which must be accepted by the end user (or on behalf of the end user) before it can be installed on the device. This call accepts the campaign so that the update can be installed.
 
 |===
@@ -258,27 +276,37 @@ std::future<void> Aktualizr::CampaignAccept(const std::string &campaign_id)
 
 |*Sends local device data to the server*
 |[source,cpp]
+----
 std::future<void> Aktualizr::SendDeviceData()
+----
 2+|This data includes network status, installed packages, hardware, an so on.
 
 |*Check for updates*
 |[source,cpp]
+----
 std::future<result::UpdateCheck> Aktualizr::CheckUpdates()
+----
 2+| Fetches Uptane metadata and check for updates. This collects a client manifest, PUTs it to the director, updates the Uptane metadata (including root and targets), and then checks the metadata for updates to the target software.
 
 |*Download target files*
 |[source,cpp]
+----
 std::future<result::Download> Aktualizr::Download(const std::vector<Uptane::Target> &updates)
+----
 2+|Downloads the target files that are specified in the input vector returned by `CheckUpdates`.
 
 |*Install software from target files*
 |[source,cpp]
+----
 std::future<result::Install> Aktualizr::Install(const std::vector<Uptane::Target> &updates)
+----
 2+|  Installs the softtware contained in the previously downloaded target files.
 
 | *???*
 |[source,cpp]
+----
 std::ifstream Aktualizr::GetStoredTarget(const Uptane::Target &target)
+----
 2+|??
 
 |===
@@ -291,13 +319,17 @@ std::ifstream Aktualizr::GetStoredTarget(const Uptane::Target &target)
 
 | *Synchronously check for updates and install them*
 |[source,cpp]
+----
 void Aktualizr::UptaneCycle()
+----
 2+|Synchronously runs an "Uptane cycle" which checks for software updates, downloads any new target files, installs the update, and sends a manifest back to the server.
 
 |*Asynchronously run aktualizr*
 |[source,cpp]
+----
 std::future<void> Aktualizr::RunForever()
-2+|  Asynchronously runs aktualizr indefinitely until `Shutdown`` is called.
+----
+2+|  Asynchronously runs aktualizr indefinitely until `Shutdown` is called.
 
 |===
 

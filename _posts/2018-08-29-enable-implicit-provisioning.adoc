@@ -18,16 +18,16 @@ toc::[]
 
 == Simulate implicit provisioning for testing
 
-To use implicit provisioning in production, you need to have a root CA. If you want to test implicit provisioning without generating a root CA, you can simulate it with the `cert_provider` command.
+To use implicit provisioning in production, you need to have a root CA. If you want to test implicit provisioning without generating a root CA, you can simulate it with the `aktualizr-cert-provider` command.
 
-To use the `cert_provider` command, you must still generate a link:../quickstarts/generating-provisioning-credentials.html[provisioning key] like you would for automatic provisioning. With this method, you use the provisioning key to sign the device certificate. In production, you would use the root CA to sign the device certificate, but this method is useful for testing.
+To use the `aktualizr-cert-provider` command, you must still generate a link:../quickstarts/generating-provisioning-credentials.html[provisioning key] like you would for automatic provisioning. With this method, you use the provisioning key to sign the device certificate. In production, you would use the root CA to sign the device certificate, but this method is useful for testing.
 
 To enable simulated implicit provisioning, follow these steps: ::
 1. Add the following lines to your local.conf:
 +
 ----
 SOTA_CLIENT_PROV = "aktualizr-ca-implicit-prov"
-SOTA_PACKED_CREDENTIALS = "/path/to/your/credentials.zip"
+SOTA_DEPLOY_CREDENTIALS = "0"
 ----
 
 1. Build a standard image using the bitbake command.
@@ -37,16 +37,16 @@ The device should not automatically provision its credentials. To verify this, l
 1. Load the device credentials on to the device with `aktualizr-cert-provider` command:
 +
 ----
-aktualizr-cert-provider -c credentials.zip -t <device> -d /var/sota
+aktualizr-cert-provider -c credentials.zip -t <device> -d /var/sota/import -r -u
 ----
 +
-You can find the link:https://github.com/advancedtelematic/aktualizr/tree/master/src/cert_provider[`aktualizr-cert-provider` source] in the aktualizr repo.
+You can find the link:https://github.com/advancedtelematic/aktualizr/tree/master/src/cert_provider[`aktualizr-cert-provider` source] in the aktualizr repo. You can also find a compiled binary in the host work directory of bitbake. The path is something like `tmp/work/x86_64-linux/aktualizr-native/1.0+gitAUTOINC+<version>/build/src/cert_provider/aktualizr-cert-provider`.
 
 == Enable implicit provisioning with a Hardware Security Module (HSM)
 
 As described in the link:prod-intro.html[introduction], it's a good idea to use a Hardware Security Model (HSM) to hold potentially sensitive device credentials.
 
-The following procedure describes how to use QEMU to simulate using an HSM. However, the procedure for your HSM will probably be different. We've provided these instructions as a basic guide to how implicit provisioning works but you'll need to make further changes on your own. For example, you'll probably need to adapt your BSP so that aktualizr can access the keys from your HSM.
+The following procedure describes how to use QEMU to simulate using an HSM with the `softhsm` tool. However, the procedure for your HSM will probably be different. We've provided these instructions as a basic guide to how implicit provisioning works but you'll need to make further changes on your own. For example, you'll probably need to adapt your BSP so that aktualizr can access the keys from your HSM.
 
 To enable implicit provisioning with an HSM, follow these steps: ::
 . link:generate-and-install-a-root-certificate.html[Generate and install a root certificate].
@@ -55,13 +55,15 @@ To enable implicit provisioning with an HSM, follow these steps: ::
 ----
 SOTA_CLIENT_FEATURES = "hsm"
 SOTA_CLIENT_PROV = "aktualizr-hsm-prov"
+SOTA_DEPLOY_CREDENTIALS = "0"
+IMAGE_INSTALL_append = " softhsm-testtoken "
 ----
 . Build a standard image using bitbake. Make sure that an ssh server is installed. Usually you can do this with `IMAGE_INSTALL_append = " dropbear "`.
 . Boot the image.
 . Copy the device credentials and device gateway root CA certificate to the device's HSM. For the QEMU simulated HSM, enter the device directory whose credentials you want to copy, then enter the following command:
 +
 ----
-scp -P 2222 -pr ./ root@localhost:/var/sota/token
+scp -P 2222 -pr ./ root@localhost:/var/sota/import
 ----
 .. The server authenticates the client device by verifying that the client's certificate was signed by the root CA private key that was uploaded in step 2.
 .. The client device authenticates the server by verifying that the server's certificate was signed by the server's internal root CA private key.

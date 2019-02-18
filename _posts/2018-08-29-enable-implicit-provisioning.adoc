@@ -46,7 +46,7 @@ You can find the link:https://github.com/advancedtelematic/aktualizr/tree/master
 
 As described in the link:prod-intro.html[introduction], it's a good idea to use a Hardware Security Model (HSM) to hold potentially sensitive device credentials.
 
-The following procedure describes how to use QEMU to simulate using an HSM with the `softhsm` tool. However, the procedure for your HSM will probably be different. We've provided these instructions as a basic guide to how implicit provisioning works but you'll need to make further changes on your own. For example, you'll probably need to adapt your BSP so that aktualizr can access the keys from your HSM.
+The following procedure describes how to use QEMU and link:https://www.opendnssec.org/softhsm/[SoftHSM] to simulate a device with an HSM. However, the procedure for your HSM will probably be different. We've provided these instructions as a basic guide to how implicit provisioning works but you'll need to make further changes on your own. For example, you'll probably need to adapt your BSP so that aktualizr can access the keys from your HSM.
 
 To enable implicit provisioning with an HSM, follow these steps: ::
 . link:generate-and-install-a-root-certificate.html[Generate and install a root certificate].

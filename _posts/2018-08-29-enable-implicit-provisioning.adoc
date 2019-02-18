@@ -60,6 +60,12 @@ IMAGE_INSTALL_append = " softhsm-testtoken "
 ----
 . Build a standard image using bitbake. Make sure that an ssh server is installed. Usually you can do this with `IMAGE_INSTALL_append = " dropbear "`.
 . Boot the image.
+. Run the following commands to tell the device what server URL to connect to:
++
+----
+unzip credentials.zip autoprov.url
+scp -P 2222 autoprov.url root@localhost:/var/sota/import/gateway.url
+----
 . Copy the device credentials and device gateway root CA certificate to the device's HSM. For the QEMU simulated HSM, enter the device directory whose credentials you want to copy, then enter the following command:
 +
 ----

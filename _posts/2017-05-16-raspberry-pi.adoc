@@ -23,11 +23,14 @@ toc::[]
 
 You'll need a build machine with the following:
 
-* A x86-64 Linux distro link:https://www.yoctoproject.org/docs/2.4/ref-manual/ref-manual.html#detailed-supported-distros[supported by the Yocto project] with the link:https://www.yoctoproject.org/docs/2.4/ref-manual/ref-manual.html#required-packages-for-the-host-development-system[required packages] installed. (On a Debian-based system, you should be able to install all the required packages with `sudo apt-get install gawk wget git-core diffstat unzip texinfo gcc-multilib build-essential chrpath socat cpio python python3 python3-pip python3-pexpect xz-utils debianutils iputils-ping default-jre qemu`.)
+* A x86-64 Linux distro link:https://www.yoctoproject.org/docs/2.4/ref-manual/ref-manual.html#detailed-supported-distros[supported by the Yocto project] with the link:https://www.yoctoproject.org/docs/2.4/ref-manual/ref-manual.html#required-packages-for-the-host-development-system[required packages] installed. (On a Debian-based system, you should be able to install all the required packages with `sudo apt-get install gawk wget git-core diffstat unzip texinfo gcc-multilib build-essential chrpath socat cpio python python3 python3-pip python3-pexpect xz-utils debianutils iputils-ping default-jre`
 ** Many/most distros that aren't on the officially supported list will still work just fine--feel free to give it a try with whatever you're running.
 ** Although the Yocto project as a whole does support architectures other than x86-64 for the build machine, one of the layers we'll be using only supports x86-64.
 ** You *can* run this all inside a VM, but a Yocto build is a pretty resource-intensive process, so generally we don't recommend it. If you do, make sure there's plenty of ram and disk space available to the VM.
 * 100GB of free disk space
+ifeval::["{machine}" == "qemux86-64"]
+* QEMU--we recommend installing it from your distro's package manager, e.g. `sudo apt-get install qemu`
+endif::[]
 * link:https://android.googlesource.com/tools/repo/[repo]
 ** link:https://source.android.com/source/downloading#installing-repo[Download the latest version] directly from Google, or
 ** install it from your distro's packages if available (`apt-get install repo`)

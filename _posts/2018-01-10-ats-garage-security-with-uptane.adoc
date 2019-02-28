@@ -24,7 +24,7 @@ The second comes from the *Director*, which controls what updates (selected from
 
 {product-name-short} manages the Director for you. When you create an update campaign, we update the Director behind the scenes, signing the metadata for each image-device tuple in the campaign.
 
-The TUF keys should be managed on your side; we provide tooling to help you do just that. When you build a new device, bitbake automatically signs the image for you, using TUF keys that you specify in the build's `local.conf`{zwsp}footnote:[The TUF keys are packed inside the zip file specified by the `SOTA_PACKED_CREDENTIALS` line.]. Your initial key is created by {product-name}, delivered to you inside your `credentials.zip` file, and kept online for convenience and bootstrapping; for any production use you should link:../quickstarts/rotate-tuf-keys.html[rotate your TUF key] and store it securely offlinefootnote:[Proceed with caution! Once you take the key offline, HERE Technologies cannot recover it.].
+The TUF keys should be managed on your side; we provide tooling to help you do just that. When you build a new device, bitbake automatically signs the image for you, using TUF keys that you specify in the build's `local.conf`{zwsp}footnote:[The TUF keys are packed inside the zip file specified by the `SOTA_PACKED_CREDENTIALS` line.]. Your initial key is created by {product-name}, delivered to you inside your `credentials.zip` file, and kept online for convenience and bootstrapping; for any production use you should link:../prod/rotating-signing-keys[rotate your TUF key] and store it securely offlinefootnote:[Proceed with caution! Once you take the key offline, HERE Technologies cannot recover it.].
 
 == Primary and secondary ECUs
 

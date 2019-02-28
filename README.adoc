@@ -3,7 +3,7 @@
 
 This is the source for docs.atsgarage.com and for the HERE Developer Portal docs for HERE OTA Connect. It's built with Jekyll, a static site generator.
 
-The text is written in Asciidoc, and rendered by link:http://asciidoctor.org[Asciidoctor]. Asciidoctor exercises a large number of styles, and has a tool to build stylesheets called asciidoctor-stylesheet-factory. ats.css is built with that tool; if you need to edit anything in there, do it via a pull request link:https://github.com/advancedtelematic/asciidoctor-stylesheet-factory[on our fork of asciidoctor-stylesheet-factory]. Any CSS changes that are specific to the ATS Garage docsite should be done in main.scss, though.
+The text is written in Asciidoc, and rendered by link:http://asciidoctor.org[Asciidoctor]. Asciidoctor exercises a large number of styles, and has a tool to build stylesheets called link:https://github.com/advancedtelematic/asciidoctor-stylesheet-factory[asciidoctor-stylesheet-factory]. However, that's pretty much just a compass pipeline, so we added it to our jekyll build process (to eliminate some annoying steps). See ` _compass` for all those details.
 
 == Configuration
 
@@ -12,7 +12,7 @@ Building the site requires a github access token with access to ATS private repo
 === Github token
 
 . https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line[Generate the token.]
-. Copy `_secrets.yml.example` to `_secrets.yml`, substituting your token.
+. Copy ` _secrets.yml.example` to ` _secrets.yml`, substituting your token.
 
 === AWS credentials
 
@@ -51,7 +51,7 @@ If it's a problem that only affects a single page, you can set the layout of tha
 
 == Navigation
 
-The sidebar navigation can be customized in `_config.yml`. The `sections` key lists the sections that will appear in the navigation, and the `navigation_tabs` key lists the tabs, and which sections each one contains. (Details in the yaml comments.)
+The sidebar navigation can be customized in ` _config.yml`. The `sections` key lists the sections that will appear in the navigation, and the `navigation_tabs` key lists the tabs, and which sections each one contains. (Details in the yaml comments.)
 
 == Multiple-language code tabs/code samples
 

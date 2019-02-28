@@ -9,15 +9,21 @@
 
 == What is libaktualizr?
 
-Libaktualizr is the client library for the HERE OTA Connect client, aktualizr. Aktualizr is designed to be run as a standalone component on an embedded system and can manage the entire software update process. It's is a {cpp} application that implements the client-side functionality for OTA Connect according to the Uptane security framework<<anchor-1,[1]>>.
+Libaktualizr is a {cpp} library providing API access to the functionality that aktualizr provides.
+
+.Aktualizr vs. libaktualizr
+****
+* **Aktualizr** is a {cpp} application that implements the client-side functionality for OTA Connect according to the Uptane security framework. It is designed to be run as a standalone component on an embedded system, and can manage the entire software update process. In implementation, it is actually a relatively thin wrapper around libaktualizr.
+* **libaktualizr** provides a {cpp} API allowing developers to integrate OTA Connect updates with Uptane security into their own custom applications.
+****
 
 == Why use libaktualizr?
 
-You might use the libaktualizr client libary if you have requirements that go beyond what the standalone client can provide.
+You might use the libaktualizr client library if you have requirements that go beyond what the standalone client can provide.
 
 For example, some in-vehicle interfaces are proprietary and under NDA, so their implementation must be kept separate from aktualizr. You might want to integrate the OTA update functionality yourself and minimize the involvement of external consultants.
 
-For this purpose, you can also use the  libaktualizr to make your own OTA update client. Typical scenarios for making your own client could be:
+For this purpose, you can also use libaktualizr to make your own OTA update client. Typical scenarios for making your own client could be:
 
 * You want to integrate HERE OTA Connect functionality with a third-party HMI
 * You want to integrate HERE OTA Connect with a third-party interface that installs software on secondary ECUs
@@ -34,22 +40,24 @@ Aktualizr is an open-source software project distributed under the Mozilla Publi
 
 You should build the project on a Linux system and your compiler must support the C++11 version of the standard.
 
-The project contains more dependencies that is practical to list here, so have a look at the https://github.com/advancedtelematic/aktualizr#security[main readme] for the aktualizr project.
+The project contains more dependencies than is practical to list here, so have a look at the https://github.com/advancedtelematic/aktualizr#dependencies[main readme] for the aktualizr project.
 
 The README contains an extended description on how to build aktualizr as well as the list of build and run-time dependencies.
 
 Before you proceed, install all the dependencies listed in the main aktualizr README.
 
-Once you have installed the dependencies, build the aktualizr project with the following command:
+Once you have installed the dependencies, build the aktualizr project with the following commands:
 [source,bash]
-$ git clone --recursive https://github.com/advancedtelematic/aktualizr.git
-$ cd aktualizr
-$ mkdir build
-$ cd build
-$ cmake -DCMAKE_BUILD_TYPE=Release ..
-$ make
+----
+git clone --recursive https://github.com/advancedtelematic/aktualizr.git
+cd aktualizr
+mkdir build
+cd build
+cmake -DCMAKE_BUILD_TYPE=Release ..
+make
+----
 
-Note the `--recursive` flag in the `git clone` command, it is needed to recursively clone all the *git submodule* repositories.
+NOTE: The `--recursive` flag in the `git clone` command is needed to recursively clone all the *git submodule* repositories.
 
 After the build is finished, the you'll find the client library at the following location: `${PROJECT_ROOT}/build/src/libaktualizr/libaktualizr_static_lib.a`.
 
@@ -79,9 +87,7 @@ add_subdirectory(aktualizr)
 ----
 +
 This command automatically adds the needed entries to `INCLUDE_DIRECTORIES` variable, create the `AKTUALIZR_EXTERNAL_LIBS` variable, which contains the list of external libraries required for linking with libaktualizr, and create the `aktualizr_static_lib` target.
-
-
- . Do a test build of your application
+. Do a test build of your application
 +
 Whenever you build your application you must add these libraries as follows:
 +
@@ -301,7 +307,4 @@ std::future<void> Aktualizr::RunForever()
 
 |===
 
-== References
-[[anchor-1]]
-[1] https://docs.ota.here.com/concepts/ats-garage-security-with-uptane.html
 

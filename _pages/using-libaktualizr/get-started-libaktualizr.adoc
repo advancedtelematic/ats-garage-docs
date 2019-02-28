@@ -1,0 +1,1 @@
+../../_posts/2019-01-30-get-started-libaktualizr.adoc

@@ -38,7 +38,8 @@ sections:
     title: Moving to Production
   - id: client-config
     title: Client Configuration
-
+  - id: using-libaktualizr
+    title: Using libaktualizr
 
 # This creates navigation tabs. 'title' is the display name of the tab, 'tab_id'
 # is the id of the tab's div, and 'topics' is the list of sections (by id) that 
@@ -58,6 +59,7 @@ navigation_tabs:
     tab_id: reference
     topics:
       - concepts
+      - using-libaktualizr
       - client-config
       - faq
 
@@ -103,4 +105,5 @@ asciidoctor:
     product-name-short: OTA Connect
     app-url: https://connect.ota.here.com
     source-highlighter: rouge
+    doxygenbase: https://advancedtelematic.github.io/aktualizr/
 

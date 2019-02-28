@@ -1,0 +1,1 @@
+../../_posts/2018-11-28-key-concepts-libaktualizr.adoc

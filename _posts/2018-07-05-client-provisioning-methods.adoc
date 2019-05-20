@@ -9,7 +9,7 @@
 In OTA Connect, the provisioning process ensures that the device has a certificate and a unique identifier. After a device has been provisioned, it can receive software updates. OTA Connect supports two types of provisioning:
 
 * *Provisioning with shared credentials*
-
++
 Devices use temporary provisioning credentials to request permanent credentials from the server. You download the temporary provisioning credentials from the OTA Connect web app and install them on a device. Once the device registers with the server for the first time, the server assigns permanent credentials to the device. The device then uses these permanent credentials for all future transactions.
 
 

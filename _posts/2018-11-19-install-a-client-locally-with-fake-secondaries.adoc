@@ -83,7 +83,7 @@ Make a directory for each device that you want to simulate. This directory will 
 Each directory should contain the following:
 
 * credentials.zip
-* sota_local.toml -- a config file for aktualizr
+* sota-local.toml -- a config file for aktualizr
 * (Optional) A `secondary_configs` directory, containing one or more JSON files representing secondary ECUs.footnote:[The terms "primary" and "secondary" ECU are used in the Uptane specificaton. For more information about the difference between primary and secondary ECUs, see our overview of the link:../concepts/ats-garage-security-with-uptane.html#primary-and-secondary-ecus[Uptane framework].]
 
 An example directory is below:
@@ -96,13 +96,13 @@ localtest/
 ├── secondary_configs
 │   ├── virtualsec1.json
 │   └── virtualsec2.json
-└── sota_local.toml
+└── sota-local.toml
 ----
 
 [source,role="secondary"]
-.sota_local.toml
+.sota-local.toml
 ----
-include::https://raw.githubusercontent.com/advancedtelematic/aktualizr/master/config/sota_local.toml[]
+include::https://raw.githubusercontent.com/advancedtelematic/aktualizr/master/config/sota-local.toml[]
 ----
 
 [source,role="secondary"]

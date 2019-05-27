@@ -29,7 +29,7 @@ To configure a device to provision with shared credentials, follow these steps:
 . Download a link:../quickstarts/generating-provisioning-credentials.html[provisioning key].
 . Edit the following `.toml` configuration file:
 +
-link:https://github.com/advancedtelematic/aktualizr/blob/master/config/sota_autoprov.toml[config/sota_autoprov.toml]
+link:https://github.com/advancedtelematic/aktualizr/blob/master/config/sota-shared-cred.toml[config/sota-shared-cred.toml]
 . Update the configuration file with the path to the zip file that you saved in the first step and start Aktualizr on the device.
 +
 ** When aktualizr starts, it uses the provisioning key to register with the device gateway HTTPS API. 

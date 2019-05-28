@@ -26,7 +26,7 @@ To simulate provisioning with a device certificate, follow these steps: ::
 1. Add the following lines to your local.conf:
 +
 ----
-SOTA_CLIENT_PROV = "aktualizr-ca-implicit-prov"
+SOTA_CLIENT_PROV = "aktualizr-device-prov"
 SOTA_DEPLOY_CREDENTIALS = "0"
 ----
 
@@ -54,7 +54,7 @@ To use an HSM when provisioning with device credentials, follow these steps: ::
 +
 ----
 SOTA_CLIENT_FEATURES = "hsm"
-SOTA_CLIENT_PROV = "aktualizr-hsm-prov"
+SOTA_CLIENT_PROV = "aktualizr-device-prov-hsm"
 SOTA_DEPLOY_CREDENTIALS = "0"
 IMAGE_INSTALL_append = " softhsm-testtoken "
 ----

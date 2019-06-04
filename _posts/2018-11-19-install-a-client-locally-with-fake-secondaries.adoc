@@ -102,7 +102,7 @@ localtest/
 [source,role="secondary"]
 .sota_local.toml
 ----
-include::https://raw.githubusercontent.com/advancedtelematic/aktualizr/master/config/sota_local.toml[]
+include::https://raw.githubusercontent.com/advancedtelematic/aktualizr/master/config/sota-local.toml[]
 ----
 
 [source,role="secondary"]

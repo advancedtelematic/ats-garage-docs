@@ -26,14 +26,14 @@ To simulate provisioning with a device certificate, follow these steps: ::
 1. Add the following lines to your local.conf:
 +
 ----
-SOTA_CLIENT_PROV = "aktualizr-ca-implicit-prov"
+SOTA_CLIENT_PROV = "aktualizr-device-prov"
 SOTA_DEPLOY_CREDENTIALS = "0"
 ----
 
 1. Build a standard image using the bitbake command.
 1. Boot the image.
 +
-The device should not automatically provision its credentials. To verify this, log in to the {product-name} server and make sure that the device does not appear in the list of devices.
+The device should not be able to provision at this time. To verify this, log in to the {product-name} server and make sure that the device does not appear in the list of devices.
 1. Load the device credentials on to the device with `aktualizr-cert-provider` command:
 +
 ----
@@ -54,7 +54,7 @@ To use an HSM when provisioning with device credentials, follow these steps: ::
 +
 ----
 SOTA_CLIENT_FEATURES = "hsm"
-SOTA_CLIENT_PROV = "aktualizr-hsm-prov"
+SOTA_CLIENT_PROV = "aktualizr-device-prov-hsm"
 SOTA_DEPLOY_CREDENTIALS = "0"
 IMAGE_INSTALL_append = " softhsm-testtoken "
 ----

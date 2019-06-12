@@ -37,7 +37,7 @@ sections:
   - id: prod
     title: Moving to Production
   - id: client-config
-    title: Client Configuration
+    title: Using aktualizr
   - id: using-libaktualizr
     title: Using libaktualizr
   - id: lib-getstarted
@@ -65,8 +65,8 @@ navigation_tabs:
     tab_id: reference
     topics:
       - concepts
-      - using-libaktualizr
       - client-config
+      - using-libaktualizr
       - faq
 
 

@@ -84,7 +84,7 @@ Each directory should contain the following:
 
 * credentials.zip
 * sota-local.toml -- a config file for aktualizr
-* (Optional) A `secondary_configs` directory, containing one or more JSON files representing secondary ECUs.footnote:[The terms "primary" and "secondary" ECU are used in the Uptane specificaton. For more information about the difference between primary and secondary ECUs, see our overview of the link:../concepts/ats-garage-security-with-uptane.html#primary-and-secondary-ecus[Uptane framework].]
+* (Optional) virtualsec.json file containing configuration of one or more secondary ECUs.footnote:[The terms "primary" and "secondary" ECU are used in the Uptane specificaton. For more information about the difference between primary and secondary ECUs, see our overview of the link:../concepts/ats-garage-security-with-uptane.html#primary-and-secondary-ecus[Uptane framework].]
 
 An example directory is below:
 
@@ -93,9 +93,7 @@ An example directory is below:
 ----
 localtest/
 ├── credentials.zip
-├── secondary_configs
-│   ├── virtualsec1.json
-│   └── virtualsec2.json
+├── virtualsec.json
 └── sota-local.toml
 ----
 
@@ -106,26 +104,9 @@ include::https://raw.githubusercontent.com/advancedtelematic/aktualizr/{aktualiz
 ----
 
 [source,role="secondary",subs="attributes"]
-.virtualsec1.json
+.virtualsec.json
 ----
 include::https://raw.githubusercontent.com/advancedtelematic/aktualizr/{aktualizr-version}/config/secondary/virtualsec.json[]
-----
-
-[source,role="secondary"]
-.virtualsec2.json
-----
-{
-  "secondary_type" : "virtual",
-  "partial_verifying" : "false",
-  "ecu_hardware_id" : "demo-virtual-2",
-
-  "full_client_dir" : "storage/demo-vsec2",
-  "ecu_private_key" : "sec.private",
-  "ecu_public_key" : "sec.public",
-  "firmware_path" : "storage/demo-vsec2/firmware.bin",
-  "target_name_path" : "storage/demo-vsec2/target_name",
-  "metadata_path" : "storage/demo-vsec2/metadata"
-}
 ----
 
 == Run aktualizr in the prepared directory

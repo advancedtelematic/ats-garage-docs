@@ -4,7 +4,7 @@
 :page-date: 2018-11-19 11:28:47
 :page-order: 5
 :icons: font
-:aktualizr-version: 2018.13
+:aktualizr-version: 2019.4
 :sectnums:
 
 You can try out OTA Connect without having to build a whole device image. This can be useful for testing the system outside of actual device updates. In this guide, you will install aktualizr (the OTA client software) on your local machine, create a directory with configuration files and credentials for aktualizr to use, and run aktualizr from there.
@@ -99,16 +99,16 @@ localtest/
 └── sota-local.toml
 ----
 
-[source,role="secondary"]
+[source,role="secondary",subs="attributes"]
 .sota-local.toml
 ----
-include::https://raw.githubusercontent.com/advancedtelematic/aktualizr/master/config/sota-local.toml[]
+include::https://raw.githubusercontent.com/advancedtelematic/aktualizr/{aktualizr-version}/config/sota-local.toml[]
 ----
 
-[source,role="secondary"]
+[source,role="secondary",subs="attributes"]
 .virtualsec1.json
 ----
-include::https://raw.githubusercontent.com/advancedtelematic/aktualizr/master/config/secondary/virtualsec.json[]
+include::https://raw.githubusercontent.com/advancedtelematic/aktualizr/{aktualizr-version}/config/secondary/virtualsec.json[]
 ----
 
 [source,role="secondary"]

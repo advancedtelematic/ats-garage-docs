@@ -4,7 +4,7 @@
 :page-date: 2018-11-19 11:28:47
 :page-order: 5
 :icons: font
-:aktualizr-version: 2019.4
+:aktualizr-version: 2019.5
 :sectnums:
 
 You can try out OTA Connect without having to build a whole device image. This can be useful for testing the system outside of actual device updates. In this guide, you will install aktualizr (the OTA client software) on your local machine, create a directory with configuration files and credentials for aktualizr to use, and run aktualizr from there.
@@ -84,7 +84,7 @@ Each directory should contain the following:
 
 * credentials.zip
 * sota-local.toml -- a config file for aktualizr
-* (Optional) virtualsec.json file containing configuration of one or more secondary ECUs.footnote:[The terms "primary" and "secondary" ECU are used in the Uptane specificaton. For more information about the difference between primary and secondary ECUs, see our overview of the link:../concepts/ats-garage-security-with-uptane.html#primary-and-secondary-ecus[Uptane framework].]
+* (Optional) A `virtualsec.json` file containing configuration for one or more secondary ECUs.footnote:[The terms "primary" and "secondary" ECU are used in the Uptane specificaton. For more information about the difference between primary and secondary ECUs, see our overview of the link:../concepts/ats-garage-security-with-uptane.html#primary-and-secondary-ecus[Uptane framework].]
 
 An example directory is below:
 

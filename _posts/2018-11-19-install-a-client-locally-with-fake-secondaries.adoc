@@ -109,6 +109,8 @@ include::https://raw.githubusercontent.com/advancedtelematic/aktualizr/{aktualiz
 include::https://raw.githubusercontent.com/advancedtelematic/aktualizr/{aktualizr-version}/config/secondary/virtualsec.json[]
 ----
 
+NOTE: Aktualizr's config file format changed with version 2019.5, released July 12, 2019. These instructions apply only to version 2019.5 and later.
+
 == Run aktualizr in the prepared directory
 
 From the directory you've created, run aktualizr and point it to the current directory for its configuration:

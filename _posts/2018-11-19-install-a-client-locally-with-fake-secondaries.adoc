@@ -4,7 +4,7 @@
 :page-date: 2018-11-19 11:28:47
 :page-order: 5
 :icons: font
-:aktualizr-version: 2019.4
+:aktualizr-version: 2019.5
 :sectnums:
 
 You can try out OTA Connect without having to build a whole device image. This can be useful for testing the system outside of actual device updates. In this guide, you will install aktualizr (the OTA client software) on your local machine, create a directory with configuration files and credentials for aktualizr to use, and run aktualizr from there.
@@ -84,7 +84,7 @@ Each directory should contain the following:
 
 * credentials.zip
 * sota-local.toml -- a config file for aktualizr
-* (Optional) A `secondary_configs` directory, containing one or more JSON files representing secondary ECUs.footnote:[The terms "primary" and "secondary" ECU are used in the Uptane specificaton. For more information about the difference between primary and secondary ECUs, see our overview of the link:../concepts/ats-garage-security-with-uptane.html#primary-and-secondary-ecus[Uptane framework].]
+* (Optional) A `virtualsec.json` file containing configuration for one or more secondary ECUs.footnote:[The terms "primary" and "secondary" ECU are used in the Uptane specificaton. For more information about the difference between primary and secondary ECUs, see our overview of the link:../concepts/ats-garage-security-with-uptane.html#primary-and-secondary-ecus[Uptane framework].]
 
 An example directory is below:
 
@@ -93,9 +93,7 @@ An example directory is below:
 ----
 localtest/
 ├── credentials.zip
-├── secondary_configs
-│   ├── virtualsec1.json
-│   └── virtualsec2.json
+├── virtualsec.json
 └── sota-local.toml
 ----
 
@@ -106,27 +104,12 @@ include::https://raw.githubusercontent.com/advancedtelematic/aktualizr/{aktualiz
 ----
 
 [source,role="secondary",subs="attributes"]
-.virtualsec1.json
+.virtualsec.json
 ----
 include::https://raw.githubusercontent.com/advancedtelematic/aktualizr/{aktualizr-version}/config/secondary/virtualsec.json[]
 ----
 
-[source,role="secondary"]
-.virtualsec2.json
-----
-{
-  "secondary_type" : "virtual",
-  "partial_verifying" : "false",
-  "ecu_hardware_id" : "demo-virtual-2",
-
-  "full_client_dir" : "storage/demo-vsec2",
-  "ecu_private_key" : "sec.private",
-  "ecu_public_key" : "sec.public",
-  "firmware_path" : "storage/demo-vsec2/firmware.bin",
-  "target_name_path" : "storage/demo-vsec2/target_name",
-  "metadata_path" : "storage/demo-vsec2/metadata"
-}
-----
+NOTE: Aktualizr's config file format changed with version 2019.5, released July 12, 2019. These instructions apply only to version 2019.5 and later.
 
 == Run aktualizr in the prepared directory
 

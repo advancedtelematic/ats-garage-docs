@@ -2,7 +2,7 @@
 :page-layout: page
 :page-categories: [usage]
 :page-date: 2017-06-07 13:52:10
-:page-order: 2
+:page-order: 3
 :icons: font
 
 .Individual device page
